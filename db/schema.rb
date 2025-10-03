@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_10_03_092325) do
+ActiveRecord::Schema.define(version: 2025_10_03_163151) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -88,12 +88,25 @@ ActiveRecord::Schema.define(version: 2025_10_03_092325) do
   create_table "reviews", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "hospital_id", null: false
-    t.string "rating", null: false
+    t.decimal "rating", precision: 2, scale: 1, null: false
     t.string "title", null: false
     t.text "body", null: false
     t.boolean "published"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.decimal "cleanliness_rating", precision: 2, scale: 1, null: false
+    t.string "cleanliness_comment"
+    t.decimal "doctor_rating", precision: 2, scale: 1, null: false
+    t.string "doctor_comment"
+    t.decimal "staff_rating", precision: 2, scale: 1, null: false
+    t.string "staff_comment"
+    t.decimal "price_rating", precision: 2, scale: 1, null: false
+    t.string "price_comment"
+    t.decimal "waiting_rating", precision: 2, scale: 1, null: false
+    t.string "waiting_comment"
+    t.string "animal_comment"
+    t.string "animal_type"
+    t.string "animal_icon"
   end
 
   create_table "tags", force: :cascade do |t|
