@@ -1,0 +1,25 @@
+<header>
+  <div>
+  </div>
+
+  <nav class="d-flex">
+    <% if admin_signed_in? %>
+      <%= link_to "投稿一覧", admin_hospitals_index_path, class: "btn btn-warning mx-1" %>
+      <%= link_to "会員一覧", admin_users_index_path, class: "btn btn-warning mx-1" %>
+      <%= link_to "タグ一覧", admin_tags_index_path, class: "btn btn-warning mx-1" %>
+      <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-warning mx-1" %>
+
+    <% elsif user_signed_in? %>
+      <%= link_to "マイページ", mypage_public_users_path, class: "btn btn-warning mx-1" %>
+      <%= link_to "投稿一覧", public_hospitals_index_path, class: "btn btn-warning mx-1" %>
+      <%= link_to "レビュー投稿", public_reviews_new_path, class: "btn btn-warning mx-1" %>
+      <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-warning mx-1" %>
+
+    <% else %>
+      <%= link_to "About", about_path, class: "btn btn-warning mx-1" %>
+      <%= link_to "投稿一覧", public_hospitals_index_path, class: "btn btn-warning mx-1" %>
+      <%= link_to "新規登録", new_user_registration_path, class: "btn btn-warning mx-1" %>
+      <%= link_to "ログイン", new_user_session_path, class: "btn btn-warning mx-1" %>
+    <% end %>
+  </nav>
+</header>
