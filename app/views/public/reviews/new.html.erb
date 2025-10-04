@@ -1,10 +1,56 @@
 <h1>レビュー投稿ページ</h1>
+<% if @review.errors.any? %>
+  <%= @review.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @review.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <div class="container">
-  <div class="row">
-    <div class="col">
+  <%= form_with model: @review, url: public_reviews_path, method: :post do |f| %>
 
+  <div class="row">
+    <%= f.label :body, "総合評価", class: "col-5 col-form-label" %><br />
+    <div class="col-6">
+      <%= f.text_area :body, row: 5, class: "form-control" %>
     </div>
   </div>
+
+  <div class="row">
+    <%= f.label :cleanliness_comment, "清潔さ", class: "col-4 col-form-label" %><br />
+    <div class="col-5">
+      <%= f.text_area :cleanliness_comment, row: 2, class: "form-control" %>
+    </div>
+
+    <%= f.label :doctor_comment, "先生の対応", class: "col-4-form-label" %><br />
+    <div class="col-5">
+      <%= f.text_area :doctor_comment, row: 2, class: "form-control" %>
+    </div>
+
+    <%= f.label :staff_comment, "スタッフの対応", class: "col-4-form-label" %><br />
+    <div class="col-5">
+      <%= f.text_area :staff_comment, row: 2, class: "form-control" %>
+    </div>
+
+    <%= f.label :price_comment, "料金", class: "col-4-form-label" %><br />
+    <div class="col-5">
+      <%= f.text_area :price_comment, row: 2, class: "form-control" %>
+    </div>
+
+    <%= f.label :waiting_comment, "待ち時間", class: "col-4-form-label" %><br />
+    <div class="col-5">
+      <%= f.text_area :waiting_comment, row: 2, class: "form-control" %>
+    </div>
+
+    <%= f.label :animal_comment, "動物目線でひとこと！(任意)", class: "col-4-form-label" %><br />
+    <div class="col-5">
+      <%= f.text_area :animal_comment, row: 2, class: "form-control" %>
+    </div>
+    
+    <%= f.submit "レビューを投稿する" %>
+  </div>
+  <% end %>
 </div>
 

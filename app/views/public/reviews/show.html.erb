@@ -1,0 +1,38 @@
+<h1>投稿詳細画面</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>総合評価</th>
+            <th>清潔さ</th>
+            <th>先生の対応</th>
+            <th>スタッフの対応</th>
+            <th>料金</th>
+            <th>待ち時間</th>
+            <th>動物目線のコメント</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @review.body %></td>
+            <td><%= @review.cleanliness_comment %></td>
+            <td><%= @review.doctor_comment %></td>
+            <td><%= @review.staff_comment %></td>
+            <td><%= @review.price_comment %></td>
+            <td><%= @review.waiting_comment %></td>
+            <td><%= @review.animal_comment %></td>
+            <% if current_user && current_user.id == @review.user_id %>
+              <td><%= link_to "編集", edit_public_review_path(@review), class: "btn btn-warning" %></td>
+              <td><%= link_to "削除", public_review_path(@review), method: :delete, data: {confirm: "本当に削除しますか？" }, class: "btn btn-warning" %></td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

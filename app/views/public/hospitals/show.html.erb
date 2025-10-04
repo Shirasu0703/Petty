@@ -1,2 +1,37 @@
-<h1>Public::Hospitals#show</h1>
-<p>Find me in app/views/public/hospitals/show.html.erb</p>
+<h1>病院詳細画面</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>病院名</th>
+            <th>住所</th>
+            <th>電話番号</th>
+            <th>診察時間</th>
+            <th>診察対応動物</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <% @hospitals.each do |hospital| %>
+              <td><%= hospital.name %></td>
+              <td><%= hospital.address %></td>
+              <td><%= hospital.phone_number %></td>
+              <td><%= hospital.opening_hours %></td>
+              <td><%= hospital.animal_types %></td>
+            <% end %>
+            <% if current_user&.admin? %>
+              <td><%= link_to "編集", edit_hospital_path(@hospital) %></td>
+              <td><%= link_to "削除", hospital_path(@hospital), method: :delete, data: { confirm: "本当に削除しますか？" } %></td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
