@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   def publish_unpublish
   end
 
-  def unsubcribe
+  def unsubscribe
   end
 
   def withdraw

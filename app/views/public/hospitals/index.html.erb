@@ -1,2 +1,11 @@
-<h1>Public::Hospitals#index</h1>
-<p>Find me in app/views/public/hospitals/index.html.erb</p>
+<h1>病院一覧ページ</h1>
+<div class="container">
+<% @hospitals.each do |hospital| %>
+  <div class="row">
+    <div class="col">
+      <p><%= hospital.hospital_id %></p>
+    </div>
+  </div>
+<% end %>
+</div>
+
