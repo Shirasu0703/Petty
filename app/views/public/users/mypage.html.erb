@@ -5,8 +5,11 @@
 
   <% if @reviews.any? %>
     <div class="row">
+      <div class="col-md-3 md-2">
+        <%= render "public/users/profile", user: @user %>
+      </div>
       <% @reviews.each do |review| %>
-        <div class="col-md-4 md-4">
+        <div class="col-md-3 md-4">
           <div class="card h-100">
 
             <div class="card-body">
