@@ -18,6 +18,12 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user = current_user
+    if @user.update(user_params)
+      redirect_to mypage_public_users_path, notice: "ユーザー情報を更新しました"
+    else
+      render :edit
+    end
   end
 
   def publish_unpublish
@@ -27,6 +33,13 @@ class UsersController < ApplicationController
   end
 
   def withdraw
+  end
+
+  
+  private
+
+  def user_params
+    params.require(:user).permit(:name, :email, :introduction, :image)
   end
 end
 end

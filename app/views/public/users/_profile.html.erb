@@ -1,0 +1,12 @@
+
+<div>
+
+  <% if user.image.attached? %>
+    <%= image_tag user.image, size: "200x200" %>
+  <% else %>
+    <%= image_tag "no_image.jpg", size: "200x200" %>
+  <% end %>
+    <h3><%= user.name %></h3>
+    <h4><%= user.introduction %></h4>
+  <p><%= link_to "プロフィール編集", edit_public_user_path(@user), class: "btn btn-warning" %></p>
+</div>
