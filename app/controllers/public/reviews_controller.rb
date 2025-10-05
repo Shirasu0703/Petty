@@ -1,6 +1,7 @@
 class Public::ReviewsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   def new
-    @review = Review.new
+    @review = current_user.reviews.new
   end
 
   def show
@@ -12,32 +13,32 @@ class Public::ReviewsController < ApplicationController
   end
 
   def create
-    @review = Review.new(review_params)
+    @review = current_user.reviews.new(review_params)
     @review.user_id = current_user.id
     if @review.save
-      redirect_to public_review_path(@review.id)
+      redirect_to public_review_path(@review.id), notice: "レビューを投稿しました"
     else
       render :new
     end
   end
 
   def edit
-    @review = Review.find(params[:id])
+    @review = current_user.reviews.find(params[:id])
   end
 
   def update
-    @review = Review.find(params[:id])
+    @review = current_user.reviews.find(params[:id])
     if @review.update(review_params)
-      redirect_to public_review_path(@review.id), notice: "投稿情報を更新しました"
+      redirect_to public_review_path(@review.id), notice: "レビューを更新しました"
     else
-      render :edit, status: :unprocessable_entity
+      render :edit
     end
   end
 
   def destroy
-    @review = Review.find(params[:id])
+    @review = current_user.reviews.find(params[:id])
     @review.destroy
-    redirect_to mypage_public_users_path, notice: "投稿を削除しました"
+    redirect_to mypage_public_users_path, notice: "レビューを削除しました"
   end
 
   private
