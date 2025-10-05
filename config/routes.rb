@@ -24,7 +24,7 @@ Rails.application.routes.draw do
         get :mypage
         get :publish_unpublish
         get :unsubscribe
-        get :withdraw
+        patch :withdraw
       end
     end
   end
