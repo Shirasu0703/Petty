@@ -30,9 +30,14 @@ class UsersController < ApplicationController
   end
 
   def unsubscribe
+    @user = current_user
   end
 
   def withdraw
+    @user = current_user
+    @user.update(is_active: false)
+    reset_session
+    redirect_to new_user_registration_path, notice: "退会が完了しました。ご利用ありがとうございました。"
   end
 
   

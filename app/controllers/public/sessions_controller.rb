@@ -27,4 +27,17 @@ class Public::SessionsController < Devise::SessionsController
   def after_sign_in_path_for(resource)
     mypage_public_users_path
   end
+
+  private
+
+  def user_state
+    user = User.find_by(email: params[:user][:email])
+    return if user.nil?
+    return unless user.valid_password?(params[:user][:password])
+    if user.is_actibe
+      return
+    else
+      redirect_to new_customer_registration_path
+    end
+  end
 end
