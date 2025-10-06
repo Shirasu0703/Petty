@@ -1,38 +1,49 @@
-<h1>投稿詳細画面</h1>
+<h1>レビュー詳細画面</h1>
 
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>総合評価</th>
-            <th>清潔さ</th>
-            <th>先生の対応</th>
-            <th>スタッフの対応</th>
-            <th>料金</th>
-            <th>待ち時間</th>
-            <th>動物目線のコメント</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><%= @review.body %></td>
-            <td><%= @review.cleanliness_comment %></td>
-            <td><%= @review.doctor_comment %></td>
-            <td><%= @review.staff_comment %></td>
-            <td><%= @review.price_comment %></td>
-            <td><%= @review.waiting_comment %></td>
-            <td><%= @review.animal_comment %></td>
-            <% if current_user && current_user.id == @review.user_id %>
-              <td><%= link_to "編集", edit_public_review_path(@review), class: "btn btn-warning" %></td>
-              <td><%= link_to "削除", public_review_path(@review), method: :delete, data: {confirm: "本当に削除しますか？" }, class: "btn btn-warning" %></td>
-            <% end %>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+<div class="container mt-4">
+  <div class="mb-3">
+    <strong>清潔さ</strong>
+    <p><%= @review.cleanliness_comment %></p>
   </div>
+
+  <div class="mb-3">
+    <strong>先生の対応</strong>
+    <p><%= @review.doctor_comment %></p>
+  </div>
+
+  <div class="mb-3">
+    <strong>スタッフの対応</strong>
+    <p><%= @review.staff_comment %></p>
+  </div>
+
+  <div class="mb-3">
+    <strong>料金</strong>
+    <p><%= @review.price_comment %></p>
+  </div>
+
+  <div class="mb-3">
+    <strong>待ち時間</strong>
+    <p><%= @review.waiting_comment %></p>
+  </div>
+
+  <div class="mb-3">
+    <strong>レビュータイトル</strong>
+    <p><%= @review.title %></p>
+  </div>
+
+  <div class="mb-3">
+    <strong>総合評価</strong>
+    <p><%= @review.body %></p>
+  </div>
+
+
+  <div class="mb-3">
+    <strong>動物目線のひとこと</strong>
+    <p><%= @review.animal_comment %></p>
+  </div>
+
+  <% if user_signed_in? && current_user == @review.user %>
+    <%= link_to "編集", edit_public_review_path(@review), class:"btn btn-warning" %> |
+    <%= link_to "削除", public_review_path(@review), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+  <% end %>
 </div>

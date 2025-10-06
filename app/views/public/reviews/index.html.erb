@@ -1,35 +1,17 @@
 <h1>投稿一覧ページ</h1>
-<div class="container">
+<div class="container mt-4">
+<hr>
   <div class="row">
-    <div class="col">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>総合評価</th>
-            <th>清潔さ</th>
-            <th>先生の対応</th>
-            <th>スタッフの対応</th>
-            <th>料金</th>
-            <th>待ち時間</th>
-            <th>動物目線のコメント</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @reviews.each do |review| %>
-            <tr>
-              <td><%= review.body %></td>
-              <td><%= review.cleanliness_comment %></td>
-              <td><%= review.doctor_comment %></td>
-              <td><%= review.staff_comment %></td>
-              <td><%= review.price_comment %></td>
-              <td><%= review.waiting_comment %></td>
-              <td><%= review.animal_comment %></td>
-              <td><%= link_to "詳細", public_review_path(review) %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+    <% @reviews.each do |review| %>
+      <div class="col-md-3 md-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title"><%= review.title %></h5>
+            <p class="card-text"><%= truncate(review.body, length: 100) %></p>
+            <%= link_to "レビュー詳細", public_review_path(review), class: "btn btn-primary" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
