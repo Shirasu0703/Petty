@@ -12,38 +12,43 @@
   <%= form_with model: @review, url: public_review_path(@review), method: :patch do |f| %>
 
   <div class="md-3">
+    <%= f.label :cleanliness_comment, "清潔さ" %>
+    <%= f.text_field :cleanliness_comment, class: "form-control" %>
+  </div>
+
+  <div class="md-3">
+    <%= f.label :doctor_comment, "先生の対応" %>
+    <%= f.text_field :doctor_comment, class: "form-control" %>
+  </div>
+
+  <div class="md-3">
+    <%= f.label :staff_comment, "スタッフの対応" %>
+    <%= f.text_field :staff_comment, class: "form-control" %>
+  </div>
+
+  <div class="md-3">
+    <%= f.label :price_comment, "料金" %>
+    <%= f.text_field :price_comment, class: "form-control" %>
+  </div>
+
+  <div class="md-3">
+    <%= f.label :waiting_comment, "待ち時間" %>
+    <%= f.text_field :waiting_comment, class: "form-control" %>
+  </div>
+
+  <div class="md-3">
+    <%= f.label :title, "レビュータイトル" %>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="md-3">
     <%= f.label :body, "総合評価" %>
     <%= f.text_area :body, row: 5, class: "form-control" %>
   </div>
 
   <div class="md-3">
-    <%= f.label :cleanliness_comment, "清潔さ" %>
-    <%= f.text_area :cleanliness_comment, row: 2, class: "form-control" %>
-  </div>
-
-  <div class="md-3">
-    <%= f.label :doctor_comment, "先生の対応" %>
-    <%= f.text_area :doctor_comment, row: 2, class: "form-control" %>
-  </div>
-
-  <div class="md-3">
-    <%= f.label :staff_comment, "スタッフの対応" %>
-    <%= f.text_area :staff_comment, row: 2, class: "form-control" %>
-  </div>
-
-  <div class="md-3">
-    <%= f.label :price_comment, "料金" %>
-    <%= f.text_area :price_comment, row: 2, class: "form-control" %>
-  </div>
-
-  <div class="md-3">
-    <%= f.label :waiting_comment, "待ち時間" %>
-    <%= f.text_area :waiting_comment, row: 2, class: "form-control" %>
-  </div>
-
-  <div class="md-3">
     <%= f.label :animal_comment, "動物目線でひとこと！(任意)" %>
-    <%= f.text_area :animal_comment, row: 2, class: "form-control" %>
+    <%= f.text_field :animal_comment, class: "form-control" %>
   </div>
 
   <div class="my-3">

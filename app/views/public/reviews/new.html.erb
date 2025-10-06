@@ -8,52 +8,55 @@
   </ul>
 <% end %>
 
-<div class="container mt-4">
+<h2 class="text-center my-4">レビュー投稿画面</h2>
+<div class="review-background d-flex justify-content-center align-items-center vh-100">
+  <div class="card shadow-lg border-0" style="max-width: 700px; width: 90%; background: rgba(255, 255, 255, 0.9);">
+
 
   <%= form_with model: @review, url: public_reviews_path, method: :post do |f| %>
+  <div class="card-body">
+    <div class="mb-3">
+      <strong><%= f.label :cleanliness_comment, "清潔さ" %></strong>
+      <p class="text-muted mb-0"><%= f.text_field :cleanliness_comment, class: "form-control" %></p>
+    </div>
 
-  <div class="mb-3">
-    <%= f.label :cleanliness_comment, "清潔さ" %>
-    <%= f.text_field :cleanliness_comment, class: "form-control" %>
-  </div>
+    <div class="mb-3">
+      <strong><%= f.label :doctor_comment, "先生の対応" %></strong>
+      <p class="text-muted mb-0"><%= f.text_field :doctor_comment, class: "form-control" %></p>
+    </div>
 
-  <div class="mb-3">
-    <%= f.label :doctor_comment, "先生の対応" %>
-    <%= f.text_field :doctor_comment, class: "form-control" %>
-  </div>
+    <div class="mb-3">
+      <strong><%= f.label :staff_comment, "スタッフの対応" %></strong>
+      <p class="text-muted mb-0"><%= f.text_field :staff_comment, class: "form-control" %></p>
+    </div>
 
-  <div class="mb-3">
-    <%= f.label :staff_comment, "スタッフの対応" %>
-    <%= f.text_field :staff_comment, class: "form-control" %>
-  </div>
+    <div class="mb-3">
+      <strong><%= f.label :price_comment, "料金" %></strong>
+      <p class="text-muted mb-0"><%= f.text_field :price_comment, class: "form-control" %></p>
+    </div>
 
-  <div class="mb-3">
-    <%= f.label :price_comment, "料金" %>
-    <%= f.text_field :price_comment, class: "form-control" %>
-  </div>
+    <div class="mb-3">
+      <strong><%= f.label :waiting_comment, "待ち時間" %></strong>
+      <p class="text-muted mb-0"><%= f.text_field :waiting_comment, class: "form-control" %></p>
+    </div>
 
-  <div class="mb-3">
-    <%= f.label :waiting_comment, "待ち時間" %>
-    <%= f.text_field :waiting_comment, class: "form-control" %>
-  </div>
+    <div class="mb-3">
+      <strong><%= f.label :title, "レビューにタイトルをつける" %></strong>
+      <p class="text-muted mb-0"><%= f.text_field :title, class: "form-control" %></p>
+    </div>
 
-  <div class="mb-3">
-    <%= f.label :title, "レビューにタイトルをつける" %>
-    <%= f.text_field :title, class: "form-control" %>
-  </div>
-
-  <div class="mb-3">
-    <%= f.label :body, "総合評価" %>
-    <%= f.text_area :body, rows: 6, class: "form-control" %>
-  </div>
+    <div class="mb-3">
+      <strong><%= f.label :body, "総合評価" %></strong>
+      <p class="text-muted mb-0"><%= f.text_area :body, rows: 6, class: "form-control" %></p>
+    </div>
 
 
-  <div class="mb-3">
-    <%= f.label :animal_comment, "動物目線でひとこと！(任意)" %>
-    <%= f.text_field :animal_comment, class: "form-control" %>
-  </div>
+    <div class="mb-3">
+      <strong><%= f.label :animal_comment, "動物目線でひとこと！(任意)" %></strong>
+      <p class="text-muted mb-0"><%= f.text_field :animal_comment, class: "form-control" %></p>
+    </div>
     
-    <%= f.submit "レビューを投稿する" %>
+    <%= f.submit "レビューを投稿する", class: "btn btn-warning" %>
   <% end %>
 </div>
 

@@ -44,6 +44,6 @@ class Public::ReviewsController < ApplicationController
   private
    
   def review_params
-    params.require(:review).permit(:body, :image, :cleanliness_comment, :doctor_comment, :staff_comment, :price_comment, :waiting_comment, :animal_comment)
+    params.require(:review).permit(:title, :body, :image, :cleanliness_comment, :doctor_comment, :staff_comment, :price_comment, :waiting_comment, :animal_comment)
   end
 end
