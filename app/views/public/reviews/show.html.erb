@@ -1,49 +1,66 @@
-<h1>レビュー詳細画面</h1>
+<h2 class="text-center my-4">レビュー詳細画面</h2>
+<div class="review-background d-flex justify-content-center align-items-center vh-100">
+  <div class="card shadow-lg border-0" style="max-width: 700px; width: 90%; background: rgba(255, 255, 255, 0.9);">
+    <div class="card-header bg-warning text-white text-center">
+      <h4 class="mb-0"><%= @review.title %></h4>
+    </div>
 
-<div class="container mt-4">
-  <div class="mb-3">
-    <strong>清潔さ</strong>
-    <p><%= @review.cleanliness_comment %></p>
+    <div class="card-body">
+      <div class="mb-3">
+        <strong>清潔さ</strong>
+        <p class="text-muted mb-0"><%= @review.cleanliness_comment %></p>
+      </div>
+
+      <div class="mb-3">
+        <strong>先生の対応</strong>
+        <p class="text-muted mb-0"><%= @review.doctor_comment %></p>
+      </div>
+
+      <div class="mb-3">
+        <strong>スタッフの対応</strong>
+        <p class="text-muted mb-0"><%= @review.staff_comment %></p>
+      </div>
+
+      <div class="mb-3">
+        <strong>料金</strong>
+        <p class="text-muted mb-0"><%= @review.price_comment %></p>
+      </div>
+
+      <div class="mb-3">
+        <strong>待ち時間</strong>
+        <p class="text-muted mb-0"><%= @review.waiting_comment %></p>
+      </div>
+
+      <div class="mb-3">
+        <strong>レビュータイトル</strong>
+        <p class="text-muted mb-0"><%= @review.title %></p>
+      </div>
+
+      <div class="mb-3">
+        <strong>総合評価</strong>
+        <p class="text-muted mb-0"><%= @review.body %></p>
+      </div>
+
+
+      <div class="mb-3">
+        <strong>動物目線のひとこと</strong>
+        <p class="text-muted mb-0"><%= @review.animal_comment %></p>
+      </div>
+
+      <div class="card-footer d-flex justify-content-between aling-items-center">
+        <span class="text-muted small">
+          投稿者: <%= @review.user.name if @review.user.present? %>
+        </span>
+        <% if user_signed_in? && current_user == @review.user %>
+          <div>
+            <%= link_to "編集", edit_public_review_path(@review), class:"btn btn-warning" %> |
+            <%= link_to "削除", public_review_path(@review), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+          </div>
+        <% end %>
+      </div>
+      <div class="text-center">
+        <%= link_to "レビュー一覧に戻る", public_reviews_path, class: "btn btn-warning" %>
+      </div>
+    </div>
   </div>
-
-  <div class="mb-3">
-    <strong>先生の対応</strong>
-    <p><%= @review.doctor_comment %></p>
-  </div>
-
-  <div class="mb-3">
-    <strong>スタッフの対応</strong>
-    <p><%= @review.staff_comment %></p>
-  </div>
-
-  <div class="mb-3">
-    <strong>料金</strong>
-    <p><%= @review.price_comment %></p>
-  </div>
-
-  <div class="mb-3">
-    <strong>待ち時間</strong>
-    <p><%= @review.waiting_comment %></p>
-  </div>
-
-  <div class="mb-3">
-    <strong>レビュータイトル</strong>
-    <p><%= @review.title %></p>
-  </div>
-
-  <div class="mb-3">
-    <strong>総合評価</strong>
-    <p><%= @review.body %></p>
-  </div>
-
-
-  <div class="mb-3">
-    <strong>動物目線のひとこと</strong>
-    <p><%= @review.animal_comment %></p>
-  </div>
-
-  <% if user_signed_in? && current_user == @review.user %>
-    <%= link_to "編集", edit_public_review_path(@review), class:"btn btn-warning" %> |
-    <%= link_to "削除", public_review_path(@review), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
-  <% end %>
 </div>

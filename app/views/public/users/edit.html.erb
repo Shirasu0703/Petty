@@ -1,4 +1,4 @@
-<h1>ユーザー情報編集</h1>
+<h2 class="text-center my-4">ユーザー情報編集画面</h2>
 <% if @user.errors.any? %>
   <%= @user.errors.count %>件のエラーが発生しました
   <ul>
@@ -8,32 +8,35 @@
   </ul>
 <% end %>
 
-<div class="container mt-4">
-  <%= form_with model: @user, url: mypage_public_users_path, method: :patch do |f| %>
+<div class="review-background d-flex justify-content-center align-items-center vh-100">
+  <div class="card shadow-lg border-0" style="max-width: 700px; width: 90%; background: rgba(255, 255, 255, 0.9);">
+    <%= form_with model: @user, url: mypage_public_users_path, method: :patch do |f| %>
 
-  <div class="md-3">
-    <%= f.label :image, "プロフィール画像" %>
-    <%= f.file_field :image, placeholder: "プロフィール画像", accept: "image/*" %> 
-  </div>
+    <div class="card-body">
+      <div class="md-3">
+        <strong><%= f.label :image, "プロフィール画像" %></strong>
+        <p class="text-muted mb-0"><%= f.file_field :image, placeholder: "プロフィール画像", accept: "image/*" %></p> 
+      </div>
 
-  <div class="md-3">
-    <%= f.label :name, "名前" %>
-    <%= f.text_field :name, class: "form-control" %>
-  </div>
+      <div class="md-3">
+        <strong><%= f.label :name, "名前" %></strong>
+        <p class="text-muted mb-0"><%= f.text_field :name, class: "form-control" %></p>
+      </div>
 
-  <div class="md-3">
-    <%= f.label :email, "メールアドレス" %>
-    <%= f.text_field :email, class: "form-control" %>
-  </div>
+      <div class="md-3">
+        <strong><%= f.label :email, "メールアドレス" %></strong>
+        <p class="text-muted mb-0"><%= f.text_field :email, class: "form-control" %></p>
+      </div>
 
-  <div class="md-3">
-    <%= f.label :introduction, "自己紹介文" %>
-    <%= f.text_area :introduction, rows: 5, class: "form-control" %>
-  </div>
+      <div class="md-3">
+        <strong><%= f.label :introduction, "自己紹介文" %></strong>
+        <p class="text-muted mb-0"><%= f.text_area :introduction, rows: 5, class: "form-control" %></p>
+      </div>
 
-  <div class="my-3">
-    <%= f.submit "更新", class: "btn btn-warning" %>
-  </div>
+      <div class="my-3">
+        <strong><%= f.submit "更新", class: "btn btn-warning" %></strong>
+      </div>
+    </div>
   <% end %>
 
   <%= link_to "マイページに戻る", mypage_public_users_path, class: "btn btn-warning" %>
