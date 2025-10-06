@@ -1,37 +1,31 @@
-<h1>病院詳細画面</h1>
-
-<div class="container">
+<h1>動物病院詳細・レビュー一覧</h1>
+<div class="container my-5">
   <div class="row">
-    <div class="col">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>病院名</th>
-            <th>住所</th>
-            <th>電話番号</th>
-            <th>診察時間</th>
-            <th>診察対応動物</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <% @hospitals.each do |hospital| %>
-              <td><%= hospital.name %></td>
-              <td><%= hospital.address %></td>
-              <td><%= hospital.phone_number %></td>
-              <td><%= hospital.opening_hours %></td>
-              <td><%= hospital.animal_types %></td>
-            <% end %>
-            <% if current_user&.admin? %>
-              <td><%= link_to "編集", edit_hospital_path(@hospital) %></td>
-              <td><%= link_to "削除", hospital_path(@hospital), method: :delete, data: { confirm: "本当に削除しますか？" } %></td>
-            <% end %>
-          </tr>
-        </tbody>
-      </table>
+    <div class="col-5">
+      <div class="mb-4">
+      <!-- 病院登録実装したら画像の表示コードを記述 -->
+      </div>
+
+    <h5 class="mb-3">レビュー</h5>
+      <div class="border rounded p-3 mb-3 bg-white">
+        <div class="d-flex justify-content-between align-items-center">
+          <h6><%= @review.user.name %></h6>
+          <h5><%= @review.title %></h5>
+          <%= link_to "詳細", public_review_path(@review), class: "btn btn-primary" %>
+        </div>
+      </div>
     </div>
+
+      <di class="offset-1 col-6">
+        <h4>病院の名前</h4>
+        <h6>住所</h6>
+        <h6>電話番号</h6>
+        <h6>診察時間</h6>
+        <h6>診察対応動物</h6>
+        <h2>病院のURL</h2>
+      </div>
+
+
   </div>
 </div>
 
