@@ -49,7 +49,12 @@
 
       <div class="card-footer d-flex justify-content-between aling-items-center">
         <span class="text-muted small">
-          投稿者: <%= @review.user.name if @review.user.present? %>
+          投稿者: 
+          <% if @review.user.present? %>
+            <%= link_to @review.user.name, public_user_path(@review.user), class: "text-decoration-none text-primary" %>
+          <% else %>
+          不明
+          <% end %>
         </span>
         <% if user_signed_in? && current_user == @review.user %>
           <div>

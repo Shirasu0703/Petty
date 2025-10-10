@@ -1,6 +1,8 @@
 module Public
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_user, only: [:edit, :show, :update]
+  before_action :ensure_correct_user, only: [:edit, :update]
 
   def mypage
     @user = current_user
@@ -10,15 +12,12 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def show
-    @user = User.find(para,s[:id])
   end
 
   def update
-    @user = current_user
     if @user.update(user_params)
       redirect_to mypage_public_users_path, notice: "ユーザー情報を更新しました"
     else
@@ -43,8 +42,19 @@ class UsersController < ApplicationController
   
   private
 
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def ensure_correct_user
+    unless @user == current_user
+      flash[:alert] = "権限がありません。"
+      redirect_to mypage_public_users_path
+    end
+  end
+
   def user_params
     params.require(:user).permit(:name, :email, :introduction, :image)
   end
-end
+  end
 end

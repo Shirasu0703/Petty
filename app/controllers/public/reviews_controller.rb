@@ -1,11 +1,13 @@
 class Public::ReviewsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create]
+  before_action :set_review, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+
   def new
     @review = current_user.reviews.new
   end
 
   def show
-    @review = Review.find(params[:id])
   end
 
   def index
@@ -23,11 +25,9 @@ class Public::ReviewsController < ApplicationController
   end
 
   def edit
-    @review = current_user.reviews.find(params[:id])
   end
 
   def update
-    @review = current_user.reviews.find(params[:id])
     if @review.update(review_params)
       redirect_to public_review_path(@review.id), notice: "レビューを更新しました"
     else
@@ -36,12 +36,22 @@ class Public::ReviewsController < ApplicationController
   end
 
   def destroy
-    @review = current_user.reviews.find(params[:id])
     @review.destroy
     redirect_to mypage_public_users_path, notice: "レビューを削除しました"
   end
 
   private
+
+  def set_review
+    @review = Review.find(params[:id])
+  end
+
+  def ensure_correct_user
+    unless @review.user == current_user
+      flash[:alert] = "権限がありません。"
+      redirect_to public_reviews_path
+    end
+  end
    
   def review_params
     params.require(:review).permit(:title, :body, :image, :cleanliness_comment, :doctor_comment, :staff_comment, :price_comment, :waiting_comment, :animal_comment)

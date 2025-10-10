@@ -36,6 +36,10 @@
       <div class="my-3">
         <strong><%= f.submit "更新", class: "btn btn-warning" %></strong>
       </div>
+
+      <div class="text-center mt-4">
+        <%= link_to "退会手続へ", unsubscribe_public_users_path, class: "btn btn-danger" %>
+      </div>
     </div>
   <% end %>
 
