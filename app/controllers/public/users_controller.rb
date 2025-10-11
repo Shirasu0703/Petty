@@ -43,7 +43,7 @@ class UsersController < ApplicationController
   private
 
   def set_user
-    @user = current_user
+    @user = params[:id].present? ? User.find(params[:id]) : current_user
   end
 
   def ensure_correct_user
