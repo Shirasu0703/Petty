@@ -43,7 +43,11 @@ class UsersController < ApplicationController
   private
 
   def set_user
-    @user = params[:id].present? ? User.find(params[:id]) : current_user
+    @user = if params[:id] == "mypage"
+               current_user
+            else
+               User.find(params[:id])
+            end
   end
 
   def ensure_correct_user
