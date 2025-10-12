@@ -1,9 +1,3 @@
-// Place all the styles related to the public/searches controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
-
-
-
 .search-form {
   display: flex;
   align-items: center;
@@ -20,7 +14,7 @@
   }
 
   .btn-pink {
-    background-color: #cc9a89;
+    background-color: #e783b2;
     color: white;
     border-radius: 50px;
     display: flex;
@@ -32,8 +26,7 @@
     }
 
     &:hover {
-      background-color: #d2a391;
+      background-color: #e783b2;
     }
   }
 }
-
