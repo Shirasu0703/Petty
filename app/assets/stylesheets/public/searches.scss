@@ -1,0 +1,40 @@
+// Place all the styles related to the public/searches controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+// 検索機能のレイアウト
+
+
+.search-form {
+  display: flex;
+  align-items: center;
+
+  .form-control,
+  .form-select {
+    height: 45px;
+    background-color: #f6f5f2;
+    border: none;
+    border-radius: 50px;
+    margin-right: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .btn-pink {
+    background-color: #cc9a89;
+    color: white;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+
+    i {
+      margin-right: 5px;
+    }
+
+    &:hover {
+      background-color: #d2a391;
+    }
+  }
+}
+

@@ -12,6 +12,7 @@
       <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-warning mx-1" %>
 
     <% elsif user_signed_in? %>
+      <%= render "public/searches/search_box" %>
       <%= link_to "マイページ", mypage_public_users_path, class: "btn btn-warning mx-1" %>
       <%= link_to "病院一覧", public_hospitals_path, class: "btn btn-warning mx-1" %>
       <%= link_to "投稿一覧", public_reviews_path, class: "btn btn-warning mx-1" %>

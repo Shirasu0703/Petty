@@ -8,9 +8,28 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
 
+  validates :name, presence: true
   has_one_attached :image
 
-  validates :name, presence: true
+  def get_profile_image
+    if image.attached?
+      image
+    else
+      'no_image.jpg'
+    end
+  end
+
+  def self.look_for(word, method)
+    if method == "perfect"
+      @user = User.where("name LIKE ?", "#{word}")
+    elsif method == "forward"
+      @user = User.where("name LIKE ?", "#{word}%")
+    elsif method == "backward"
+      @user = User.where("name LIKE ?", "%#{word}")
+    elsif method == "partial"
+      @user = User.where("name LIKE ?", "%#{word}%")
+    end
+  end
 
   def active_for_authentication?
     super && is_active
