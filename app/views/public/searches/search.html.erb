@@ -1,0 +1,49 @@
+<div class="container mt-4">
+  <h3>検索結果</h3>
+<hr>
+
+  <div class="row">
+    <% if @data == "User" %>
+      <% @users.each do |user| %>
+        <div class="colmd-3 md-4">
+          <div class="card h-100">
+            <div class="card-body text-center">
+              <%= image_tag user.get_profile_image, class: "card-img-top" %>
+                <h5 class-"card-title">
+                  <%= link_to user.name, public_user_path(user), class: "text-decoration-none text-primary" %>
+                </h5>
+                <p class="card-text text-muted small">
+                  投稿レビュー数：<%= user.reviews.count %>
+                </p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <% else %>
+      <% @reviews.each do |review| %>
+        <div class="colmd-3 md-4">
+          <div class="card h-100">
+            <div class="card-body text-center">
+
+              <h5 class="card-title">
+                <%= link_to review.title, public_review_path(review), class: "text-decoration-none text-primary" %>
+              </h5>
+              <p class="card-text">
+                <%= truncate(review.body, length: 80) %>
+              </p>
+              <span class="text-muted small">
+                投稿者: 
+                <% if review.user.present? %>
+                  <%= link_to review.user.name, public_user_path(review.user), class: "text-decoration-none text-primary" %>
+                <% else %>
+                  不明
+                <% end %>
+              </span>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

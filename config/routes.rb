@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :reviews, only: [:index, :create, :edit, :update, :destroy]
     resources :comments, only: [:index, :destroy]
     resources :users, only: [:index, :show, :edit, :update]
+    get :searches, to: "searches#search"
 
     root to: "hospitals#index"
   end
@@ -24,7 +25,8 @@ Rails.application.routes.draw do
         get :mypage
         get :publish_unpublish
         get :unsubscribe
-        patch :withdraw
+        patch :withdraw    
+        get :searches, to: "searches#search"
       end
     end
   end
