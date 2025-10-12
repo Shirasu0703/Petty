@@ -1,29 +1,29 @@
-<header>
+<header class="bg-header d-flex align-items-center justify-content-center">
   <div>
   </div>
 
-  <nav class="d-flex">
+  <nav class="d-flex align-items-center">
     <% if admin_signed_in? %>
       <%= current_admin.email %>
-      <%= link_to "病院登録", new_admin_hospital_path, class: "btn btn-warning mx-1" %>
-      <%= link_to "投稿一覧", admin_hospitals_path, class: "btn btn-warning mx-1" %>
-      <%= link_to "会員一覧", admin_users_path, class: "btn btn-warning mx-1" %>
-      <%= link_to "タグ一覧", admin_tags_path, class: "btn btn-warning mx-1" %>
-      <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-warning mx-1" %>
+      <%= link_to "病院登録", new_admin_hospital_path, class: "btn btnx-pink rounded-pill mx-1" %>
+      <%= link_to "投稿一覧", admin_hospitals_path, class: "btn btnx-pink rounded-pill mx-1" %>
+      <%= link_to "会員一覧", admin_users_path, class: "btn btnx-pink rounded-pill mx-1" %>
+      <%= link_to "タグ一覧", admin_tags_path, class: "btn btnx-pink rounded-pill mx-1" %>
+      <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-warning rounded-pill mx-1" %>
 
     <% elsif user_signed_in? %>
       <%= render "public/searches/search_box" %>
-      <%= link_to "マイページ", mypage_public_users_path, class: "btn btn-warning mx-1" %>
-      <%= link_to "病院一覧", public_hospitals_path, class: "btn btn-warning mx-1" %>
-      <%= link_to "投稿一覧", public_reviews_path, class: "btn btn-warning mx-1" %>
-      <%= link_to "レビュー投稿", new_public_review_path, class: "btn btn-warning mx-1" %>
-      <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-warning mx-1" %>
+      <%= link_to "マイページ", mypage_public_users_path, class: "btn btnx-green rounded-pill border border-warning mx-1" %>
+      <%= link_to "病院一覧", public_hospitals_path, class: "btn btnx-green rounded-pill border border-warning mx-1" %>
+      <%= link_to "投稿一覧", public_reviews_path, class: "btn btnx-green rounded-pill border border-warning mx-1" %>
+      <%= link_to "レビュー投稿", new_public_review_path, class: "btn btnx-green rounded-pill border border-warning mx-1" %>
+      <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btnx-green rounded-pill border border-warning mx-1" %>
 
     <% else %>
-      <%= link_to "About", about_path, class: "btn btn-warning mx-1" %>
-      <%= link_to "投稿一覧", public_hospitals_path, class: "btn btn-warning mx-1" %>
-      <%= link_to "新規登録", new_user_registration_path, class: "btn btn-warning mx-1" %>
-      <%= link_to "ログイン", new_user_session_path, class: "btn btn-warning mx-1" %>
+      <%= link_to "About", about_path, class: "btn btnx-green rounded-pill border border-warning mx-1" %>
+      <%= link_to "投稿一覧", public_hospitals_path, class: "btn btnx-green rounded-pill border border-warning mx-1" %>
+      <%= link_to "新規登録", new_user_registration_path, class: "btn btnx-green rounded-pill border border-warning mx-1" %>
+      <%= link_to "ログイン", new_user_session_path, class: "btn btnx-green rounded-pill border border-warning mx-1" %>
     <% end %>
   </nav>
 </header>

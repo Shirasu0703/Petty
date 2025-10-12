@@ -1,0 +1,24 @@
+
+.bg-header {
+  background-color: #ccbb88;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+.btnx-pink{
+  color: var(--bs-pink) ;background: #e783b2; border: 2px solid #e783b2; 
+}
+
+.btnx-green{
+  height: 60px;
+  width: 150px;
+  line-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  color: var(--bs-green) ;background: #b9e783; border: 2px solid #b9e783; 
+}
