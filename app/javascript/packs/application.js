@@ -15,6 +15,7 @@ import "../stylesheets/application";
 
 
 import "stylesheets/header.scss"
+import "stylesheets/search.scss"
 
 Rails.start()
 Turbolinks.start()
