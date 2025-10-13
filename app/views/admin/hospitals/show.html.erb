@@ -1,2 +1,41 @@
-<h1>Admin::Hospitals#show</h1>
-<p>Find me in app/views/admin/hospitals/show.html.erb</p>
+<h2 class="text-center my-4"></h2>
+<div class="hospital-background d-flex justify-content-center align-items-center min-vh-100">
+  <div class="card shadow-lg border-0" style="max-width: 700px; width: 90%; background: rgba(255, 255, 255, 0.9);">
+    <div class="card-header bg-warning text-white text-center">
+      <h4 class="mb-0"><%= @hospital.name %></h4>
+    </div>
+
+    <div class="card-body">
+      <% if @hospital.main_image.attached? %>
+        <%= image_tag @hospital.main_image, class: "img_fluid rounded mb-3" %>
+      <% end %>
+
+      <!--  サブ画像一覧  -->
+      <div class="d-flex flex-wrap gap-2">
+        <% @hospital.sub_images.each do |img| %>
+          <%= image_tag img, class: "img-thumbnail",
+      <div class="mb-3">
+        <strong>住所</strong>
+        <p class="text-muted mb-0"><%= @hospital.address %></p>
+      </div>
+      <div class="mb-3">
+        <strong>連絡先</strong>
+        <p class="text-muted mb-0"><%= @hospital.phone_number %></p>
+      </div>
+      <div class="mb-3">
+        <strong>診察時間</strong>
+        <p class="text-muted mb-0"><%= @hospital.opening_hours %></p>
+      </div>
+      <div class="mb-3">
+        <strong>診察対応動物</strong>
+        <p class="text-muted mb-0"><%= @hospital.animal_types %></p>
+      </div>
+      <div class="mb-3">
+        <p>コメント件数：<%= @review.comments.count %></p>
+      </div>
+      <div class="text-center">
+        <%= link_to "病院一覧に戻る", admin_hospitals_path, class: "btn btn-warning" %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 <% if admin_signed_in? %>
 <header class="bg-pink-100 d-flex align-items-center justify-content-center" style="height: 100px; padding: 0 20px;">
-  <%= form_with url: searches_admin_searches_path, method: :get, local: true  html: { class: "d-flex align-items-center search-form w-100", style: "max-width: 700px;" } do |f| %>
+  <%= form_with url: admin_searches_path, method: :get, local: true,  html: { class: "d-flex align-items-center search-form w-100", style: "max-width: 700px;" } do |f| %>
     <%= f.text_field :word, placeholder: "検索...", class: "form-control me-2 rounded-pill" %>
     <%= f.select :data, options_for_select([['User'], ['Review']]), {}, class: "form-select me-2 rounded-pill" %>
     <%= f.select :method, options_for_select([["完全一致", "perfect"], ["前方一致", "forward"], ["後方一致", "backward"], ["部分一致", "partial"]]), {}, class: "form-select me-2 rounded-pill" %>

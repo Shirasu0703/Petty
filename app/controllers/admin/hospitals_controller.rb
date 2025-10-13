@@ -1,9 +1,8 @@
 class Admin::HospitalsController < ApplicationController
-  before_action :authenticate_admin!
   before_action :set_hospital, only: [:edit, :update, :destroy]
 
   def new
-    @hosptal = Hospital.new
+    @hospital = Hospital.new
   end
 
   def index
@@ -45,8 +44,8 @@ class Admin::HospitalsController < ApplicationController
     @hospital = Hospital.find(params[:id])
   end
 
-  def hospitao_params
-    params.requre(:hospital).permit(:name, :address, :phone_number, :opening_hours, :animal_types)
+  def hospital_params
+    params.require(:hospital).permit(:name, :address, :phone_number, :opening_hours, :animal_types, :main_image, sub_images: [] )
   end 
 
   def authenticate_admin!
