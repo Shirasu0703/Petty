@@ -25,7 +25,7 @@
         <div class="colmd-3 md-4">
           <div class="card h-100">
             <div class="card-body text-center">
-
+              <p><%= link_to "#{review.comments.count} コメント", public_review_path(review.id) %></p>
               <h5 class="card-title">
                 <%= link_to review.title, public_review_path(review), class: "text-decoration-none text-primary" %>
               </h5>

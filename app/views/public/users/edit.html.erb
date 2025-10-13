@@ -8,7 +8,7 @@
   </ul>
 <% end %>
 
-<div class="review-background d-flex justify-content-center align-items-center vh-100">
+<div class="review-background d-flex justify-content-center align-items-center min-vh-100">
   <div class="card shadow-lg border-0" style="max-width: 700px; width: 90%; background: rgba(255, 255, 255, 0.9);">
     <%= form_with model: @user, url: mypage_public_users_path, method: :patch do |f| %>
 

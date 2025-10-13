@@ -8,6 +8,7 @@ class Public::ReviewsController < ApplicationController
   end
 
   def show
+    @comment = Comment.new
   end
 
   def index

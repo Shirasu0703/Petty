@@ -17,8 +17,9 @@ Rails.application.routes.draw do
     resources :favorites, only: [:create, :destroy]
     resource :map, only: [:show]
     resources :hospitals, only: [:index, :show]
-    resources :reviews
-    resources :comments, only: [:create, :destroy]
+      resources :reviews do
+        resources :comments, only: [:create, :destroy]
+      end
 
     resources :users do
       collection do
