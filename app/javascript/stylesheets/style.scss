@@ -1,0 +1,43 @@
+
+$background-color: #f8f6ee;
+$footer-color: #a58b68;
+$text-color: #3c3a36;
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background-color: $background-color;
+  font-family: "Noto Sans JP", sans-serif;
+  color: $text-color;
+}
+
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  min-height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+.site-footer {
+  background-color: $footer-color;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .footer_logo {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+  }
+}
