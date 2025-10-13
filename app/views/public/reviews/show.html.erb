@@ -1,5 +1,5 @@
-<h2 class="text-center my-4">レビュー詳細画面</h2>
-<div class="review-background d-flex justify-content-center align-items-center vh-100">
+<h2 class="text-center my-4"></h2>
+<div class="review-background d-flex justify-content-center align-items-center min-vh-100">
   <div class="card shadow-lg border-0" style="max-width: 700px; width: 90%; background: rgba(255, 255, 255, 0.9);">
     <div class="card-header bg-warning text-white text-center">
       <h4 class="mb-0"><%= @review.title %></h4>
@@ -63,6 +63,54 @@
           </div>
         <% end %>
       </div>
+
+      <div class="mb-3">
+        <p>コメント件数：<%= @review.comments.count %></p>
+      </div>
+
+      <div class="mt-4">
+        <h5 class="text-center mb-3">💬 コメント一覧</h5>
+  
+        <% if @review.comments.any? %>
+          <% @review.comments.each do |comment| %>
+            <div class="card mb-3 shadow-sm border-0" style="background: #f8f9fa;">
+              <div class="card-body">
+                <div class="d-flex align-items-center mb-2">
+                  <%= image_tag comment.user.get_profile_image, class: "rounded-circle me-2", size: "40x40" %>
+                  <div>
+                    <strong><%= comment.user.name %></strong><br>
+                    <small class="text-muted"><%= comment.created_at.strftime('%Y/%m/%d %H:%M') %></small>
+                    <% if comment.user == current_user %>
+                      <%= link_to "削除", public_review_comment_path(comment.review, comment), method: :delete %>
+                    <% end %>
+                  </div>
+                </div>
+                <p class="mb-0"><%= comment.body %></p>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <p class="text-muted text-center">まだコメントはありません。</p>
+        <% end %>
+      </div>
+
+      <div class="mt-4">
+        <h5 class="text-center mb-3">✏️ コメントを投稿する</h5>
+        <div class="card shadow-sm border-0" style="background: rgba(255, 255, 255, 0.95);">
+          <div class="card-body">
+            <%= form_with model: [@review, @comment], url: public_review_comments_path(@review), local: true do |f| %>
+              <div class="mb-3">
+                <%= f.text_area :body, rows: 4, class: "form-control", placeholder: "コメントを入力してください" %>
+              </div>
+              <div class="text-end">
+                <%= f.submit "送信する", class: "btn btn-warning px-4" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+
       <div class="text-center">
         <%= link_to "レビュー一覧に戻る", public_reviews_path, class: "btn btn-warning" %>
       </div>
