@@ -1,11 +1,19 @@
-<h1>病院一覧ページ</h1>
-<div class="container">
-<% @hospitals.each do |hospital| %>
+<div class="container mt-4">
+  <h2>病院一覧</h2>
+<hr>
   <div class="row">
-    <div class="col">
-      <p><%= hospital.hospital_id %></p>
-    </div>
+    <% @hospitals.each do |hospital| %>
+      <div class="col-md-3 md-4">
+        <div class="card h-100">
+          <%= image_tag hospital.main_image, class: "card-img-top", alt: hospital.name %>
+          <div class="card-body">
+            <h5 class="card-title"><%= link_to hospital.name, public_hospital_path(hospital) %></h5>
+
+            <p><%= hospital.reviews.count%> 件</p>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
-<% end %>
 </div>
 

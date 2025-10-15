@@ -2,23 +2,40 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :tags, only: [:index, :create, :edit, :update, :destroy]
     resources :review_tags, only: [:create, :destroy]
-    resources :hospitals
-    resources :reviews, only: [:index, :create, :edit, :update, :destroy]
-    resources :comments, only: [:index, :destroy]
-    resources :users, only: [:index, :show, :edit, :update]
-    get :searches, to: "searches#search"
 
+      resources :hospitals do
+        member do
+          delete :remove_main_image
+          delete :remove_sub_image
+        end
+        resources :reviews, only: [:index, :create, :edit, :update, :destroy] do
+         resources :comments, only: [:index, :destroy]
+        end
+      end
+    
+      resources :users, only: [:index, :show, :edit, :update] do
+        member do
+          get :unsubscribe
+          patch :withdraw
+          patch :activate
+          patch :deactivate
+        end
+      end
+    get :searches, to: "searches#search"
     root to: "hospitals#index"
   end
+
 
   namespace :public do
     resources :tags, only: [:index, :show, :create, :destroy]
     resources :review_tags, only: [:create, :destroy]
     resources :favorites, only: [:create, :destroy]
     resource :map, only: [:show]
-    resources :hospitals, only: [:index, :show]
-      resources :reviews do
-        resources :comments, only: [:create, :destroy]
+
+      resources :hospitals, only: [:index, :show] do
+        resources :reviews do
+          resources :comments, only: [:create, :destroy]
+        end
       end
 
     resources :users do

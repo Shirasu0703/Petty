@@ -58,8 +58,8 @@
         </span>
         <% if user_signed_in? && current_user == @review.user %>
           <div>
-            <%= link_to "編集", edit_public_review_path(@review), class:"btn btn-warning" %> |
-            <%= link_to "削除", public_review_path(@review), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+            <%= link_to "編集", edit_public_hospital_review_path(@hospital, @review), class:"btn btn-warning" %> |
+            <%= link_to "削除", public_hospital_review_path(@hospital, @review), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
           </div>
         <% end %>
       </div>
@@ -81,7 +81,7 @@
                     <strong><%= comment.user.name %></strong><br>
                     <small class="text-muted"><%= comment.created_at.strftime('%Y/%m/%d %H:%M') %></small>
                     <% if comment.user == current_user %>
-                      <%= link_to "削除", public_review_comment_path(comment.review, comment), method: :delete %>
+                      <%= link_to "削除", public_hospital_review_comment_path(@review.hospital, @review, comment), method: :delete %>
                     <% end %>
                   </div>
                 </div>
@@ -98,7 +98,7 @@
         <h5 class="text-center mb-3">✏️ コメントを投稿する</h5>
         <div class="card shadow-sm border-0" style="background: rgba(255, 255, 255, 0.95);">
           <div class="card-body">
-            <%= form_with model: [@review, @comment], url: public_review_comments_path(@review), local: true do |f| %>
+            <%= form_with model: [@review, @comment], url: public_hospital_review_comments_path(@hospital, @review), local: true do |f| %>
               <div class="mb-3">
                 <%= f.text_area :body, rows: 4, class: "form-control", placeholder: "コメントを入力してください" %>
               </div>
@@ -112,7 +112,7 @@
 
 
       <div class="text-center">
-        <%= link_to "レビュー一覧に戻る", public_reviews_path, class: "btn btn-warning" %>
+        <%= link_to "レビュー一覧に戻る", public_hospital_reviews_path, class: "btn btn-warning" %>
       </div>
     </div>
   </div>
