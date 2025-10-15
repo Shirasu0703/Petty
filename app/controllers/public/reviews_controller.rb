@@ -8,6 +8,7 @@ class Public::ReviewsController < ApplicationController
   end
 
   def show
+    @hospital = Hospital.find(params[:hospital_id])
     @comment = Comment.new
   end
 
@@ -16,10 +17,11 @@ class Public::ReviewsController < ApplicationController
   end
 
   def create
-    @review = current_user.reviews.new(review_params)
+    @hospital = Hospital.find(params[:hospital_id])
+    @review = @hospital.reviews.build(review_params)
     @review.user_id = current_user.id
     if @review.save
-      redirect_to public_review_path(@review.id), notice: "レビューを投稿しました"
+      redirect_to public_hospital_path(@hospital), notice: "レビューを投稿しました"
     else
       render :new
     end

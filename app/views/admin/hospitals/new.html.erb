@@ -1,2 +1,51 @@
-<h1>Admin::Hospitals#new</h1>
-<p>Find me in app/views/admin/hospitals/new.html.erb</p>
+<% if @hospital.errors.any? %>
+  <%= @hospital.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @hospital.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h2 class="text-center my-4">病院登録</h2>
+<div class="hospital-background d-flex justify-content-center align-items-center min-vh-100">
+  <div class="card shadow-lg border-0" style="max-width: 700px; width: 90%; background: rgba(255, 255, 255, 0.9);">
+    <%= form_with model: @hospital, url: admin_hospitals_path, method: :post, local: true, html: { multipart: true } do |f| %>
+      <div class="card-body">
+        <div class="mb-3">
+          <strong><%= f.label :name, "施設名" %></strong>
+          <p class="text-muted mb-0"><%= f.text_field :name, class: "form-control" %></p>
+        </div>
+        <div class="mb-3">
+          <strong><%= f.label :address, "住所" %></strong>
+          <p class="text-muted mb-0"><%= f.text_area :address, class: "form-control" %></p>
+        </div>
+        <div class="mb-3">
+          <strong><%= f.label :phone_number, "連絡先" %></strong>
+          <p class="text-muted mb-0"><%= f.text_field :phone_number, class: "form-control" %></p>
+        </div>
+        <div class="mb-3">
+          <strong><%= f.label :opening_hours, "診察時間" %></strong>
+          <p class="text-muted mb-0"><%= f.text_area :opening_hours, class: "form-control" %></p>
+        </div>
+        <div class="mb-3">
+          <strong><%= f.label :aminal_types, "診察対応動物" %></strong>
+          <p class="text-muted mb-0"><%= f.text_field :animal_types, class: "form-control" %></p>
+        </div>
+
+        <!--  見出し画像  -->
+        <div class="mb-3">
+          <strong><%= f.label :main_image, "見出し画像(1枚)" %></strong>
+          <%= f.file_field :main_image, accept: "image/*", class: "form-control-file" %>
+        </div>
+
+        <!-- サブ画像 -->
+        <div class="mb-3">
+          <strong><%= f.label :sub_images, "サブ画像(複数選択可)" %></strong><br />
+          <%= f.file_field :sub_images, multiple: true, accept: "image/*", class: "form-comtrol-file" %>
+        </div>
+        <%= f.submit "登録", class: "btn btn-warning w-100" %>
+      </div>
+    <% end %>
+  </div>
+</div>

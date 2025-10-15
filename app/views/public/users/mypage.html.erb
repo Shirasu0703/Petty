@@ -16,8 +16,8 @@
                 <div class="card-body">
                   <h5 class="card-title"><%= review.title %></h5>
                   <p class="card-text"><%= truncate(review.body, length: 100) %></p>
-                  <p><%= link_to "#{review.comments.count} コメント", public_review_path(review.id) %></p>
-                  <%= link_to "レビュー詳細", public_review_path(review), class: "btn btn-primary" %>
+                  <p><%= link_to "#{review.comments.count} コメント", public_hospital_review_path(review.hospital, review) %></p>
+                  <%= link_to "レビュー詳細", public_hospital_review_path(review.hospital, review), class: "btn btn-primary" %>
                 </div>
                 <div class="card-footer text-muted small">
                   投稿日: <%= review.created_at.strftime("%Y-%m-%d") %>

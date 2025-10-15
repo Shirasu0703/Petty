@@ -1,2 +1,33 @@
-<h1>Admin::Reviews#index</h1>
-<p>Find me in app/views/admin/reviews/index.html.erb</p>
+<h5>レビュー一覧画面</h5>
+
+<table class="table table-responsive">
+  <thead>
+    <tr>
+      <th></th>
+      <th投稿者</th>
+      <th>評価</th>
+      <th>登録日</th>
+      <th>コメント</th>
+      <th>投稿日</th>
+      <th>詳細</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @reviews.each do |review| %>
+    <tr>
+      <td>
+        <% if review.user.image.attached? %>
+          <%= image_tag review.user.image_tag, size: "40x40", class: "rounded-circle" %>
+        <% else %>
+          <%= image_tag "no_image.jpg", size: "40x40", class: "rounded-circle" %>
+        <% end %>
+      </td>
+      <td><%= review.user.name %></td>
+      <td></td>
+      <td><%= review.body.truncate(15, omission: ' [...]') %></td>
+      <td><%= review.created_at.strftime("%Y-%m-%d") %></td>
+      <td><%= link_to "編集", edit_admin_review_path(review.id) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

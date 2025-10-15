@@ -1,9 +1,8 @@
 class Admin::HospitalsController < ApplicationController
-  before_action :authenticate_admin!
   before_action :set_hospital, only: [:edit, :update, :destroy]
 
   def new
-    @hosptal = Hospital.new
+    @hospital = Hospital.new
   end
 
   def index
@@ -11,6 +10,7 @@ class Admin::HospitalsController < ApplicationController
   end
 
   def show
+    @hospital = Hospital.find(params[:id])
   end
 
   def create
@@ -39,14 +39,27 @@ class Admin::HospitalsController < ApplicationController
     redirect_to admin_hospitals_path, notice: "病院を削除しました"
   end
 
+  def remove_main_image
+    @hospital = Hospital.find(params[:id])
+    @hospital.main_image.purge
+    redirect_to edit_admin_hospital_path(@hospital), notice: "メイン画像を削除しました"
+  end
+  
+  def remove_sub_image
+    @hospital = Hospital.find(params[:id])
+    image = @hospital.sub_images.find(params[:image_id])
+    image.purge
+    redirect_to edit_admin_hospital_path(@hospital), notice: "サブ画像を削除しました"
+  end
+
   private
 
   def set_hospital
     @hospital = Hospital.find(params[:id])
   end
 
-  def hospitao_params
-    params.requre(:hospital).permit(:name, :address, :phone_number, :opening_hours, :animal_types)
+  def hospital_params
+    params.require(:hospital).permit(:name, :address, :phone_number, :opening_hours, :animal_types, :main_image, sub_images: [] )
   end 
 
   def authenticate_admin!
