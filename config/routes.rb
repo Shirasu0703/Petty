@@ -8,7 +8,7 @@ Rails.application.routes.draw do
           delete :remove_main_image
           delete :remove_sub_image
         end
-        resources :reviews, only: [:index, :create, :edit, :update, :destroy] do
+        resources :reviews, only: [:show, :index, :create, :edit, :update, :destroy] do
          resources :comments, only: [:index, :destroy]
         end
       end

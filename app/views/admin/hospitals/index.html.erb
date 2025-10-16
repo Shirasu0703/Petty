@@ -1,4 +1,4 @@
-<h5>投稿一覧画面</h5>
+<h2 class="text-center my-4">病院一覧</h2>
 
 <table class="table">
   <thead>
@@ -17,7 +17,7 @@
   <tbody>
   <% @hospitals.each do |hospital| %>
     <tr>
-      <td><%= hospital.name %></td>
+      <td><%= link_to hospital.name, admin_hospital_path(hospital) %></td>
       <td><%= hospital.address %></td>
       <td><%= hospital.phone_number %></td>
       <td><%= hospital.created_at.strftime("%Y-%m-%d") %></td>

@@ -1,0 +1,106 @@
+<h2 class="text-center my-4"></h2>
+<div class="review-background d-flex justify-content-center align-items-center min-vh-100">
+  <div class="card shadow-lg border-0" style="max-width: 700px; width: 90%; background: rgba(255, 255, 255, 0.9);">
+    <div class="card-header bg-warning text-white text-center">
+      <h4 class="mb-0"><%= @review.title %></h4>
+    </div>
+
+    <div class="card-body">
+      <div class="mb-3">
+        <strong>清潔さ</strong>
+        <p class="text-muted mb-0"><%= @review.cleanliness_comment %></p>
+      </div>
+      <div class="mb-3">
+        <strong>先生の対応</strong>
+        <p class="text-muted mb-0"><%= @review.doctor_comment %></p>
+      </div>
+      <div class="mb-3">
+        <strong>スタッフの対応</strong>
+        <p class="text-muted mb-0"><%= @review.staff_comment %></p>
+      </div>
+      <div class="mb-3">
+        <strong>料金</strong>
+        <p class="text-muted mb-0"><%= @review.price_comment %></p>
+      </div>
+      <div class="mb-3">
+        <strong>待ち時間</strong>
+        <p class="text-muted mb-0"><%= @review.waiting_comment %></p>
+      </div>
+      <div class="mb-3">
+        <strong>レビュータイトル</strong>
+        <p class="text-muted mb-0"><%= @review.title %></p>
+      </div>
+      <div class="mb-3">
+        <strong>総合評価</strong>
+        <p class="text-muted mb-0"><%= @review.body %></p>
+      </div>
+      <div class="mb-3">
+        <strong>動物目線のひとこと</strong>
+        <p class="text-muted mb-0"><%= @review.animal_comment %></p>
+      </div>
+      <div class="card-footer d-flex justify-content-between align-items-center">
+        <span class="text-muted small">
+          投稿者: 
+          <% if @review.user.present? %>
+            <%= link_to @review.user.name, admin_user_path(@review.user), class: "text-decoration-none text-primary" %>
+          <% else %>
+          不明
+          <% end %>
+        </span>
+        <div>
+          <%= link_to "編集", edit_admin_hospital_review_path(@hospital, @review), class:"btn btn-warning" %> |
+          <%= link_to "削除", admin_hospital_review_path(@hospital, @review), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <p>コメント件数：<%= @review.comments.count %></p>
+      </div>
+
+      <div class="mt-4">
+        <h5 class="text-center mb-3">💬 コメント一覧</h5>
+  
+        <% if @review.comments.any? %>
+          <% @review.comments.each do |comment| %>
+            <div class="card mb-3 shadow-sm border-0" style="background: #f8f9fa;">
+              <div class="card-body">
+                <div class="d-flex align-items-center mb-2">
+                  <%= image_tag comment.user.get_profile_image, class: "rounded-circle me-2", size: "40x40" %>
+                  <div>
+                    <strong><%= comment.user.name %></strong><br>
+                    <small class="text-muted"><%= comment.created_at.strftime('%Y/%m/%d %H:%M') %></small>
+                    <%= link_to "削除", admin_hospital_review_comment_path(@review.hospital, @review, comment), method: :delete %>
+                  </div>
+                </div>
+                <p class="mb-0"><%= comment.body %></p>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <p class="text-muted text-center">まだコメントはありません。</p>
+        <% end %>
+      </div>
+
+      <div class="mt-4">
+        <h5 class="text-center mb-3">✏️ コメントを投稿する</h5>
+        <div class="card shadow-sm border-0" style="background: rgba(255, 255, 255, 0.95);">
+          <div class="card-body">
+            <%= form_with model: [@review, @comment], url: admin_hospital_review_comments_path(@hospital, @review), local: true do |f| %>
+              <div class="mb-3">
+                <%= f.text_area :body, rows: 4, class: "form-control", placeholder: "コメントを入力してください" %>
+              </div>
+              <div class="text-end">
+                <%= f.submit "送信する", class: "btn btn-warning px-4" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="text-center">
+        <%= link_to "病院一覧に戻る", admin_hospitals_path, class: "btn btn-warning" %>
+      </div>
+    </div>
+  </div>
+</div>
