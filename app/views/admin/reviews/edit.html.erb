@@ -1,4 +1,4 @@
-<h1>レビュー編集ページ</h1>
+<h2 class="text-center my-4">レビュー編集</h2>
 <% if @review.errors.any? %>
   <%= @review.errors.count %>件のエラーが発生しました
   <ul>
@@ -9,7 +9,7 @@
 <% end %>
 
 <div class="container mt-4">
-  <%= form_with model: @review, url: admin_hospital_review_path(@review), method: :patch do |f| %>
+  <%= form_with model: @review, url: admin_hospital_review_path(@hospital, @review), method: :patch do |f| %>
 
   <div class="md-3">
     <%= f.label :cleanliness_comment, "清潔さ" %>
@@ -53,10 +53,10 @@
 
   <div class="my-3">
     <%= f.submit "更新", class: "btn btn-warning" %> |
-    <%= link_to "削除", admin_hospital_review_path(@review), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+    <%= link_to "削除", admin_hospital_review_path(@hospital, @review), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
   </div>
   <% end %>
 
-  <%= link_to "詳細に戻る", admin_hospital_review_path(@review), class: "btn btn-warning" %> 
-  <%= link_to "一覧に戻る", admin_hospital_reviews_path, class: "btn btn-warning" %>
+  <%= link_to "詳細に戻る", admin_hospital_review_path(@hospital, @review), class: "btn btn-warning" %> 
+  <%= link_to "一覧に戻る", admin_hospitals_path, class: "btn btn-warning" %>
 </div>

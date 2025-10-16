@@ -1,2 +1,52 @@
-<h1>Admin::Users#show</h1>
-<p>Find me in app/views/admin/users/show.html.erb</p>
+<h2 class="text-center my-4">ユーザー情報編集</h2>
+<% if @user.errors.any? %>
+  <%= @user.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<div class="review-background d-flex justify-content-center align-items-center min-vh-100">  
+  <div class="card shadow-lg border-0" style="max-width: 700px; width: 90%; background: rgba(255, 255, 255, 0.9);">
+    <div class="card-body">
+      <div class="text-center md-3">
+        <% if @user.image.attached? %>
+          <%= image_tag @user.image, size: "170x170" %>
+        <% else %>
+          <%= image_tag "no_image.jpg", size: "170x170" %>
+        <% end %>
+      </div>
+
+      <div class="text-center mx-3">
+        <strong>名前</strong>
+        <p class="text-muted"><%= @user.name %></p>
+      </div>
+
+      <div class="text-center mx-3">
+        <strong>メールアドレス</strong>
+        <p class="text-muted"><%= @user.email %></p>
+      </div>
+
+      <div class="text-center mx-3">
+        <strong>自己紹介文</strong>
+        <p class="text-muted"><%= @user.introduction %></p>
+      </div>
+
+      <div class="text-center mx-3">
+        <% if @user.is_active? %>
+        <strong>会員ステータス</strong><br />
+          有効
+        <% else %>
+          退会済み
+        <% end %>
+      </div>
+
+      <div class="text-center mb-4">
+        <%= link_to "会員一覧に戻る", admin_users_path, class: "btn btn-warning w-25" %>
+        <%= link_to "会員編集", edit_admin_user_path(@user), class: "btn btn-warning w-25" %>
+      </div>
+    </div>
+  </div>
+</div>

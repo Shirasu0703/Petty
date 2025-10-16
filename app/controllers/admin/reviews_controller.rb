@@ -1,27 +1,36 @@
 class Admin::ReviewsController < ApplicationController
+
+  def show
+    @hospital = Hospital.find(params[:hospital_id])
+    @review = @hospital.reviews.find(params[:id])
+    @comment = Comment.new
+  end
+
   def index
     @reviews = Review.all
   end
 
   def create
-    @review = current_user.reviews.new(review_params)
+    @hospital = Hospital.find(params[:hospital_id])
+    @review = @hospital.reviews.new(review_params)
     @review.user_id = current_user.id
     if @review.save
-      redirect_to public_review_path(@review.id), notice: "レビューを投稿しました"
+      redirect_to admin_review_path(@hospital), notice: "レビューを投稿しました"
     else
       render :new
     end
   end
 
   def edit
-    @review = Review.find(params[:id])
+    @hospital = Hospital.find(params[:hospital_id])
+    @review = @hospital.reviews.find(params[:id])
   end
 
   def update
     @hospital = Hospital.find(params[:hospital_id])
-    @review = Review.find(params[:id])
+    @review = @hospital.reviews.find(params[:id])
     if @review.update(review_params)
-      redirect_to admin_hospital_path(@hospital), notice: "レビューを更新しました"
+      redirect_to admin_hospital_review_path(@hospital, @review), notice: "レビューを更新しました"
     else
       render :edit
     end
@@ -39,5 +48,4 @@ class Admin::ReviewsController < ApplicationController
   def review_params
     params.require(:review).permit(:title, :body, :image, :cleanliness_comment, :doctor_comment, :staff_comment, :price_comment, :waiting_comment, :animal_comment)
   end
-
 end
