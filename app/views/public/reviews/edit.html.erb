@@ -9,7 +9,7 @@
 <% end %>
 
 <div class="container mt-4">
-  <%= form_with model: @review, url: public_review_path(@review), method: :patch do |f| %>
+  <%= form_with model: @review, url: public_hospital_review_path(@review.hospital, @review), method: :patch do |f| %>
 
   <div class="md-3">
     <%= f.label :cleanliness_comment, "清潔さ" %>
@@ -53,12 +53,12 @@
 
   <div class="my-3">
     <%= f.submit "更新", class: "btn btn-warning" %> |
-    <%= link_to "削除", public_review_path(@review), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+    <%= link_to "削除", public_hospital_review_path(@review.hospital, @review), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
   </div>
   <% end %>
 
-  <%= link_to "詳細に戻る", public_review_path(@review), class: "btn btn-warning" %> 
-  <%= link_to "一覧に戻る", public_reviews_path, class: "btn btn-warning" %>
+  <%= link_to "詳細に戻る", public_hospital_review_path(@review.hospital, @review), class: "btn btn-warning" %> 
+  <%= link_to "一覧に戻る", public_hospital_reviews_path, class: "btn btn-warning" %>
 </div>
 
 

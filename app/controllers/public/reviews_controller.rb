@@ -1,5 +1,6 @@
 class Public::ReviewsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
+  before_action :set_hospital
   before_action :set_review, only: [:show, :edit, :update, :destroy]
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
@@ -8,7 +9,6 @@ class Public::ReviewsController < ApplicationController
   end
 
   def show
-    @hospital = Hospital.find(params[:hospital_id])
     @comment = Comment.new
   end
 
@@ -17,7 +17,6 @@ class Public::ReviewsController < ApplicationController
   end
 
   def create
-    @hospital = Hospital.find(params[:hospital_id])
     @review = @hospital.reviews.build(review_params)
     @review.user_id = current_user.id
     if @review.save
@@ -32,7 +31,7 @@ class Public::ReviewsController < ApplicationController
 
   def update
     if @review.update(review_params)
-      redirect_to public_review_path(@review.id), notice: "レビューを更新しました"
+      redirect_to public_hospital_review_path(@hospital, @review), notice: "レビューを更新しました"
     else
       render :edit
     end
@@ -40,19 +39,23 @@ class Public::ReviewsController < ApplicationController
 
   def destroy
     @review.destroy
-    redirect_to mypage_public_users_path, notice: "レビューを削除しました"
+    redirect_to public_hospitals_path, notice: "レビューを削除しました"
   end
 
   private
 
+  def set_hospital
+    @hospital = Hospital.find(params[:hospital_id])
+  end
+
   def set_review
-    @review = Review.find(params[:id])
+    @review = @hospital.reviews.find(params[:id])
   end
 
   def ensure_correct_user
     unless @review.user == current_user
       flash[:alert] = "権限がありません。"
-      redirect_to public_reviews_path
+      redirect_to public_hospital_reviews_path
     end
   end
    
