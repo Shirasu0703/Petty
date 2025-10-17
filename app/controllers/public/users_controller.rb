@@ -15,6 +15,8 @@ class UsersController < ApplicationController
   end
 
   def show
+    @hospital = Hospital.first
+    @review = @hospital.reviews.first
   end
 
   def update
