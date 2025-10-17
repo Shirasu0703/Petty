@@ -7,9 +7,6 @@ class Admin::HospitalsController < ApplicationController
   end
 
   def index
-    logger.info "admin_signed_in?: #{admin_signed_in?}"
-    logger.info "current_admin: #{current_admin.inspect}"
-    logger.info "warden.authenticated?(:admin): #{warden.authenticated?(:admin)}"
     @hospitals = Hospital.all
   end
 
