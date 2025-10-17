@@ -27,7 +27,7 @@
           退会済み
         <% end %>
       </td>
-      <td><%= link_to "編集", edit_admin_user_path(user) if user.reviews.any? %></td>
+      <td><%= link_to "編集", edit_admin_user_path(user) %></td>
     </tr>
   <% end %>
   </tbody>

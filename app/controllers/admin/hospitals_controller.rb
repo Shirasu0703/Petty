@@ -1,4 +1,5 @@
 class Admin::HospitalsController < ApplicationController
+  before_action :authenticate_admin!
   before_action :set_hospital, only: [:edit, :update, :destroy]
 
   def new
@@ -6,6 +7,9 @@ class Admin::HospitalsController < ApplicationController
   end
 
   def index
+    logger.info "admin_signed_in?: #{admin_signed_in?}"
+    logger.info "current_admin: #{current_admin.inspect}"
+    logger.info "warden.authenticated?(:admin): #{warden.authenticated?(:admin)}"
     @hospitals = Hospital.all
   end
 
@@ -63,6 +67,6 @@ class Admin::HospitalsController < ApplicationController
   end 
 
   def authenticate_admin!
-    redirect_to root_path, alert: "権限がありません" unless current_user&.admin?
+    redirect_to root_path, alert: "権限がありません" unless current_admin
   end
 end
