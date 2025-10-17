@@ -1,5 +1,5 @@
 class Admin::ReviewsController < ApplicationController
-
+before_action :authenticate_admin!
   def show
     @hospital = Hospital.find(params[:hospital_id])
     @review = @hospital.reviews.find(params[:id])
@@ -40,7 +40,7 @@ class Admin::ReviewsController < ApplicationController
     @hospital = Hospital.find(params[:hospital_id])
     @review = @hospital.reviews.find(params[:id])
     @review.destroy
-    redirect_to admin_hospitals_path, notice: "レビューを削除しました"
+    redirect_to admin_hospital_path(@hospital), notice: "レビューを削除しました"
   end
 
   private

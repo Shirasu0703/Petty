@@ -7,9 +7,9 @@ html,
 body {
   height: 100%;
   margin: 0;
-  background-color: $background-color;
+  background-color: #f8f6ee;
   font-family: "Noto Sans JP", sans-serif;
-  color: $text-color;
+  color: #3c3a36;
 }
 
 .wrapper {
@@ -29,7 +29,7 @@ body {
 }
 
 .site-footer {
-  background-color: $footer-color;
+  background-color: #a58b68;
   height: 100px;
   display: flex;
   align-items: center;

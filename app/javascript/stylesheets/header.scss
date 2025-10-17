@@ -1,20 +1,21 @@
-.bg-header {
+header.bg-header {
   background-color: #a58b68;
   border-bottom: 1px solid #ddd;
   height: auto;
   padding: 0 20px;
 }
 
-.btnx-pink{
+header.bg-header .btnx-pink{
   color: #fff; 
   background: #d869a1; 
   border: 2px solid #d869a1; 
+  
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
-.btnx-green{
+header.bg-header .btnx-green{
   color: #fff;
   background: #699a4c;
   border: 2px solid #699a4c;
@@ -23,7 +24,8 @@
   justify-content: center;
 }
 
-.btnx-green, .btnx-pink {
+header.bg-header .btnx-green, 
+header.bg-header .btnx-pink {
   height: 60px;
   width: 125px;
   line-height: 40px;
@@ -31,27 +33,30 @@
   text-align: center;
 }
 
-.logo-img {
+header.bg-header .logo-img {
   height: 50px;
   width: auto;
 }
 
-.welcome-text {
+header.bg-header .welcome-text {
   font-size: 1rem;
   font-weight: 500;
+  white-space: nowrap;
+  display: inline-bloch;
 }
 
-.navbar-collapse {
+header.bg-header .navbar-collapse {
   display: none;
 }
 
-.navbar-collapse.collapse.show {
+// !importantで強制的に指示
+header.bg-header .navbar-collapse.collapse.show {
   display: flex !important;
   flex-direction: column;
 }
 
 @media (min-width: 992px) {
-  .navbar-collapse {
+  header.bg-header .navbar-collapse {
     display: flex !important;
     flex-direction: row !important;
     justify-content: flex-end;
@@ -59,16 +64,16 @@
   }
 }
 
-// !importantで強制的に指示
-form.search-form,
-.search-box,
-input[type="text"].form-control {
+
+header.bg-header form.search-form,
+header.bg-header .search-box,
+header.bg-header input[type="text"].form-control {
   width: 100%;
 }
 
 @media (min-width: 992px) {
-  form.search-form,
-  .search-box,
+  header.bg-header form.search-form,
+  header.bg-header .search-box,
   input[type="text"].form-control {
     max-width: 800px;
     margin: 0 auto;
@@ -76,18 +81,20 @@ input[type="text"].form-control {
 }
 
 // 画面崩れ対策
-.navbar-toggler {
+header.bg-header .navbar-toggler {
   z-index: 10;
   border: none;
 }
 
 @media (max-width: 991px) {
-  .welcome-text {
+  header.bg-header .welcome-text {
     margin-top: 0.25rem;
   }
 
-  .btnx-green, .btnx-pink {
+  header.bg-header .btnx-green, 
+  header.bg-header .btnx-pink {
     width: 100%;
     margin-bottom: 5px;
   }
 }
+

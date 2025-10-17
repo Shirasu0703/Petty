@@ -1,4 +1,5 @@
 class Admin::CommentsController < ApplicationController
+  before_action :authenticate_admin!
   def create
     @hospital = Hospital.find(params[:hospital_id])
     @review = Review.find(params[:review_id])
