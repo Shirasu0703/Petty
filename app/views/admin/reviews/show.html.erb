@@ -7,24 +7,35 @@
 
     <div class="card-body">
       <div class="mb-3">
+        <strong>総合評価</strong><br>
+        <%= render 'layouts/rating_form', object: @review, type: :rating, read_only: true, score: @review.rating %>
+        <p class="text-muted">（<%= @review.rating %> / 5）</p>
+      </div>
+      <hr>
+      <div class="mb-3">
         <strong>清潔さ</strong>
-        <p class="text-muted mb-0"><%= @review.cleanliness_comment %></p>
+        <%= render 'layouts/rating_form', object: @review, type: :cleanliness_rating, read_only: true, score: @review.cleanliness_rating %>
+        <p class="text-muted mb-0"><%= @review.cleanliness_comment.presence || "(コメントなし)" %></p>
       </div>
       <div class="mb-3">
         <strong>先生の対応</strong>
-        <p class="text-muted mb-0"><%= @review.doctor_comment %></p>
+        <%= render 'layouts/rating_form', object: @review, type: :doctor_rating, read_only: true, score: @review.doctor_rating %>
+        <p class="text-muted mb-0"><%= @review.doctor_comment.presence || "(コメントなし)" %></p>
       </div>
       <div class="mb-3">
         <strong>スタッフの対応</strong>
-        <p class="text-muted mb-0"><%= @review.staff_comment %></p>
+        <%= render 'layouts/rating_form', object: @review, type: :staff_rating, read_only: true, score: @review.staff_rating %>
+        <p class="text-muted mb-0"><%= @review.staff_comment.presence || "(コメントなし)" %></p>
       </div>
       <div class="mb-3">
         <strong>料金</strong>
-        <p class="text-muted mb-0"><%= @review.price_comment %></p>
+        <%= render 'layouts/rating_form', object: @review, type: :price_rating, read_only: true, score: @review.price_rating %>
+        <p class="text-muted mb-0"><%= @review.price_comment.presence || "(コメントなし)" %></p>
       </div>
       <div class="mb-3">
         <strong>待ち時間</strong>
-        <p class="text-muted mb-0"><%= @review.waiting_comment %></p>
+        <%= render 'layouts/rating_form', object: @review, type: :waiting_rating, read_only: true, score: @review.waiting_rating %>
+        <p class="text-muted mb-0"><%= @review.waiting_comment.presence || "(コメントなし)" %></p>
       </div>
       <div class="mb-3">
         <strong>レビュータイトル</strong>
@@ -35,7 +46,11 @@
         <p class="text-muted mb-0"><%= @review.body %></p>
       </div>
       <div class="mb-3">
-        <strong>動物目線のひとこと</strong>
+        <strong>総合コメント</strong>
+        <p class="text-dark"><%= simple_format(@review.body) %></p>
+      </div>
+      <div class="mb-3">
+        <strong>🐾動物目線のひとこと</strong>
         <p class="text-muted mb-0"><%= @review.animal_comment %></p>
       </div>
       <div class="card-footer d-flex justify-content-between align-items-center">

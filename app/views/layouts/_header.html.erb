@@ -1,4 +1,5 @@
 <header class="bg-header">
+  
   <nav class="navbar navbar-expand-lg navbar-light w-100">
     <div class="container flex-column flex-lg-row align-items-center justify-content-between">
 
@@ -26,13 +27,6 @@
 
       </div>
 
-      <div class="w-100 order-2 order-lg-2 my-2 my-lg-0">
-        <% if admin_signed_in? %>
-          <%= render "admin/searches/search_box" %>
-        <% else %>
-          <%= render "public/searches/search_box" %>
-        <% end %>
-      </div>
 
       <div class="collapse navbar-collapse order-3 order-lg-3 w-100" id="navbarNavDropdown">
         <div class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center p-2 gap-2">
@@ -54,8 +48,17 @@
           <% end %>
         </div>
       </div>
+    
 
     </div>
   </nav>
+  <div class="container my-2 my-lg-0">
+<% if admin_signed_in? %>
+  <%= render "admin/searches/search_box" %>
+<% else %>
+  <%= render "public/searches/search_box" %>
+<% end %>
+</div>
+
 </header>
 

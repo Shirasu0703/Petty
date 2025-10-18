@@ -53,6 +53,10 @@ class Admin::HospitalsController < ApplicationController
     redirect_to edit_admin_hospital_path(@hospital), notice: "サブ画像を削除しました"
   end
 
+  def average_rating
+    reviews.average(:rating).to_f.round(1)
+  end
+
   private
 
   def set_hospital

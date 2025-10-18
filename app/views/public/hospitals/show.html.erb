@@ -36,11 +36,10 @@
                       <%= image_tag "no_image.jpg", size: "40x40" %>
                     <% end %>
                     <strong><%= review.user.name %></strong><br />
+                    <%= render "layouts/rating_form", object: review, type: "rating", score: review.rating, read_only: true %>
                     <%= review.body.truncate(15, omission: ' [...]') %>
                     <%= link_to "もっと見る", public_hospital_review_path(@hospital, review), class: "btn btn-outline-primary btn-sm" %>
                   </div>
-
-                  <!--  星評価実装時に記述する  -->
                 </div>
               <% end %>
             <% else %>
@@ -52,8 +51,40 @@
             <h2 class="text-muted"><%= @hospital.name %></h2>
 
             <div class="d-flex align-items-center mb-3">
-              <!--  星評価実装時に記述する  -->
+              <%= render 'layouts/rating_form', object: @hospital, type: :rating, read_only: true, score: @hospital.average_rating %>
+              <p class="text-muted">平均：<%= @hospital.average_rating %> / 5</p>
             </div>
+          <hr>
+
+          <div class="mt-3">
+            <strong>清潔さ</strong>
+            <%= render 'layouts/rating_form', object: @hospital, type: :cleanliness_rating, read_only: true, score: @hospital.average_cleanliness %>
+            <p class="text-muted">平均：<%= @hospital.average_cleanliness %> / 5</p>
+          </div>
+
+          <div class="mt-3">
+            <strong>先生の対応</strong>
+            <%= render 'layouts/rating_form', object: @hospital, type: :doctor_rating, read_only: true, score: @hospital.average_doctor %>
+            <p class="text-muted">平均：<%= @hospital.average_doctor %> / 5</p>
+          </div>
+
+          <div class="mt-3">
+            <strong>スタッフの対応</strong>
+            <%= render 'layouts/rating_form', object: @hospital, type: :staff_rating, read_only: true, score: @hospital.average_staff %>
+            <p class="text-muted">平均：<%= @hospital.average_staff %> / 5</p>
+          </div>
+
+          <div class="mt-3">
+            <strong>料金</strong>
+            <%= render 'layouts/rating_form', object: @hospital, type: :price_rating, read_only: true, score: @hospital.average_price %>
+            <p class="text-muted">平均：<%= @hospital.average_price %> / 5</p>
+          </div>
+
+          <div class="mt-3">
+            <strong>待ち時間</strong>
+            <%= render 'layouts/rating_form', object: @hospital, type: :waiting_rating, read_only: true, score: @hospital.average_waiting %>
+            <p class="text-muted">平均：<%= @hospital.average_waiting %> / 5</p>
+          </div>
 
             <div class="md-3">
               <strong>住所：</strong>
