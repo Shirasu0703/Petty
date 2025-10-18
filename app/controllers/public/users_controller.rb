@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   def show
     @hospital = Hospital.first
     @review = @hospital.reviews.first
+    @reviews = @user.reviews.order(created_at: :desc)
   end
 
   def update

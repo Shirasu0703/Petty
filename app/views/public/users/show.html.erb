@@ -43,6 +43,35 @@
         <% end %>
       </div>
 
+      <div class="col-lg-9">
+        <% if @reviews.any? %>
+          <div class="row g-3">
+            <% @reviews.each do |review| %>
+              <div class=" col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                <div class="card h-100 shadow-sm">
+                  <%= link_to public_hospital_path(review.hospital), class: "card-img-top" do %>
+                  <%= image_tag review.hospital.main_image, class: "card-img-top", alt: review.hospital.name %>
+                  <% end %>
+                  <div class="card-body">
+                    <h5 class="card-title"><%= link_to review.hospital.name, public_hospital_path(review.hospital) %>
+                    <%= render "layouts/rating_form", object: review, type: "rating", score: review.rating, read_only: true %>
+                    <h5 class="card-title"><%= review.title %></h5>
+                    <p class="card-text"><%= truncate(review.body, length: 15) %></p>
+                    <p><%= link_to "#{review.comments.count} コメント", public_hospital_review_path(review.hospital, review) %></p>
+                    <%= link_to "レビュー詳細", public_hospital_review_path(review.hospital, review), class: "btn btn-primary" %>
+                  </div>
+                  <div class="card-footer text-muted small">
+                    投稿日: <%= review.created_at.strftime("%Y-%m-%d") %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+        <p>まだレビューは登録されていません。</p>
+        <% end %>
+      </div>
+
       <div class="text-center mb-4">
         <%= link_to "病院一覧へ", public_hospitals_path, class: "btn btn-warning w-25" %>
         <%= link_to "レビューへ", public_hospital_review_path(@hospital, @review), class: "btn btn-warning w-25" %>
