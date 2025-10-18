@@ -26,14 +26,14 @@
           <div class="card h-100">
             <div class="card-body text-center">
               <%= image_tag review.hospital.main_image, class: "card-img-top" %>
-              <div class="card-body text-center">
-                <p><%= link_to "#{review.comments.count} コメント", public_hospital_review_path(review.hospital, review) %></p>
                 <h5 class="card-title">
+                  <%= render 'layouts/rating_form', object: review.hospital, type: :rating, read_only: true, score: review.hospital.average_rating %>
                   <%= link_to review.title, public_hospital_review_path(review.hospital, review), class: "text-decoration-none text-primary" %>
                 </h5>
                 <p class="card-text">
                   <%= truncate(review.body, length: 80) %>
                 </p>
+                                <p><%= link_to "#{review.comments.count} コメント", public_hospital_review_path(review.hospital, review) %></p>
                 <span class="text-muted small">
                   投稿者: 
                   <% if review.user.present? %>

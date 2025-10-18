@@ -11,12 +11,16 @@
       <% if @reviews.any? %>
         <div class="row g-3">
           <% @reviews.each do |review| %>
-            <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="col-xl-4 col-lg-5 col-md-6">
               <div class="card h-100 shadow-sm">
+                <%= link_to public_hospital_path(review.hospital), class: "card-img-top" do %>
                 <%= image_tag review.hospital.main_image, class: "card-img-top", alt: review.hospital.name %>
+                <% end %>
                 <div class="card-body">
+                  <h5 class="card-title"><%= link_to review.hospital.name, public_hospital_path(review.hospital) %>
+                  <%= render "layouts/rating_form", object: review, type: "rating", score: review.rating, read_only: true %>
                   <h5 class="card-title"><%= review.title %></h5>
-                  <p class="card-text"><%= truncate(review.body, length: 100) %></p>
+                  <p class="card-text"><%= truncate(review.body, length: 15) %></p>
                   <p><%= link_to "#{review.comments.count} コメント", public_hospital_review_path(review.hospital, review) %></p>
                   <%= link_to "レビュー詳細", public_hospital_review_path(review.hospital, review), class: "btn btn-primary" %>
                 </div>

@@ -22,7 +22,7 @@
       <td><%= hospital.phone_number %></td>
       <td><%= hospital.created_at.strftime("%Y-%m-%d") %></td>
       <td><%= hospital.reviews.count %></td>
-      <td><p>◯◯</p></td>
+      <td><p class="text-muted">平均：<%= @hospital.average_rating %> / 5</p></td>
       <td><p>△△</p></td>
       <td><%= link_to "編集", edit_admin_hospital_path(hospital.id), class: "btn btn-primary" %></td>
       <td><%= link_to "削除", admin_hospital_path(hospital.id), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %></td>

@@ -18,6 +18,40 @@ import "stylesheets/header.scss"
 import "stylesheets/search.scss"
 import "stylesheets/style.scss"
 
+import Raty from "../raty"
+window.Raty = Raty;
+window.raty = function(elem,opt) {
+  const raty =  new Raty(elem,opt)
+  raty.init();
+  return raty;
+};
+
+
+
+document.addEventListener("turbolinks:load", function() {
+  document.querySelectorAll('.raty-display').forEach((elem) => {
+    const score = parseFloat(elem.dataset.score || 0);
+    const readOnly = elem.dataset.readonly === 'true';
+
+    const raty = new Raty(elem, {
+      starOn: "/assets/star-on.png",
+      starHalf: "/assets/star-half.png",
+      starOff: "/assets/star-off.png",
+      half: true,
+      readOnly,
+      score
+    });
+    raty.init();
+  });
+});
+
+document.addEventListener("turbolinks:before-cache", function() {
+  // ページ遷移前に星評価を空にする
+  document.querySelectorAll('.raty-display').forEach((elem) => {
+    elem.innerHTML = '';
+  });
+});
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()

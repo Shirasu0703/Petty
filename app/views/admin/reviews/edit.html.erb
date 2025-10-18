@@ -12,43 +12,49 @@
   <%= form_with model: @review, url: admin_hospital_review_path(@hospital, @review), method: :patch do |f| %>
 
   <div class="md-3">
-    <%= f.label :cleanliness_comment, "清潔さ" %>
-    <%= f.text_field :cleanliness_comment, class: "form-control" %>
+    <h4><%= f.label :cleanliness_comment, "清潔さ" %></h4>
+    <%= render 'layouts/rating_form', object: @review, type: :cleanliness_rating, read_only: true, score: @review.cleanliness_rating %>
+    <%= f.text_field :cleanliness_comment, class: "form-control border border-secondary" %>
   </div>
 
   <div class="md-3">
-    <%= f.label :doctor_comment, "先生の対応" %>
-    <%= f.text_field :doctor_comment, class: "form-control" %>
+    <h4><%= f.label :doctor_comment, "先生の対応" %></h4>
+    <%= render 'layouts/rating_form', object: @review, type: :doctor_rating, read_only: true, score: @review.doctor_rating %>
+    <%= f.text_field :doctor_comment, class: "form-control border border-secondary" %>
   </div>
 
   <div class="md-3">
-    <%= f.label :staff_comment, "スタッフの対応" %>
-    <%= f.text_field :staff_comment, class: "form-control" %>
+    <h4><%= f.label :staff_comment, "スタッフの対応" %></h4>
+    <%= render 'layouts/rating_form', object: @review, type: :staff_rating, read_only: true, score: @review.staff_rating %>
+    <%= f.text_field :staff_comment, class: "form-control border border-secondary" %>
   </div>
 
   <div class="md-3">
-    <%= f.label :price_comment, "料金" %>
-    <%= f.text_field :price_comment, class: "form-control" %>
+    <h4><%= f.label :price_comment, "料金" %></h4>
+    <%= render 'layouts/rating_form', object: @review, type: :price_rating, read_only: true, score: @review.price_rating %>
+    <%= f.text_field :price_comment, class: "form-control border border-secondary" %>
   </div>
 
   <div class="md-3">
-    <%= f.label :waiting_comment, "待ち時間" %>
-    <%= f.text_field :waiting_comment, class: "form-control" %>
+    <h4><%= f.label :waiting_comment, "待ち時間" %></h4>
+    <%= render 'layouts/rating_form', object: @review, type: :waiting_rating, read_only: true, score: @review.waiting_rating %>
+    <%= f.text_field :waiting_comment, class: "form-control border border-secondary" %>
   </div>
 
   <div class="md-3">
-    <%= f.label :title, "レビュータイトル" %>
-    <%= f.text_field :title, class: "form-control" %>
+    <h4><%= f.label :title, "レビュータイトル" %></h4>
+    <%= f.text_field :title, class: "form-control border border-secondary" %>
   </div>
 
   <div class="md-3">
-    <%= f.label :body, "総合評価" %>
-    <%= f.text_area :body, row: 5, class: "form-control" %>
+    <h4><%= f.label :body, "総合評価" %><//h4>
+    <%= render 'layouts/rating_form', object: @review, type: :rating, read_only: true, score: @review.rating %>
+    <%= f.text_area :body, row: 5, class: "form-control border border-secondary" %>
   </div>
 
   <div class="md-3">
-    <%= f.label :animal_comment, "動物目線でひとこと！(任意)" %>
-    <%= f.text_field :animal_comment, class: "form-control" %>
+    <h4><%= f.label :animal_comment, "動物目線でひとこと！(任意)" %></h4>
+    <%= f.text_field :animal_comment, class: "form-control border border-secondary" %>
   </div>
 
   <div class="my-3">

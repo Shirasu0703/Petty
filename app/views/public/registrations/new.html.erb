@@ -5,12 +5,12 @@
 
   <div class="field">
     <%= f.label :name, "名前(ニックネーム)" %>
-    <%= f.text_field :name, class: "form-control w-25" %>
+    <%= f.text_field :name, class: "form-control border border-secondary w-25" %>
   </div>
 
   <div class="field">
     <%= f.label :email, "メールアドレス" %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control w-25" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control border border-secondary w-25" %>
   </div>
 
   <div class="field">
@@ -18,12 +18,12 @@
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> 文字以上)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password", class: "form-control w-25" %>
+    <%= f.password_field :password, autocomplete: "new-password", class: "form-control border border-secondary w-25" %>
   </div>
 
   <div class="field">
     <%= f.label :password_confirmation, "パスワード(確認用)" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control w-25" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control border border-secondary w-25" %>
   </div>
 
   <div class="actions">

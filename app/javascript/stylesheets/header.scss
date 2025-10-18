@@ -8,7 +8,7 @@ header.bg-header {
 header.bg-header .btnx-pink{
   color: #fff; 
   background: #d869a1; 
-  border: 2px solid #d869a1; 
+  border: 2px solid hsl(330, 59%, 63%); 
   
   display: inline-flex;
   align-items: center;
@@ -42,7 +42,7 @@ header.bg-header .welcome-text {
   font-size: 1rem;
   font-weight: 500;
   white-space: nowrap;
-  display: inline-bloch;
+  display: inline-block;
 }
 
 header.bg-header .navbar-collapse {
@@ -58,12 +58,11 @@ header.bg-header .navbar-collapse.collapse.show {
 @media (min-width: 992px) {
   header.bg-header .navbar-collapse {
     display: flex !important;
-    flex-direction: row !important;
-    justify-content: flex-end;
+    //flex-direction: row !important;
+    //justify-content: flex-end;
     align-items: center;
   }
 }
-
 
 header.bg-header form.search-form,
 header.bg-header .search-box,
@@ -76,7 +75,6 @@ header.bg-header input[type="text"].form-control {
   header.bg-header .search-box,
   input[type="text"].form-control {
     max-width: 800px;
-    margin: 0 auto;
   }
 }
 
@@ -96,5 +94,12 @@ header.bg-header .navbar-toggler {
     width: 100%;
     margin-bottom: 5px;
   }
+}
+
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding-right: 20px;
 }
 
