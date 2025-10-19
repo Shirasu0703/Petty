@@ -1,4 +1,6 @@
 class Public::CommentsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :reject_guest_user, only: [:create, :destroy]
   def create
     @hospital = Hospital.find(params[:hospital_id])
     @review = Review.find(params[:review_id])
@@ -23,5 +25,11 @@ class Public::CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:body)
+  end
+
+  def reject_guest_user
+    if current_user.email == 'guest@example.com'
+      redirect_to mypage_public_users_path, alert: "ゲストユーザーはレビュー投稿できません。会員登録をお願いします。"
+    end
   end
 end

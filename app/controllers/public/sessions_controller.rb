@@ -28,6 +28,12 @@ class Public::SessionsController < Devise::SessionsController
     mypage_public_users_path
   end
 
+  def guest_sign_in
+    user = User.guest
+    sign_in user
+    redirect_to public_hospitals_path, notice: "ゲストでログインしました。"
+  end
+
   private
 
   def user_state

@@ -9,8 +9,12 @@
 
   <h3><%= user.name %></h3>
   <h4><%= user.introduction %></h4>
-  <p><%= link_to "プロフィール編集", edit_public_user_path(@user), class: "btn btn-warning" %></p>
-  <p><%= link_to "退会手続へ", unsubscribe_public_users_path, class: "btn btn-danger" %></p>
 
+  <% unless user.guest_user? %>
+    <div class="row">
+      <p><%= link_to "プロフィール編集", edit_public_user_path(@user), class: "btn btn-warning" %></p>
+      <p><%= link_to "退会手続へ", unsubscribe_public_users_path, class: "btn btn-danger" %></p>
+    </div>
+  <% end %>
 
 </div>
