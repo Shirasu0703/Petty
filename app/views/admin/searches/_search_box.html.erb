@@ -1,13 +1,15 @@
 <% if admin_signed_in? %>
-<div class="bg-pink-100 search-wrapper py-3">
+<div class="bg-pink-100 admin_search-wrapper py-3">
   <%= form_with url: admin_searches_path, method: :get, local: true,
       html: { class: "search-form w-100 d-flex flex-wrap align-items-center gap-2" } do |f| %>
     <div class="flex-grow-1 mr-2">
-      <%= f.text_field :word, placeholder: "検索...", class: "form-control me-2 rounded-pill" %>
+      <%= f.text_field :word, placeholder: "検索...", class: "form-control rounded-pill w-100" %>
     </div>
-      <%= f.select :data, options_for_select([['User'], ['Review']]), {}, class: "form-select me-2 rounded-pill" %>
+    <div>
+      <%= f.select :data, options_for_select([['User'], ['Review']]), {}, class: "form-select rounded-pill" %>
     </div>
-      <%= f.select :method, options_for_select([["完全一致", "perfect"], ["前方一致", "forward"], ["後方一致", "backward"], ["部分一致", "partial"]]), {}, class: "form-select me-2 rounded-pill" %>
+    <div>
+      <%= f.select :method, options_for_select([["完全一致", "perfect"], ["前方一致", "forward"], ["後方一致", "backward"], ["部分一致", "partial"]]), {}, class: "form-select rounded-pill" %>
     </div>
     <button type="submit" class="btn btn-pink rounded-pill px-4 d-flex align-items-center">
       <i class="bi bi-search me-2"></i>検索

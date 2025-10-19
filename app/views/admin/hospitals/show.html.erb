@@ -17,13 +17,13 @@
             <% end %>
           </div>
 
-            <h5 class="mb-3 fw-bold text-secondary">
+            <h5 class="col-lg-8 mb-3 fw-bold text-secondary">
               <i class="bi bi-chat-dots"></i>この病院についてのレビュー
             </h5>
 
             <% if @hospital.reviews.any? %>
               <% @hospital.reviews.each do |review| %>
-                <div class="border rounded p-3 mb-3 bg-white shadow-sm">
+                <div class="col-lg-8 border rounded p-3 mb-3 bg-white shadow-sm">
                   <div class="d-flex justify-content-between align-items-center">
                     <% if review.user.image.attached? %>
                       <%= image_tag review.user.image, size: "40x40" %>

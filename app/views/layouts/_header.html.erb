@@ -10,7 +10,7 @@
           <% end %>
           <div class="welcome-text ms-2">
             <% if admin_signed_in? %>
-              管理者<%= current_admin.email %>ログイン中
+              管理者ログイン中...
             <% elsif user_signed_in? %>
               ようこそ、<%= current_user.name %>さん!
             <% else %>
@@ -48,17 +48,14 @@
           <% end %>
         </div>
       </div>
-    
-
     </div>
   </nav>
   <div class="container my-2 my-lg-0">
-<% if admin_signed_in? %>
-  <%= render "admin/searches/search_box" %>
-<% else %>
-  <%= render "public/searches/search_box" %>
-<% end %>
-</div>
-
+    <% if admin_signed_in? %>
+    <%= render "admin/searches/search_box" %>
+  <% else %>
+    <%= render "public/searches/search_box" %>
+  <% end %>
+  </div>
 </header>
 
