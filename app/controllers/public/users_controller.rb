@@ -6,8 +6,16 @@ class UsersController < ApplicationController
 
   def mypage
     @user = current_user
+    sort_params = params[:sort] || "created_at DESC"
+    # @hospital = Hospital.first
+    # @review = @hospital.reviews.first
+    allowed_sorts = {
+      'created_at DESC' => 'created_at DESC',
+      'star DESC' => 'rating DESC'
+    }
+    sort_order = allowed_sorts[sort_params] || "created_at DESC"
     # ログインユーザーの投稿したレビューを新しい順に取得とページネーション
-    @reviews = @user.reviews.order(created_at: :desc)
+    @reviews = @user.reviews.order(sort_order)
     # .page(params[:page]).per(6)
   end
 

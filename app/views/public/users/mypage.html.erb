@@ -1,5 +1,9 @@
 <div class="container mt-4">
-  <h3><%= @user.name %>さんのマイページ</h3>
+  <div class="d-flex justify-content-between">
+    <h2><%= @user.name %>さんのマイページ</h2>
+    <h4><%= link_to "新着順", mypage_public_users_path(sort: 'created_at DESC'), class: "btn btn-link" %> |
+    <%= link_to "評価の高い順", mypage_public_users_path(sort: 'star DESC'), class: "btn btn-link" %></h4>
+  </div>
   <hr>
 
   <div class="row">
@@ -11,7 +15,7 @@
       <% if @reviews.any? %>
         <div class="row g-3">
           <% @reviews.each do |review| %>
-            <div class="col-xl-4 col-lg-5 col-md-6">
+            <div class="col-xl-4 col-lg-5 col-md-6 my-3">
               <div class="card h-100 shadow-sm">
                 <%= link_to public_hospital_path(review.hospital), class: "card-img-top" do %>
                 <%= image_tag review.hospital.main_image, class: "card-img-top", alt: review.hospital.name %>

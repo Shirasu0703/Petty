@@ -1,6 +1,7 @@
 class Admin::SearchesController < ApplicationController
 before_action :authenticate_admin!
   def search
+    @reviews = []
     @data = params[:data]
     @word = params[:word]
     @method = params[:method]

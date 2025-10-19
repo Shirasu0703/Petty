@@ -20,9 +20,14 @@
             <h5 class="col-lg-8 mb-3 fw-bold text-secondary">
               <i class="bi bi-chat-dots"></i>この病院についてのレビュー
             </h5>
+            <h4>
+              <%= link_to "新着順", public_hospital_path(@hospital, sort: 'new'), class: "btn btn-link" %> |
+              <%= link_to "評価の高い順", public_hospital_path(@hospital, sort: 'high_rating'), class: "btn btn-link" %>
+            </h4>
+          <hr>
 
-            <% if @hospital.reviews.any? %>
-              <% @hospital.reviews.each do |review| %>
+            <% if @reviews.any? %>
+              <% @reviews.each do |review| %>
                 <div class="col-lg-8 border rounded p-3 mb-3 bg-white shadow-sm">
                   <div class="d-flex justify-content-between align-items-center">
                     <% if review.user.image.attached? %>
@@ -33,7 +38,7 @@
                     <strong><%= review.user.name %></strong>
                     <%= render "layouts/rating_form", object: review, type: "rating", score: review.rating, read_only: true %>
                     <%= review.body.truncate(15, omission: ' [...]') %>
-                    <%= link_to "詳細", admin_hospital_review_path(@hospital, review), class: "btn btn-outline-primary btn-sm" %>
+                    <%= link_to "詳細", admin_hospital_review_path(review.hospital, review), class: "btn btn-outline-primary btn-sm" %>
                   </div>
                 </div>
               <% end %>

@@ -1,6 +1,6 @@
 class Public::SearchesController < ApplicationController
-
   def search
+    @reviews = []
     @data = params[:data]
     @word = params[:word]
     @method = params[:method]

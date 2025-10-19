@@ -19,32 +19,38 @@
             </div>
 
             <h5 class="mb-3 fw-bold text-secondary">
-              <i class="bi bi-chat-dots"></i>この病院についてのレビュー
+            <i class="bi bi-chat-dots"></i>この病院についてのレビュー
             </h5>
+            <h4>
+              <%= link_to "新着順", public_hospital_path(@hospital, sort: 'new'), class: "btn btn-link" %> |
+              <%= link_to "評価の高い順", public_hospital_path(@hospital, sort: 'high_rating'), class: "btn btn-link" %>
+            </h4>
+          <hr>
 
             <div class="mb-3 text-end">
               <%= link_to "レビューを投稿する", new_public_hospital_review_path(hospital_id: @hospital.id), class: "btn btn-primary" %>
             </div>
 
-            <% if @hospital.reviews.any? %>
-              <% @hospital.reviews.each do |review| %>
-                <div class="border rounded p-3 mb-3 bg-white shadow-sm">
-                  <div class="d-flex justify-content-between align-items-center">
-                    <% if review.user.image.attached? %>
-                      <%= image_tag review.user.image, size: "40x40" %>
-                    <% else %>
-                      <%= image_tag "no_image.jpg", size: "40x40" %>
-                    <% end %>
-                    <strong><%= review.user.name %></strong><br />
-                    <%= render "layouts/rating_form", object: review, type: "rating", score: review.rating, read_only: true %>
-                    <%= review.body.truncate(15, omission: ' [...]') %>
-                    <%= link_to "もっと見る", public_hospital_review_path(@hospital, review), class: "btn btn-outline-primary btn-sm" %>
-                  </div>
+            <% if @reviews.any? %>
+            <% @reviews.each do |review| %>
+              <div class="col-lg-8 border rounded p-3 mb-3 bg-white shadow-sm">
+                <div class="d-flex justify-content-between align-items-center">
+                  <% if review.user.image.attached? %>
+                    <%= image_tag review.user.image, size: "40x40" %>
+                  <% else %>
+                    <%= image_tag "no_image.jpg", size: "40x40" %>
+                  <% end %>
+                  <strong><%= review.user.name %></strong><br />
+                  <%= render "layouts/rating_form", object: review, type: "rating", score: review.rating, read_only: true %>
+                  <%= review.body.truncate(15, omission: ' [...]') %>
+                  <%= link_to "もっと見る", public_hospital_review_path(review.hospital, review), class: "btn btn-outline-primary btn-sm" %>
                 </div>
-              <% end %>
-            <% else %>
-              <p class="text-muted">レビューはまだありません。</p>
+              </div>
             <% end %>
+          <% else %>
+            <p class="text-muted">レビューはまだありません。</p>
+          <% end %>
+          
           </div>
 
           <div class="col-md-7 p-5">
