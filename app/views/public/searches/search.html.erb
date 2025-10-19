@@ -4,7 +4,7 @@
   <div class="row">
     <% if @data == "User" %>
       <% @users.each do |user| %>
-        <div class="colmd-3 md-4">
+        <div class="col-lx-3 col-lg-4 col-md-5 col-sm-10 md-4">
           <div class="card h-100">
             <div class="card-body text-center">
               <%= image_tag user.get_profile_image, class: "card-img-top" %>
@@ -21,7 +21,7 @@
       <% end %>
       <% else %>
       <% @reviews.each do |review| %>
-        <div class="colmd-3 md-4">
+        <div class="col-lx-3 col-lg-4 col-md-5 col-sm-10 md-4">
           <div class="card h-100">
             <div class="card-body text-center">
               <%= image_tag review.hospital.main_image, class: "card-img-top" %>

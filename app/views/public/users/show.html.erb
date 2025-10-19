@@ -9,32 +9,27 @@
 <% end %>
 
 <div class="review-background d-flex justify-content-center align-items-center min-vh-100">  
-  <div class="card shadow-lg border-0" style="max-width: 700px; width: 90%; background: rgba(255, 255, 255, 0.9);">
+  <div class="card shadow-lg border-0 style-show">
     <div class="card-body">
-      <div class="text-center md-3">
+      <div class="rounded border text-center mx-3">
         <% if @user.image.attached? %>
           <%= image_tag @user.image, size: "170x170" %>
         <% else %>
           <%= image_tag "no_image.jpg", size: "170x170" %>
         <% end %>
-      </div>
-
-      <div class="text-center mx-3">
+      <div>
         <strong>名前</strong>
         <p class="text-muted"><%= @user.name %></p>
       </div>
-
-      <div class="text-center mx-3">
+      <div>
         <strong>メールアドレス</strong>
         <p class="text-muted"><%= @user.email %></p>
       </div>
-
-      <div class="text-center mx-3">
+      <div>
         <strong>自己紹介文</strong>
         <p class="text-muted"><%= @user.introduction %></p>
       </div>
-
-      <div class="text-center mx-3">
+      <div>
         <% if @user.is_active? %>
         <strong>会員ステータス</strong><br />
           有効
@@ -42,12 +37,13 @@
           退会済み
         <% end %>
       </div>
+    </div>
 
-      <div class="col-lg-9">
+      <div class="col-lg-9 mx-auto">
         <% if @reviews.any? %>
-          <div class="row g-3">
+          <div class="row ustify-content-center g-4">
             <% @reviews.each do |review| %>
-              <div class=" col-xl-6 col-lg-6 col-md-6 col-sm-12">
+              <div class=" col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-4">
                 <div class="card h-100 shadow-sm">
                   <%= link_to public_hospital_path(review.hospital), class: "card-img-top" do %>
                   <%= image_tag review.hospital.main_image, class: "card-img-top", alt: review.hospital.name %>
@@ -72,7 +68,7 @@
         <% end %>
       </div>
 
-      <div class="text-center mb-4">
+      <div class="text-center my-4">
         <%= link_to "病院一覧へ", public_hospitals_path, class: "btn btn-warning w-25" %>
         <%= link_to "レビューへ", public_hospital_review_path(@hospital, @review), class: "btn btn-warning w-25" %>
       </div>
