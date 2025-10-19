@@ -47,7 +47,7 @@ before_action :authenticate_admin!
 
   def review_params
     params.require(:review).permit(:title, :body, :image, :rating,
-                                   :cleanliness_comment, :doctor_comment, :staff_comment, :price_comment, :waiting_comment, :animal_comment
+                                   :cleanliness_comment, :doctor_comment, :staff_comment, :price_comment, :waiting_comment, :animal_comment,
                                    :cleanliness_rating, :doctor_rating, :staff_rating, :price_rating, :waiting_rating,
                                    :animal_type, :animal_icon)
   end
