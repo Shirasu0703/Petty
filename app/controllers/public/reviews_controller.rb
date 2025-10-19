@@ -1,5 +1,6 @@
 class Public::ReviewsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
+  before_action :reject_guest_user, only: [:new, :create]
   before_action :set_hospital
   before_action :set_review, only: [:show, :edit, :update, :destroy]
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
@@ -64,5 +65,11 @@ class Public::ReviewsController < ApplicationController
                                    :cleanliness_comment, :doctor_comment, :staff_comment, :price_comment, :waiting_comment, :animal_comment,
                                    :cleanliness_rating, :doctor_rating, :staff_rating, :price_rating, :waiting_rating,
                                    :animal_type, :animal_icon)
+  end
+
+  def reject_guest_user
+    if current_user.email == 'guest@example.com'
+      redirect_to mypage_public_users_path, alert: "ゲストユーザーはレビュー投稿できません。会員登録をお願いします。"
+    end
   end
 end
