@@ -11,10 +11,13 @@ class Public::ReviewsController < ApplicationController
 
   def show
     @comment = Comment.new
+    @hospital = Hospital.find(params[:hospital_id])
+    @review = @hospital.reviews.find(params[:id])
+    # .page(params[:page]).per(6)
   end
 
   def index
-    @reviews = Review.all
+    @reviews = Review.all.order(params[:id])
   end
 
   def create
