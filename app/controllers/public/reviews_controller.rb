@@ -7,6 +7,7 @@ class Public::ReviewsController < ApplicationController
 
   def new
     @review = current_user.reviews.new
+    @tags = Tag.all
   end
 
   def show
@@ -18,14 +19,29 @@ class Public::ReviewsController < ApplicationController
 
   def index
     @reviews = Review.all.order(params[:id])
+    @reviews.params[:tag_id].present? ? Tag.find(params[:tag_id]).reviews : Post.all
   end
 
   def create
     @review = @hospital.reviews.build(review_params)
     @review.user_id = current_user.id
+    # reviewとtagを紐付け
     if @review.save
+      if params[:review][:tag_ids].present?
+        @review.tag_ids = params[:review][:tag_ids]
+      end
+      # タグ作成との紐付け
+      if params[:review][:new_tag_names].present?
+        new_tags = params[:review][:new_tag_names].split(',').map(&:strip).reject(&:blank?)
+        new_tags.each do |tag_name|
+          formatted_name = tag_name.start_with?('#') ? tag_name : "##{tag_name}"
+          tag = Tag.find_or_create_by(tag: formatted_name)
+          @review.tags << tag unless @review.tags.include?(tag)
+        end
+      end
       redirect_to public_hospital_path(@hospital), notice: "レビューを投稿しました"
     else
+      @tags = Tag.all
       render :new
     end
   end
@@ -44,6 +60,13 @@ class Public::ReviewsController < ApplicationController
   def destroy
     @review.destroy
     redirect_to public_hospitals_path, notice: "レビューを削除しました"
+  end
+
+  def remove_tag
+    @review = Review.find(params[:id])
+    tag = Tag.find(params[:tag_id])
+    @review.tags.destroy(tag)
+    redirect_to edit_public_hospital_path(@review.hospital, @review), notice: "#{tag.tag} を削除しました。"
   end
 
   private
@@ -67,7 +90,7 @@ class Public::ReviewsController < ApplicationController
     params.require(:review).permit(:title, :body, :image, :rating,
                                    :cleanliness_comment, :doctor_comment, :staff_comment, :price_comment, :waiting_comment, :animal_comment,
                                    :cleanliness_rating, :doctor_rating, :staff_rating, :price_rating, :waiting_rating,
-                                   :animal_type, :animal_icon)
+                                   :animal_type, :animal_icon, tag_ids: [])
   end
 
   def reject_guest_user

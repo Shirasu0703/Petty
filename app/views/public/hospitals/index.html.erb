@@ -9,6 +9,9 @@
           <div class="card-body">
             <h5 class="card-title"><%= link_to hospital.name, public_hospital_path(hospital) %></h5>
             <%= render 'layouts/rating_form', object: hospital, type: :rating, read_only: true, score: hospital.average_rating %>
+            <% hospital.tags.each do |tag| %>
+              <span class="badge text-primary"><%= tag.tag %></span>
+            <% end %>
             <p><%= hospital.reviews.count%> 件</p>
           </div>
         </div>

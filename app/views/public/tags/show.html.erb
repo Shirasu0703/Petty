@@ -1,2 +1,23 @@
-<h1>Public::Tags#show</h1>
-<p>Find me in app/views/public/tags/show.html.erb</p>
+<p>検索結果ビュー</p>
+<% if @tags %>
+  <h3>タグ検索結果</h3>
+  <% @tags.each do |tag| %>
+    <p>
+      <%= tag.tag %>
+      （病院: <%= tag.hospitals.count %> 件 / レビュー: <%= tag.reviews.count %> 件）
+    </p>
+  <% end %>
+<% end %>
+
+<h2><%= @tag.tag %> の関連情報</h2>
+
+<h3>病院一覧</h3>
+<% @hospitals.each do |hospital| %>
+  <%= link_to hospital.name, hospital_path(hospital) %><br>
+<% end %>
+
+<h3>レビュー一覧</h3>
+<% @reviews.each do |review| %>
+  <%= link_to review.title, review_path(review) %><br>
+<% end %>
+

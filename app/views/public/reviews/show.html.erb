@@ -10,6 +10,9 @@
         <strong>総合評価</strong><br>
         <%= render 'layouts/rating_form', object: @review, type: :rating, read_only: true, score: @review.rating %>
         <p class="text-muted">（<%= @review.rating %> / 5）</p>
+        <% @review.tags.each do |tag| %>
+          <span class="badge text-primary"><%= tag.tag %></span>
+        <% end %>
       </div>
       <hr>
       <div class="mb-3">

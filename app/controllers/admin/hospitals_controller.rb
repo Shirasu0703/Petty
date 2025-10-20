@@ -4,6 +4,7 @@ class Admin::HospitalsController < ApplicationController
 
   def new
     @hospital = Hospital.new
+    @tags = Tag.all
   end
 
   def index
@@ -12,6 +13,7 @@ class Admin::HospitalsController < ApplicationController
 
   def show
     @hospital = Hospital.find(params[:id])
+    @review = @hospital.reviews.first
     @comment = Comment.new
     allowed_sorts = {
        'new' => { created_at: :desc },
@@ -26,9 +28,18 @@ class Admin::HospitalsController < ApplicationController
   def create
     @hospital = Hospital.new(hospital_params)
     if @hospital.save
+      @hospital.tag_ids = params[:hospital][:tag_ids]
+    if params[:hospital][:new_tag_names].present?
+      new_tags = params[:hospital][:new_tag_names].split(",").map(&:strip).reject(&:blank?)
+      new_tags.each do |tag_name|
+        tag = Tag.find_or_create_by(name: tag_name)
+        @hospital.tags << tag unless @hospital.tags.include?(tag)
+      end
+    end
       redirect_to admin_hospitals_path, notice: "病院を登録しました"
     else
-      render :new, status: :unprocessable_entity
+      @tags = Tag.all
+      render :new
     end
   end
 
@@ -39,7 +50,7 @@ class Admin::HospitalsController < ApplicationController
     if @hospital.update(hospital_params)
       redirect_to admin_hospitals_path, notice: "病院情報を更新しました"
     else
-      render :edit, status: :unprocessable_entity
+      render :edit
     end
   end
 
@@ -62,6 +73,13 @@ class Admin::HospitalsController < ApplicationController
     redirect_to edit_admin_hospital_path(@hospital), notice: "サブ画像を削除しました"
   end
 
+  def remove_tag
+    @hospital = Hospital.find(params[:id])
+    tag = Tag.find(params[:tag_id])
+    @hospital.tags.destroy(tag)
+    redirect_to edit_admin_hospital_path(@hospital), notice: "#{tag.tag} を削除しました。"
+  end
+
   def average_rating
     reviews.average(:rating).to_f.round(1)
   end
@@ -73,7 +91,8 @@ class Admin::HospitalsController < ApplicationController
   end
 
   def hospital_params
-    params.require(:hospital).permit(:name, :address, :phone_number, :opening_hours, :animal_types, :main_image, sub_images: [] )
+    params.require(:hospital).permit(:name, :address, :phone_number, :opening_hours, :animal_types, :main_image,
+                                      sub_images: [], tag_ids: [] )
   end 
 
   def authenticate_admin!

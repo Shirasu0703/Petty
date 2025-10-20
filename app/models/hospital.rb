@@ -3,6 +3,10 @@ class Hospital < ApplicationRecord
   has_many_attached :sub_images
   has_many :reviews, dependent: :destroy
 
+  has_many :hospital_tags, dependent: :destroy
+  has_many :tags, through: :hospital_tags
+  accepts_nested_attributes_for :tags
+
   validates :name, presence: true
   validates  :address, presence: true
   validates :phone_number, presence: true
@@ -31,5 +35,44 @@ class Hospital < ApplicationRecord
 
   def average_waiting
     reviews.average(:waiting_rating).to_f.round(1)
+  end
+  
+  def self.look_for(word, method)
+    case method
+    when "perfect"
+      Hospital.includes(:hospital_tags).where("name LIKE ?", "#{word}").or(
+        Hospital.includes(:hospital_tags).where(
+          'hospital_tags.tag_id': Tag.includes(:hospital_tags).where(
+            'tags.tag like ?', "#{word}"
+          ).pluck(:tag_id)
+        )
+      )
+    when "forward"
+      Hospital.includes(:hospital_tags).where("name LIKE ?", "#{word}%").or(
+        Hospital.includes(:hospital_tags).where(
+          'hospital_tags.tag_id': Tag.includes(:hospital_tags).where(
+            'tags.tag like ?', "#{word}%"
+          ).pluck(:tag_id)
+        )
+      )
+    when "backward"
+      Hospital.includes(:hospital_tags).where("name LIKE ?", "#%{word}").or(
+        Hospital.includes(:hospital_tags).where(
+          'hospital_tags.tag_id': Tag.includes(:hospital_tags).where(
+            'tags.tag like ?', "#%{word}"
+          ).pluck(:tag_id)
+        )
+      )
+    when "partial"
+      Hospital.includes(:hospital_tags).where("name LIKE ?", "%#{word}%").or(
+        Hospital.includes(:hospital_tags).where(
+          'hospital_tags.tag_id': Tag.includes(:hospital_tags).where(
+            'tags.tag like ?', "%#{word}%"
+          ).pluck(:tag_id)
+        )
+      )
+    else
+      Hospital.all
+    end
   end
 end

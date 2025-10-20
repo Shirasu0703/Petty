@@ -7,9 +7,10 @@
   </ul>
 <% end %>
 
-<h2 class="text-center my-4">病院編集</h2>
+
 <div class="hospital-background d-flex justify-content-center align-items-center min-vh-100">
   <div class="card shadow-lg border-0" style="max-width: 700px; width: 90%; background: rgba(255, 255, 255, 0.9);">
+    <h2 class="text-center my-4 bg-light">病院編集</h2>
     <%= form_with model: @hospital, url: admin_hospital_path(@hospital), method: :patch do |f| %>
       <div class="card-body">
         <div class="text-center mb-3">
@@ -38,6 +39,20 @@
             </div>
           <% end %>
           <%= f.file_field :sub_images, multiple: true, accept: "image/*", class: "form-control-file" %>
+        </div>
+
+        <div class="mb-3">
+          <strong>現在のタグ</strong>
+          <div class="d-flex flex-wrap mt-2">
+            <% @hospital.tags.each do |tag| %>
+              <div class="position-relative mr-2 mt-2">
+                <span class="badge text-primary"><%= tag.tag %></span>
+                <%= link_to "&times;".html_safe, remove_tag_admin_hospital_path(@hospital, tag_id: tag.id),
+                method: :delete, data: { confirm: "「#{tag.tag}」を削除しますか？" },
+                class: "btn btn-sm btn-danger position-absolute tag-style" %>
+              </div>
+            <% end %>
+          </div>
         </div>
 
         <div class="mb-3">

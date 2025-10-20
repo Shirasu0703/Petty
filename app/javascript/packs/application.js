@@ -17,6 +17,7 @@ import "../stylesheets/application";
 import "stylesheets/header.scss"
 import "stylesheets/search.scss"
 import "stylesheets/style.scss"
+import "stylesheets/tag.scss"
 
 import Raty from "../raty"
 window.Raty = Raty;

@@ -3,9 +3,9 @@
     <div class="col-md-10">
       <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
         <div class="row g-0">
-          <div class="vol-md-5 bg-light p-4">
+          <div class="vol-md-5 p-4">
             <div class="mb-4">
-              <%= image_tag @hospital.main_image, class: "img-fluid rounded shadow-sm w-100" %>
+              <%= image_tag @hospital.main_image, class: "img-fluid rounded w-100" %>
             </div>
 
             <% if @hospital.sub_images.attached? %>
@@ -48,7 +48,14 @@
           </div>
 
           <div class="col-md-7 p-5">
-            <h2 class="text-muted"><%= @hospital.name %></h2>
+          <% if @review.present? && @review.tags.present? %>
+          <% @review.tags.each do |tag| %>
+            <span class="badge text-primary"><%= tag.tag %></span>
+          <% end %>
+        <% else %>
+          <p>タグはありません。</p>
+        <% end %>
+        
 
             <div class="d-flex align-items-center mb-3">
               <%= render 'layouts/rating_form', object: @hospital, type: :rating, read_only: true, score: @hospital.average_rating %>

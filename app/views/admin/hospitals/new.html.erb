@@ -44,7 +44,14 @@
           <strong><%= f.label :sub_images, "サブ画像(複数選択可)" %></strong><br />
           <%= f.file_field :sub_images, multiple: true, accept: "image/*", class: "form-comtrol-file" %>
         </div>
-        <%= f.submit "登録", class: "btn btn-warning w-100" %>
+        <div class="mb-3">
+          <p>タグを選択</p>
+          <% @tags.each do |tag| %>
+            <%= check_box_tag "hospital[tag_ids][]", tag.id, @hospital.tags.include?(tag) %>
+            <span class="badge text-primary"><%= tag.tag %></span>
+          <% end %>
+        </div>
+          <%= f.submit "登録", class: "btn btn-warning w-100" %>
       </div>
     <% end %>
   </div>

@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
   namespace :admin do
-    resources :tags, only: [:index, :create, :edit, :update, :destroy]
+    resources :tags, only: [:new, :index, :show, :create, :edit, :update, :destroy]
     resources :review_tags, only: [:create, :destroy]
+    # タグ機能用
+    resources :reviews, only: [:index]
 
       resources :hospitals do
         member do
           delete :remove_main_image
           delete :remove_sub_image
+          delete :remove_tag
         end
         resources :reviews, only: [:show, :index, :create, :edit, :update, :destroy] do
          resources :comments, only: [:index, :destroy]
@@ -34,6 +37,9 @@ Rails.application.routes.draw do
 
       resources :hospitals, only: [:index, :show] do
         resources :reviews do
+          member do
+            delete :remove_tag
+          end
           resources :comments, only: [:create, :destroy]
         end
       end
