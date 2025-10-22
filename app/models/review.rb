@@ -10,6 +10,10 @@ class Review < ApplicationRecord
   validates :body, presence: true
   validates :rating, presence: true
 
+  def favorited_by?(user)
+    favorites.exists?(user_id: user.id)
+  end
+
   def self.look_for(word, method)
     case method
     when "perfect"

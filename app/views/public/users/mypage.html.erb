@@ -26,6 +26,19 @@
                   <%= render "layouts/rating_form", object: review, type: "rating", score: review.rating, read_only: true %>
                   <h5 class="card-title"><%= review.title %></h5>
                   <p class="card-text"><%= truncate(review.body, length: 15) %></p>
+                  <% if review.favorited_by?(current_user) %>
+                    <p>
+                      <%= link_to public_hospital_review_favorite_path(review.hospital, review), method: :delete, params: { redirect_path: request.fullpath } do %>
+                        ♥<%= review.favorites.count %> いいね
+                      <% end %>
+                    </p>
+                    <% else %>
+                    <p>
+                      <%= link_to public_hospital_review_favorite_path(review.hospital, review), method: :post, params: { redirect_path: request.fullpath } do %>
+                        ♡<%= review.favorites.count %> いいね
+                      <% end %>
+                    </p>
+                  <% end %>
                   <p><%= link_to "#{review.comments.count} コメント", public_hospital_review_path(review.hospital, review) %></p>
                   <%= link_to "レビュー詳細", public_hospital_review_path(review.hospital, review), class: "btn btn-primary" %>
                 </div>

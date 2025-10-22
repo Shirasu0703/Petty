@@ -57,6 +57,7 @@
                     <% review.tags.each do |tag| %>
                       <span class="badge text-primary"><%= tag.tag %></span>
                     <% end %>
+                    <p>♥<%= review.favorites.count %></p>
                     <p><%= link_to "#{review.comments.count} コメント", admin_hospital_review_path(review.hospital, review) %></p>
                     <%= link_to "レビュー詳細", admin_hospital_review_path(review.hospital, review), class: "btn btn-primary" %>
                   </div>
