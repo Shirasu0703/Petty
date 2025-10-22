@@ -13,6 +13,10 @@ import "popper.js";
 import "bootstrap";
 import "../stylesheets/application";
 
+window.$ = $;
+window.jQuery = $;
+import "../script";
+
 
 import "stylesheets/header.scss"
 import "stylesheets/search.scss"
@@ -20,6 +24,7 @@ import "stylesheets/style.scss"
 import "stylesheets/tag.scss"
 import "stylesheets/hospital.scss"
 import "stylesheets/review.scss"
+
 
 import Raty from "../raty"
 window.Raty = Raty;
@@ -33,6 +38,7 @@ window.raty = function(elem,opt) {
 
 document.addEventListener("turbolinks:load", function() {
   document.querySelectorAll('.raty-display').forEach((elem) => {
+    elem.innerHTML = '';
     const score = parseFloat(elem.dataset.score || 0);
     const readOnly = elem.dataset.readonly === 'true';
 

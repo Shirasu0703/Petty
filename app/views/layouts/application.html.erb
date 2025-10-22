@@ -24,7 +24,13 @@
       <div class="wrapper">
         <%= yield %>
       </div>
-
+      <span id="back">
+        <a href="#">
+          <img src="<%= asset_path("arrow.png") %>" alt="トップに戻る">
+        </a>
+      </span>
+      <script src="js/jqurery.min.js"></script>
+      <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= render "layouts/footer" %>
   </body>
 </html>
