@@ -52,6 +52,19 @@
                   <% end %>
                   <strong><%= review.user.name %></strong><br />
                   <%= render "layouts/rating_form", object: review, type: "rating", score: review.rating, read_only: true %>
+                    <% if review.favorited_by?(current_user) %>
+                      <p>
+                        <%= link_to public_hospital_review_favorite_path(review.hospital, review), method: :delete, params: { redirect_path: request.fullpath } do %>
+                          ♥<%= review.favorites.count %>
+                        <% end %>
+                      </p>
+                      <% else %>
+                      <p>
+                        <%= link_to public_hospital_review_favorite_path(review.hospital, review), method: :post, params: { redirect_path: request.fullpath } do %>
+                          ♡<%= review.favorites.count %>
+                        <% end %>
+                      </p>
+                    <% end %>
                   <%= review.body.truncate(15, omission: ' [...]') %>
                   <%= link_to "もっと見る", public_hospital_review_path(review.hospital, review), class: "btn btn-outline-primary btn-sm" %>
                 </div>

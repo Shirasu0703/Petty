@@ -32,7 +32,6 @@ Rails.application.routes.draw do
   namespace :public do
     resources :tags, only: [:index, :show, :create, :destroy]
     resources :review_tags, only: [:create, :destroy]
-    resources :favorites, only: [:create, :destroy]
     resource :map, only: [:show]
     resources :reviews, only: [:index]
 
@@ -42,6 +41,7 @@ Rails.application.routes.draw do
             delete :remove_tag
           end
           resources :comments, only: [:create, :destroy]
+          resource :favorite, only: [:create, :destroy]
         end
       end
 
