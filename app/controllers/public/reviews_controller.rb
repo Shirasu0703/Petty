@@ -1,7 +1,7 @@
 class Public::ReviewsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
-  before_action :reject_guest_user, only: [:new, :create]
-  before_action :set_hospital
+  before_action :reject_guest_user, only: [:new, :create, :update, :destroy]
+  before_action :set_hospital, except: [:index]
   before_action :set_review, only: [:show, :edit, :update, :destroy]
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
@@ -19,7 +19,13 @@ class Public::ReviewsController < ApplicationController
 
   def index
     @reviews = Review.all.order(params[:id])
-    @reviews.params[:tag_id].present? ? Tag.find(params[:tag_id]).reviews : Post.all
+    # @reviews.params[:tag_id].present? ? Tag.find(params[:tag_id]).reviews : Post.all
+    if params[:tag_id].present?
+      @tag =Tag.find(params[:tag_id])
+      @reviews = @tag.reviews.includes(:user, :hospital)
+    else
+      @reviews = Review.all.includes(:user, :hospital)
+    end
   end
 
   def create
@@ -47,10 +53,19 @@ class Public::ReviewsController < ApplicationController
   end
 
   def edit
+    @tags = Tag.all
   end
 
   def update
     if @review.update(review_params)
+      if params[:review][:new_tag_names].present?
+        new_tags = params[:review][:new_tag_names].split(',').map(&:strip).reject(&:blank?)
+        new_tags.each do |tag_name|
+          formatted_name = tag_name.start_with?('#') ? tag_name : "##{tag_name}"
+          tag = Tag.find_or_create_by(tag: formatted_name)
+          @review.tags << tag unless @review.tags.include?(tag)
+        end
+      end
       redirect_to public_hospital_review_path(@hospital, @review), notice: "レビューを更新しました"
     else
       render :edit
@@ -66,7 +81,7 @@ class Public::ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     tag = Tag.find(params[:tag_id])
     @review.tags.destroy(tag)
-    redirect_to edit_public_hospital_path(@review.hospital, @review), notice: "#{tag.tag} を削除しました。"
+    redirect_to edit_public_hospital_review_path(@review.hospital, @review), notice: "#{tag.tag} を削除しました。"
   end
 
   private

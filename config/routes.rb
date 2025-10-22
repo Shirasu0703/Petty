@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   namespace :admin do
-    resources :tags, only: [:new, :index, :show, :create, :edit, :update, :destroy]
+    resources :tags, only: [:index, :show, :create, :edit, :update, :destroy]
     resources :review_tags, only: [:create, :destroy]
     # タグ機能用
     resources :reviews, only: [:index]
@@ -34,6 +34,7 @@ Rails.application.routes.draw do
     resources :review_tags, only: [:create, :destroy]
     resources :favorites, only: [:create, :destroy]
     resource :map, only: [:show]
+    resources :reviews, only: [:index]
 
       resources :hospitals, only: [:index, :show] do
         resources :reviews do

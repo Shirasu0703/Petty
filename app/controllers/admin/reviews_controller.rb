@@ -12,8 +12,9 @@ before_action :set_review_for_hospital, only: [:show, :edit, :update, :destroy]
   end
 
   def index
-    @reviews = Review.all.order(params[:id])
-    @reviews.params[:tag_id].present? ? Tag.find(params[:tag_id]).reviews : Post.all
+    # @reviews = Review.all.order(params[:id])
+    @reviews = Review.all.order(:id)
+    # @reviews.params[:tag_id].present? ? Tag.find(params[:tag_id]).reviews : Post.all
     if params[:tag_id].present?
       @reviews = Review.joins(:tags).where(tags: { id: params[:tag_id] }).distinct
     else
@@ -42,6 +43,26 @@ before_action :set_review_for_hospital, only: [:show, :edit, :update, :destroy]
     else
       @tags = Tag.all
       render :new
+    end
+  end
+
+  def edit
+    @tags = Tag.all
+  end
+
+  def update
+    if @review.update(review_params)
+      if params[:review][:new_tag_names].present?
+        new_tags = params[:review][:new_tag_names].split(',').map(&:strip).reject(&:blank?)
+        new_tags.each do |tag_name|
+          formatted_name = tag_name.start_with?('#') ? tag_name : "##{tag_name}"
+          tag = Tag.find_or_create_by(tag: formatted_name)
+          @review.tags << tag unless @review.tags.include?(tag)
+        end
+      end
+      redirect_to public_hospital_review_path(@hospital, @review), notice: "レビューを更新しました"
+    else
+      render :edit
     end
   end
 

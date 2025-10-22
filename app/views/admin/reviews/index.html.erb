@@ -1,37 +1,40 @@
-<h2 class="text-center my-4">レビュー一覧</h2>
+<%= render "layouts/tag_form" %>
+<div class="card p-4 mb-4">
+ <h2 class="text-center">レビュー一覧</h2>
 
-<table class="table table-responsive">
-  <thead>
-    <tr>
-      <th></th>
-      <th>投稿者</th>
-      <th>評価</th>
-      <th>登録日</th>
-      <th>コメント</th>
-      <th>投稿日</th>
-      <th>詳細</th>
-    </tr>
-  </thead>
-  <tbody>
-  <% @reviews.each do |review| %>
-    <tr>
-      <td>
-        <% if review.user.image.attached? %>
-          <%= image_tag review.user.image, size: "40x40", class: "rounded-circle" %>
-        <% else %>
-          <%= image_tag "no_image.jpg", size: "40x40", class: "rounded-circle" %>
-        <% end %>
-      </td>
-      <td><%= review.user.name %></td>
-      <td>
-        <%= render 'layouts/rating_form', object: review, type: :rating, read_only: true, score: review.rating %>
-        <p class="text-muted">（<%= review.rating %> / 5）</p>
-      </td>
-      <td><%= review.body.truncate(15, omission: ' [...]') %></td>
-      <td><%= review.created_at.strftime("%Y-%m-%d") %></td>
-      <td><%= link_to "編集", edit_admin_hospital_review_path(review.hospital, review) %></td>
-      <td><%= link_to "詳細", admin_hospital_review_path(review.hospital, review) %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+  <table class="table table-striped mt-3">
+    <thead>
+      <tr class="table-warning">
+        <th></th>
+        <th>投稿者</th>
+        <th>評価</th>
+        <th>登録日</th>
+        <th>コメント</th>
+        <th>投稿日</th>
+        <th>詳細</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @reviews.each do |review| %>
+      <tr>
+        <td>
+          <% if review.user.image.attached? %>
+            <%= image_tag review.user.image, size: "40x40", class: "rounded-circle" %>
+          <% else %>
+            <%= image_tag "no_image.jpg", size: "40x40", class: "rounded-circle" %>
+          <% end %>
+        </td>
+        <td><%= review.user.name %></td>
+        <td>
+          <%= render 'layouts/rating_form', object: review, type: :rating, read_only: true, score: review.rating %>
+          <p class="text-muted">（<%= review.rating %> / 5）</p>
+        </td>
+        <td><%= review.body.truncate(15, omission: ' [...]') %></td>
+        <td><%= review.created_at.strftime("%Y-%m-%d") %></td>
+        <td><%= link_to "編集", edit_admin_hospital_review_path(review.hospital, review) %></td>
+        <td><%= link_to "詳細", admin_hospital_review_path(review.hospital, review) %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

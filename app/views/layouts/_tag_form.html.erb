@@ -1,0 +1,58 @@
+<% if admin_signed_in? %>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h4 mb-0">タグ検索</h1>
+    <%= link_to "タグ一覧・編集へ", admin_tags_path, class: "text-primary" %>
+  </div>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <%= form_tag admin_reviews_path, method: :get, class: 'd-flex align-items-center gap-2' do %>
+      <%= select_tag :tag_id,
+        options_from_collection_for_select(Tag.all, :id, :tag, params[:tag_id]),
+        prompt: 'タグで絞り込み検索',
+        class: 'form-select w-auto border border-secondary',
+        onchange: 'this.form.submit();'
+      %>
+      <% if params[:tag_id].present? %>
+        <%= link_to "リセット", admin_reviews_path, class: "btn btn-outline-secondary btn-sm" %>
+      <% end %>
+    <% end %>
+    
+      <%= form_with model: Tag.new, url: admin_tags_path, local: true, class: "d-flex alifn-items-center ms-3" do |f| %>
+        <%= f.text_field :tag, placeholder: "新しいタグ名を追加", class: "form-control me-2 w-auto border border-secondary" %>
+        <%= f.submit "追加", class: "btn btn-success btn-sm" %>
+      <% end %>
+  </div>
+<% elsif user_signed_in? %>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h4 mb-0">タグ検索</h1>
+  </div>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <%= form_tag public_reviews_path, method: :get, class: 'd-flex align-items-center gap-2' do %>
+      <%= select_tag :tag_id,
+        options_from_collection_for_select(Tag.all, :id, :tag, params[:tag_id]),
+        prompt: 'タグで絞り込み検索',
+        class: 'form-select w-auto border border-secondary',
+        onchange: 'this.form.submit();'
+      %>
+    <% if params[:tag_id].present? %>
+      <%= link_to "リセット", public_tags_path, class: "btn btn-outline-secondary btn-sm" %>
+    <% end %>
+  <% end %>
+  </div>
+<% else %>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h4 mb-0">タグ検索</h1>
+  </div>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <%= form_tag public_reveiws_path, method: :get, class: 'd-flex align-items-center gap-2' do %>
+      <%= select_tag :tag_id,
+        options_from_collection_for_select(Tag.all, :id, :tag, params[:tag_id]),
+        prompt: 'タグで絞り込み検索',
+        class: 'form-select w-auto border border-secondary',
+        onchange: 'this.form.submit();'
+      %>
+  </div>
+  <% end %>
+  <% if params[:tag_id].present? %>
+    <%= link_to "リセット", public_tags_path, class: "btn btn-outline-secondary btn-sm" %>
+  <% end %>
+<% end %>

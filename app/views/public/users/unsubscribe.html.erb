@@ -1,10 +1,16 @@
-<h2>退会お手続き</h2>
-  <p>
-    退会お手続きをされますと、一部サービスのご利用とこれまでのデータが復元できなくなります。<br />
-    再度ご利用いただく場合には、新規登録のお手続が必要になります。<br />
-    本当に退会してよろしいですか？
-  </p>
-
-  <%= link_to "退会する", withdraw_public_users_path, class: "btn btn-danger me-3", method: :patch, data: { confirm: "本当に退会しますか？" } %>
-  <%= link_to "退会しない", mypage_public_users_path, class: "btn btn-primary" %>
-
+<div class="review-background d-flex justify-content-center align-items-center min-vh-100">  
+  <div class="card shadow-lg border-0 style-show">
+    <div class="card-body">
+      <h2 class="text-center">退会お手続き</h2>
+      <p>
+        退会お手続きをされますと、一部サービスのご利用とこれまでのデータが復元できなくなります。<br />
+        再度ご利用いただく場合には、新規登録のお手続が必要になります。<br />
+        本当に退会してよろしいですか？
+      </p>
+      <div class="text-center">
+        <%= link_to "退会する", withdraw_public_users_path, class: "btn btn-danger me-3", method: :patch, data: { confirm: "本当に退会しますか？" } %>
+        <%= link_to "退会しない", mypage_public_users_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>

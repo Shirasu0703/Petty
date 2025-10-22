@@ -1,12 +1,39 @@
-<p id="notice"><%= notice %></p>
+<%= render "layouts/tag_form" %>
+<div class="container mt-4">
+  <% if params[:tag_id].present? && @tag %>
+    <h1 class="text-center"><%= "#{@tag.tag} の検索結果" %></h1>
+  <% else %>
+    <h1 class="text-center">すべてのタグ</h1>
+  <% end %>
+  <hr>
+  <% if @reviews.present? %>
+    <div class="row">
+      <% @reviews.each do |review| %>
+        <div class="col-md-3 md-4 mb-4">
+          <div class="card h-100">
+            <% if review.hospital&.main_image.attached? %>
+              <%= image_tag review.hospital.main_image, class: "card-img-top", alt: review.hospital.name %>
+            <% end %>
+            <div class="card-body">
+              <% review.tags.each do |tag| %>
+                <span class="badge text-primary"><%= tag.tag %></span>
+              <% end %>
+              <h5 classs="card-title"><%= review.title %></h5>
+              <p class="card-text"><%= truncate(review.body, legth: 15) %></p>
 
-<h1>タグ検索</h1>
-<%= form_tag public_reviews_path, method: :get, class: 'boards__searchForm' do %>
-      <%= select_tag :tag_id,
-                     options_from_collection_for_select(Tag.all, :id, :tag, params[:tag_id]),
-                     {
-                       prompt: 'タグで絞り込み検索',
-                       onchange: 'this.form.submit();'
-                     }
-      %>
-    <% end %>
+              <p class="card-text small text-muted">
+                病院名：<%= review.hospital.name if review.hospital %>
+              </p>
+              <div class="card-footer text-muted small">
+                投稿日: <%= review.created_at.strftime("%Y-%m-%d") %>
+              </div>
+            <%= link_to "レビュー詳細", public_hospital_review_path(review.hospital, review), class: "btn btn-primary" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-center text-muted">該当する結果はありません。</p>
+  <% end %>
+</div>

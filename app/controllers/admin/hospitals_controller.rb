@@ -32,7 +32,7 @@ class Admin::HospitalsController < ApplicationController
     if params[:hospital][:new_tag_names].present?
       new_tags = params[:hospital][:new_tag_names].split(",").map(&:strip).reject(&:blank?)
       new_tags.each do |tag_name|
-        tag = Tag.find_or_create_by(name: tag_name)
+        tag = Tag.find_or_create_by(tag: tag_name)
         @hospital.tags << tag unless @hospital.tags.include?(tag)
       end
     end
@@ -44,10 +44,19 @@ class Admin::HospitalsController < ApplicationController
   end
 
   def edit
+    @tags =Tag.all
   end
 
   def update
     if @hospital.update(hospital_params)
+      if params[:hospital][:new_tag_names].present?
+        new_tags = params[:hospital][:new_tag_names].split(',').map(&:strip).reject(&:blank?)
+        new_tags.each do |tag_name|
+          formatted_name = tag_name.start_with?('#') ? tag_name : "##{tag_name}"
+          tag = Tag.find_or_create_by(tag: formatted_name)
+          @hospital.tags << tag unless @hospital.tags.include?(tag)
+        end
+      end
       redirect_to admin_hospitals_path, notice: "病院情報を更新しました"
     else
       render :edit
