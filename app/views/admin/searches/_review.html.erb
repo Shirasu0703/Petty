@@ -1,0 +1,31 @@
+<% if reviews&.any? %>
+  <h2>レビュー</h2>
+  <div class="row">
+    <% reviews.each do |review| %>
+      <div class="col-lx-3 col-lg-4 col-md-5 col-sm-10 md-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body text-center">
+            <%= image_tag review.hospital.main_image, class: "card-img-top" %>
+            <h4 class="card-title">
+              <%= link_to review.hospital.name, admin_hospital_path(review.hospital) %>
+              <%= render 'layouts/rating_form', object: review.hospital, type: :rating, read_only: true, score: review.hospital.average_rating %>
+              <%= link_to review.title, edit_admin_hospital_review_path(review.hospital, review), class: "text-decoration-none text-primary" %>
+            </h4>
+            <p class="card-text">
+              <%= truncate(review.body, length: 15) %>
+            </p>
+            <p><%= link_to "#{review.comments.count} コメント", admin_hospital_review_path(review.hospital, review) %></p>
+            <span class="text-muted small">
+              投稿者: 
+              <% if review.user.present? %>
+                <%= link_to review.user.name, admin_user_path(review.user), class: "text-decoration-none text-primary" %>
+              <% else %>
+                不明
+              <% end %>
+            </span>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

@@ -1,7 +1,8 @@
+<%= render "layouts/tag_form" %>
 <h2 class="text-center my-4"></h2>
 <div class="review-background d-flex justify-content-center align-items-center min-vh-100">
-  <div class="card shadow-lg border-0" style="max-width: 700px; width: 90%; background: rgba(255, 255, 255, 0.9);">
-    <div class="card-header bg-warning text-white text-center">
+  <div class="card shadow-lg border-0 review-form">
+    <div class="card-header bg-warning form-color text-center">
       <h4 class="mb-0"><%= @review.title %></h4>
     </div>
 
@@ -53,6 +54,11 @@
         <strong>🐾動物目線のひとこと</strong>
         <p class="text-muted mb-0"><%= @review.animal_comment %></p>
       </div>
+      <div class="mb-3">
+        <% @review.tags.each do |tag| %>
+          <span class="badge text-primary"><%= tag.tag %></span>
+        <% end %>
+      </div>
       <div class="card-footer d-flex justify-content-between align-items-center">
         <span class="text-muted small">
           投稿者: 
@@ -77,7 +83,7 @@
   
         <% if @review.comments.any? %>
           <% @review.comments.each do |comment| %>
-            <div class="card mb-3 shadow-sm border-0" style="background: #f8f9fa;">
+            <div class="card mb-3 shadow-sm border-0 form-color">
               <div class="card-body">
                 <div class="d-flex align-items-center mb-2">
                   <%= image_tag comment.user.get_profile_image, class: "rounded-circle me-2", size: "40x40" %>
@@ -98,13 +104,13 @@
 
       <div class="mt-4">
         <h5 class="text-center mb-3">✏️ コメントを投稿する</h5>
-        <div class="card shadow-sm border-0" style="background: rgba(255, 255, 255, 0.95);">
+        <div class="card shadow-sm border-0 form-color">
           <div class="card-body">
             <%= form_with model: [@review, @comment], url: admin_hospital_review_comments_path(@hospital, @review), local: true do |f| %>
               <div class="mb-3">
                 <%= f.text_area :body, rows: 4, class: "form-control", placeholder: "コメントを入力してください" %>
               </div>
-              <div class="text-end">
+              <div class="text-center">
                 <%= f.submit "送信する", class: "btn btn-warning px-4" %>
               </div>
             <% end %>
@@ -114,7 +120,7 @@
 
 
       <div class="text-center">
-        <%= link_to "病院一覧に戻る", admin_hospitals_path, class: "btn btn-warning" %>
+        <%= link_to "病院一覧に戻る", admin_hospitals_path, class: "btn btn-link-color" %>
       </div>
     </div>
   </div>

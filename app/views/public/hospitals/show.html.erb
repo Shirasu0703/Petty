@@ -1,18 +1,26 @@
+<%= render "layouts/tag_form" %>
 <div class="container my-5">
   <div class="row justify-content-center">
     <div class="col-md-10">
       <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
         <div class="row g-0">
-          <div class="vol-md-5 bg-light p-4">
+          <div class="vol-md-5 p-4">
             <div class="mb-4 text-center">
+              <h2 class="text-muted"><%= @hospital.name %></h2>
+              <%= render 'layouts/rating_form', object: @hospital, type: :rating, read_only: true, score: @hospital.average_rating %>
+              <p class="text-muted">平均：<%= @hospital.average_rating %> / 5</p>
+              <% @hospital.tags.each do |tag| %>
+                <span class="badge text-primary"><%= tag.tag %></span>
+              <% end %>
+          
               <% if @hospital.main_image.attached? %>
-                <%= image_tag @hospital.main_image, class: "img-fluid rounded shadow-sm mb-3", style: "max-height: 400px; object-fit: cover;" %>
+                <%= image_tag @hospital.main_image, class: "img-fluid rounded w-100" %>
               <% end %>
         
               <% if @hospital.sub_images.attached? %>
                 <div class="d-flex flex-wrap justify-content-center gap-2">
                   <% @hospital.sub_images.each do |image| %>
-                    <%= image_tag image, class: "rounded shadow-sm", style: "width: 100px; height: 100px; object-fit: cover;" %>
+                    <%= image_tag image, class: "rounded shadow-sm image-style" %>
                   <% end %>
                 </div>
               <% end %>
@@ -53,10 +61,14 @@
           
           </div>
 
-          <div class="col-md-7 p-5">
-            <h2 class="text-muted"><%= @hospital.name %></h2>
+          <div class="col-md-9 p-5">
+            <% @hospital.tags.each do |tag| %>
+              <span class="badge text-primary"><%= tag.tag %></span>
+            <% end %>
 
-            <div class="d-flex align-items-center mb-3">
+            <!--  <div class="d-flex align-items-center mb-3">  -->
+            <div class="mt-3">
+              <h4>総合評価</h4>
               <%= render 'layouts/rating_form', object: @hospital, type: :rating, read_only: true, score: @hospital.average_rating %>
               <p class="text-muted">平均：<%= @hospital.average_rating %> / 5</p>
             </div>
@@ -118,6 +130,7 @@
             </div>
           </div>
         </div>
+        <%= link_to "病院一覧へ", public_hospitals_path, class: "btn btn-link-color" %>
       </div>
     </div>
   </div>

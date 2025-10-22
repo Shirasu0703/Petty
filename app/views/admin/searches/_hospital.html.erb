@@ -1,0 +1,26 @@
+<% if hospitals&.any? %>
+  <h2>病院名</h2>
+  <div class="row">
+    <% hospitals.each do |hospital| %>
+      <div class="col-lx-3 col-lg-4 col-md-5 col-sm-10 md-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body text-center">
+            <%= image_tag hospital.main_image, class: "card-img-top" %>
+            <h4 class="card-title">
+              <%= link_to hospital.name, admin_hospital_path(hospital) %>
+              <%= render 'layouts/rating_form', object: hospital, type: :rating, read_only: true, score: hospital.average_rating %>
+            </h4>
+            <% if hospital.tags.present? %>
+              <div class="tags mb-2">
+                <% hospital.tags.each do |tag| %>
+                  <span class="badge text-primary"><%= tag.tag %></span>
+                <% end %>
+              </div>
+            <% end %>
+            <p><%= link_to "#{hospital.reviews.count} コメント", admin_hospital_reviews_path(hospital) %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

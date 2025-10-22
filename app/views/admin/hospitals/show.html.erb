@@ -1,17 +1,18 @@
+<%= render "layouts/tag_form" %>
 <div class="container my-5">
   <div class="row justify-content-center">
     <div class="col-md-10">
       <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
         <div class="row g-0">
-          <div class="vol-md-5 bg-light p-4">
+          <div class="vol-md-5 p-4">
             <div class="mb-4">
-              <%= image_tag @hospital.main_image, class: "img-fluid rounded shadow-sm w-100" %>
+              <%= image_tag @hospital.main_image, class: "img-fluid rounded w-100" %>
             </div>
 
             <% if @hospital.sub_images.attached? %>
               <div class="d-flex flex-wrap justify-content-center gap-2">
                 <% @hospital.sub_images.each do |image| %>
-                  <%= image_tag image, class: "rounded shadow-sm", style: "width: 100px; height: 100px; object-fit: cover;" %>
+                  <%= image_tag image, class: "rounded shadow-sm image-style" %>
                 <% end %>
               </div>
             <% end %>
@@ -21,8 +22,8 @@
               <i class="bi bi-chat-dots"></i>この病院についてのレビュー
             </h5>
             <h4>
-              <%= link_to "新着順", public_hospital_path(@hospital, sort: 'new'), class: "btn btn-link" %> |
-              <%= link_to "評価の高い順", public_hospital_path(@hospital, sort: 'high_rating'), class: "btn btn-link" %>
+              <%= link_to "新着順", admin_hospital_path(@hospital, sort: 'new'), class: "btn btn-link" %> |
+              <%= link_to "評価の高い順", admin_hospital_path(@hospital, sort: 'high_rating'), class: "btn btn-link" %>
             </h4>
           <hr>
 
@@ -48,7 +49,14 @@
           </div>
 
           <div class="col-md-7 p-5">
-            <h2 class="text-muted"><%= @hospital.name %></h2>
+          <% if @review.present? && @review.tags.present? %>
+          <% @review.tags.each do |tag| %>
+            <span class="badge text-primary"><%= tag.tag %></span>
+          <% end %>
+        <% else %>
+          <p>タグはありません。</p>
+        <% end %>
+        
 
             <div class="d-flex align-items-center mb-3">
               <%= render 'layouts/rating_form', object: @hospital, type: :rating, read_only: true, score: @hospital.average_rating %>

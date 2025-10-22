@@ -1,3 +1,4 @@
+<%= render "layouts/tag_form" %>
 <h2 class="text-center my-4">ユーザー情報編集</h2>
 <% if @user.errors.any? %>
   <%= @user.errors.count %>件のエラーが発生しました
@@ -57,7 +58,7 @@
     </div>
 
     <div class="text-center mb-4">
-      <%= link_to "会員一覧に戻る", admin_users_path, class: "btn btn-warning" %>
+      <%= link_to "会員一覧に戻る", admin_users_path, class: "btn btn-link-color" %>
     </div>
   </div>
 </div>

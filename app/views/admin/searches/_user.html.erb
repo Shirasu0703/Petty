@@ -1,0 +1,20 @@
+<% if users&.any? %>
+  <h2>会員名</h2>
+  <div class="row">
+    <% users&.each do |user| %>
+      <div class="col-lx-3 col-lg-4 col-md-5 col-sm-10 md-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body text-center">
+            <%= image_tag user.get_profile_image, class: "card-img-top" %>
+              <h5 class="card-title">
+                <%= link_to user.name, admin_user_path(user), class: "text-decoration-none text-primary" %>
+              </h5>
+              <p class="card-text text-muted small">
+                投稿レビュー数：<%= link_to user.reviews.count, admin_user_path(user) %>
+              </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
