@@ -17,13 +17,15 @@
                 <%= image_tag @hospital.main_image, class: "img-fluid rounded w-100" %>
               <% end %>
         
-              <% if @hospital.sub_images.attached? %>
-                <div class="d-flex flex-wrap justify-content-center gap-2">
-                  <% @hospital.sub_images.each do |image| %>
-                    <%= image_tag image, class: "rounded shadow-sm image-style" %>
-                  <% end %>
-                </div>
-              <% end %>
+              <div class="sub-images-container d-flex flex-wrap gap-2">
+                <% if @hospital.sub_images.attached? %>
+                  <div class="sub-image-item">
+                    <% @hospital.sub_images.each do |image| %>
+                      <%= image_tag image, class: "rounded shadow-sm image-style" %>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
             </div>
 
             <h5 class="mb-3 fw-bold text-secondary">

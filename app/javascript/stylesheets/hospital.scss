@@ -10,4 +10,18 @@
   background: #ffffff;
 }
 
+.image-style {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
 
+.sub-images-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sub-image-item {
+  position: relative;
+}

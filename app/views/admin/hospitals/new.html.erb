@@ -11,7 +11,7 @@
 <h2 class="text-center my-4">病院登録</h2>
 <div class="hospital-background d-flex justify-content-center align-items-center min-vh-100">
   <div class="card shadow-lg border-0" style="max-width: 700px; width: 90%; background: rgba(255, 255, 255, 0.9);">
-    <%= form_with model: @hospital, url: admin_hospitals_path, method: :post, local: true, html: { multipart: true } do |f| %>
+    <%= form_with model: @hospital, url: admin_hospitals_path, method: :post, local: true, multipart: true do |f| %>
       <div class="card-body">
         <div class="mb-3">
           <strong><%= f.label :name, "施設名" %></strong>
@@ -43,7 +43,7 @@
         <!-- サブ画像 -->
         <div class="mb-3">
           <strong><%= f.label :sub_images, "サブ画像(複数選択可)" %></strong><br />
-          <%= f.file_field :sub_images, multiple: true, accept: "image/*", class: "form-comtrol-file" %>
+          <%= f.file_field :sub_images, multiple: true, accept: "image/*", class: "form-control-file" %>
         </div>
         <div class="mb-3">
           <p>タグを選択</p>

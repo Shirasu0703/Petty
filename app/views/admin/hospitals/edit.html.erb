@@ -11,7 +11,7 @@
 <div class="hospital-background d-flex justify-content-center align-items-center min-vh-100 mb-4">
   <div class="card shadow-lg border-0 hospital-form">
     <h2 class="text-center my-4 table-warning">病院編集</h2>
-    <%= form_with model: @hospital, url: admin_hospital_path(@hospital), method: :patch do |f| %>
+    <%= form_with model: @hospital, url: admin_hospital_path(@hospital), method: :patch, multipart: true do |f| %>
       <div class="card-body">
         <div class="text-center mb-3">
           <strong><%= f.label :main_image, "見出し画像(1枚)" %></strong><br />
@@ -26,15 +26,13 @@
         </div>
 
         <!-- サブ画像表示・添付 -->
-        <div class="m-3">
+        <div class="sub-images-container d-flex flex-wrap gap-2">
           <strong><%= f.label :sub_images, "サブ画像(複数選択可)" %></strong><br />
           <% if @hospital.sub_images.attached? %>
-            <div class="d-flex flex-wrap fap-2 mb-2">
+            <div class="sub-image-item mb-2">
               <% @hospital.sub_images.each do |image| %>
-                <div class="position-relative">
-                  <%= image_tag image, class: "rounded shadow-sm", style: "width: 80px; height: 80px; object-fit: cover;" %>
-                  <%= link_to "x", remove_sub_image_admin_hospital_path(@hospital, image_id: image.id), method: :delete, data: { confirm: "削除しますか？" }, class: "btn btn-sm btn-danger position-absolute top-0 end-0" %>
-                </div>
+                <%= image_tag image, class: "rounded shadow-sm image-style" %>
+                <%= link_to "x", remove_sub_image_admin_hospital_path(@hospital, image_id: image.id), method: :delete, data: { confirm: "削除しますか？" }, class: "btn btn-sm btn-danger position-absolute top-0 end-0" %>
               <% end %>
             </div>
           <% end %>
