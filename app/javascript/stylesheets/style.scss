@@ -1,7 +1,21 @@
+@charset "UTF-8";
 
-$background-color: #f8f6ee;
-$footer-color: #a58b68;
-$text-color: #3c3a36;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// topに戻るボタン
+// position: fixed; は同じ位置に表示する
+#back {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+}
+#back img {
+  width: 50px;
+}
 
 html,
 body {
