@@ -40,6 +40,7 @@
                     <% end %>
                     <strong><%= review.user.name %></strong>
                     <%= render "layouts/rating_form", object: review, type: "rating", score: review.rating, read_only: true %>
+                      ♥<%= review.favorites.count %>
                     <%= review.body.truncate(15, omission: ' [...]') %>
                     <%= link_to "詳細", admin_hospital_review_path(review.hospital, review), class: "btn btn-outline-primary btn-sm" %>
                   </div>
