@@ -26,7 +26,7 @@ class Public::TagsController < ApplicationController
   end
 
   def destroy
-    @tag = Tag.find_by(params[:id])
+    @tag = Tag.find(params[:id])
     if @tag.destroy
       redirect_to public_tags_path, notice: "#{@tag.tag}を削除しました。"
     else

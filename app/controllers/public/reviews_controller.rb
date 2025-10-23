@@ -84,6 +84,13 @@ class Public::ReviewsController < ApplicationController
     redirect_to edit_public_hospital_review_path(@review.hospital, @review), notice: "#{tag.tag} を削除しました。"
   end
 
+  def add_tag
+    @review = Review.find(params[:id])
+    tag = Tag.find_or_create_by(tag: params[:tag_name])
+    @review.tags << tag unless @review.tags.include?(tag)
+    redirect_to edit_public_hospital_review_path(@review.hospital, @review), notice: "#{tag.tag} を追加しました。"
+  end
+
   private
 
   def set_hospital

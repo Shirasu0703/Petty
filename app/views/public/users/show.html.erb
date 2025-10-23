@@ -53,7 +53,7 @@
                     <%= render "layouts/rating_form", object: review, type: "rating", score: review.rating, read_only: true %>
                     <h5 class="card-title"><%= review.title %></h5>
                     <p class="card-text"><%= truncate(review.body, length: 15) %></p>
-                    <% review.tag.each do |tag| %>
+                    <% review.tags.each do |tag| %>
                       <span class="badge text-primary"><%= tag.tag %></span>
                     <% end %>
                           <div class="mb-3">

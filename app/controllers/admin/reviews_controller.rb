@@ -51,6 +51,8 @@ before_action :set_review_for_hospital, only: [:show, :edit, :update, :destroy]
   end
 
   def update
+    @review = Review.find(params[:id])
+    @hospital = @review.hospital
     if @review.update(review_params)
       if params[:review][:new_tag_names].present?
         new_tags = params[:review][:new_tag_names].split(',').map(&:strip).reject(&:blank?)
@@ -60,7 +62,7 @@ before_action :set_review_for_hospital, only: [:show, :edit, :update, :destroy]
           @review.tags << tag unless @review.tags.include?(tag)
         end
       end
-      redirect_to public_hospital_review_path(@hospital, @review), notice: "レビューを更新しました"
+      redirect_to admin_hospital_review_path(@hospital, @review), notice: "レビューを更新しました"
     else
       render :edit
     end
@@ -70,6 +72,21 @@ before_action :set_review_for_hospital, only: [:show, :edit, :update, :destroy]
     @review.destroy
     redirect_to admin_hospital_path(@hospital), notice: "レビューを削除しました"
   end
+
+  def remove_tag
+    @review = Review.find(params[:id])
+    tag = Tag.find(params[:tag_id])
+    @review.tags.destroy(tag)
+    redirect_to edit_admin_hospital_review_path(@review.hospital, @review), notice: "#{tag.tag} を削除しました。"
+  end
+
+  def add_tag
+    @review = Review.find(params[:id])
+    tag = Tag.find_or_create_by(tag: params[:tag_name])
+    @review.tags << tag unless @review.tags.include?(tag)
+    redirect_to edit_admin_hospital_review_path(@review.hospital, @review), notice: "#{tag.tag} を追加しました。"
+  end
+  
 
   private
 
