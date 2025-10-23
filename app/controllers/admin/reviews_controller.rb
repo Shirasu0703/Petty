@@ -20,6 +20,19 @@ before_action :set_review_for_hospital, only: [:show, :edit, :update, :destroy]
     else
       @reviews = Review.all
     end
+    case params[:sort]
+    when 'created_at DESC'
+      @reviews = @reviews.order(created_at: :desc)
+    when 'star DESC'
+      @reviews = @reviews.order(rating: :desc)
+    when 'favorites DESC'
+      @reviews = @reviews
+        .left_joins(:favorites)
+        .group(:id)
+        .order('COUNT(favorites.id) DESC')
+    else
+      @reviews = @reviews.order(created_at: :desc)
+    end
   end
 
   def create

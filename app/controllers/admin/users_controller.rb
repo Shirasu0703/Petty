@@ -6,7 +6,21 @@ class Admin::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @reviews = @user.reviews.order(created_at: :desc)
+    @reviews = @user.reviews
+
+    case params[:sort]
+    when 'created_at DESC'
+      @reviews = @reviews.order(created_at: :desc)
+    when 'star DESC'
+      @reviews = @reviews.order(rating: :desc)
+    when 'favorites DESC'
+      @reviews = @reviews.order
+        .left_joins(:favorites)
+        .group(:id)
+        .order('COUNT(favorites.id) DESC')
+    else
+      @reviews = @user.reviews.order(created_at: :desc)
+    end
   end
 
   def edit

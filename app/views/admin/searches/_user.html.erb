@@ -12,6 +12,7 @@
               <p class="card-text text-muted small">
                 投稿レビュー数：<%= link_to user.reviews.count, admin_user_path(user) %>
               </p>
+              <%= link_to "会員投稿一覧へ", admin_user_path(user), class: "btn btn-primary" %>
           </div>
         </div>
       </div>

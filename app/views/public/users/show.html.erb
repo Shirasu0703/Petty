@@ -9,7 +9,7 @@
 <% end %>
 
 <div class="review-background d-flex justify-content-center align-items-center min-vh-100">  
-  <div class="card shadow-lg border-0 style-show">
+  <div class="card shadow-lg border-0 style-show mb-4">
     <div class="card-body">
       <div class="rounded border text-center mx-3">
         <% if @user.image.attached? %>
@@ -38,7 +38,12 @@
         <% end %>
       </div>
     </div>
-
+    <h4>
+      <%= link_to "新着順", public_user_path(id: @user, sort: 'created_at DESC'), class: "btn btn-link" %> |
+      <%= link_to "評価の高い順", public_user_path(id: @user, sort: 'star DESC'), class: "btn btn-link" %> |
+      <%= link_to "いいね数の多い順", public_user_path(id: @user, sort: 'favorites DESC'), class: "btn btn-link" %>
+    </h4>
+    <hr>
       <div class="col-lg-9 mx-auto">
         <% if @reviews.any? %>
           <div class="row ustify-content-center g-4">
@@ -56,20 +61,21 @@
                     <% review.tags.each do |tag| %>
                       <span class="badge text-primary"><%= tag.tag %></span>
                     <% end %>
-                          <div class="mb-3">
-                    <% if @review.favorited_by?(current_user) %>
-                      <p>
-                        <%= link_to public_hospital_review_favorite_path(@hospital, @review), method: :delete, params: { redirect_path: request.fullpath } do %>
-                          ♥<%= @review.favorites.count %> いいね
-                        <% end %>
-                      </p>
-                      <% else %>
-                      <p>
-                        <%= link_to public_hospital_review_favorite_path(@hospital, @review), method: :post, params: { redirect_path: request.fullpath } do %>
-                          ♡<%= @review.favorites.count %> いいね
-                        <% end %>
-                      </p>
-                    <% end %>
+                    <div class="mb-3">
+                      <% if review.favorited_by?(current_user) %>
+                        <p>
+                          <%= link_to public_hospital_review_favorite_path(review.hospital, review), method: :delete, params: { redirect_path: request.fullpath } do %>
+                            ♥<%= review.favorites.count %> いいね
+                          <% end %>
+                        </p>
+                        <% else %>
+                        <p>
+                          <%= link_to public_hospital_review_favorite_path(review.hospital, review), method: :post, params: { redirect_path: request.fullpath } do %>
+                            ♡<%= review.favorites.count %> いいね
+                          <% end %>
+                        </p>
+                      <% end %>
+                    </div>
                     <p><%= link_to "#{review.comments.count} コメント", public_hospital_review_path(review.hospital, review) %></p>
                     <%= link_to "レビュー詳細", public_hospital_review_path(review.hospital, review), class: "btn btn-primary" %>
                   </div>
