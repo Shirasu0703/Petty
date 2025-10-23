@@ -73,6 +73,9 @@
           <%= link_to "削除", admin_hospital_review_path(@hospital, @review), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
         </div>
       </div>
+      <div class="mb-3">
+        <p>♥<%= @review.favorites.count %>いいね</p>
+      </div>
 
       <div class="mb-3">
         <p>コメント件数：<%= @review.comments.count %></p>

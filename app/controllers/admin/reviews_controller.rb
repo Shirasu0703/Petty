@@ -4,6 +4,7 @@ before_action :set_hospital, only: [:show, :create, :edit, :update,:destroy]
 before_action :set_review_for_hospital, only: [:show, :edit, :update, :destroy]
 
   def show
+    @review = Review.includes(:favorites).find(params[:id])
     unless @review
       @review = Review.find(params[:id])
       @hospital = @review.hospital
@@ -12,9 +13,8 @@ before_action :set_review_for_hospital, only: [:show, :edit, :update, :destroy]
   end
 
   def index
-    # @reviews = Review.all.order(params[:id])
+    @reviews = Review.includes(:favorites).all
     @reviews = Review.all.order(:id)
-    # @reviews.params[:tag_id].present? ? Tag.find(params[:tag_id]).reviews : Post.all
     if params[:tag_id].present?
       @reviews = Review.joins(:tags).where(tags: { id: params[:tag_id] }).distinct
     else
