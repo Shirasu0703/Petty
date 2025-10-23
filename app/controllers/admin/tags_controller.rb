@@ -14,10 +14,12 @@ class Admin::TagsController < ApplicationController
 
   def create
     @tag = Tag.new(tag_params)
+    @tags = Tag.all
     if @tag.save
       redirect_to admin_tags_path, notice: "タグを追加しました。"
     else
-      redirect_to admin_tags_path, notice: "すでに登録されています。"
+      flash.now[:alert] = "すでに登録されています。"
+      render :index
     end
   end
 
@@ -31,7 +33,8 @@ class Admin::TagsController < ApplicationController
       @tags = Tag.all
       redirect_to admin_tags_path, notice: "#{@tag.tag}へ更新しました。"
     else
-      redirect_to edit_admin_tag_path(@tag), alert: "更新に失敗しました。"
+      flash.now[:alert] = "更新に失敗しました。"
+      render :edit
     end
   end
 
