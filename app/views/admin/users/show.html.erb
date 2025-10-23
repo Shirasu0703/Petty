@@ -39,7 +39,12 @@
         <% end %>
       </div>
     </div>
-
+    <h4>
+      <%= link_to "新着順", admin_user_path(id: @user, sort: 'created_at DESC'), class: "btn btn-link" %> |
+      <%= link_to "評価の高い順", admin_user_path(id: @user, sort: 'star DESC'), class: "btn btn-link" %> |
+      <%= link_to "いいね数の多い順", admin_user_path(id: @user, sort: 'favorires DESC'), class: "btn btn-link" %>
+    </h4>
+    <hr>
       <div class="col-lg-9 mx-auto">
         <% if @reviews.any? %>
           <div class="row justify-content-center g-4">

@@ -11,12 +11,26 @@ class UsersController < ApplicationController
     # @review = @hospital.reviews.first
     allowed_sorts = {
       'created_at DESC' => 'created_at DESC',
-      'star DESC' => 'rating DESC'
+      'star DESC' => 'rating DESC',
+      'favorite DESC' => 'favorite DESC'
     }
     sort_order = allowed_sorts[sort_params] || "created_at DESC"
     # ログインユーザーの投稿したレビューを新しい順に取得とページネーション
-    @reviews = @user.reviews.order(sort_order)
+    @reviews = @user.reviews
     # .page(params[:page]).per(6)
+    case params[:sort]
+    when 'created_at DESC'
+      @reviews = @reviews.order(created_at: :desc)
+    when 'star DESC'
+      @reviews = @reviews.order(rating: :desc)
+    when 'favorites DESC'
+      @reviews = @reviews
+        .left_joins(:favorites)
+        .group(:id)
+        .order('COUNT(favorites.id) DESC')
+    else
+      @reviews = @user.reviews.order(created_at: :desc)
+    end
   end
 
   def edit
@@ -25,7 +39,21 @@ class UsersController < ApplicationController
   def show
     @hospital = Hospital.first
     @review = @hospital.reviews.first
-    @reviews = @user.reviews.order(created_at: :desc)
+    @reviews = @user.reviews
+    @user = User.find(params[:id])
+    case params[:sort]
+    when 'created_at DESC'
+      @reviews = @reviews.order(created_at: :desc)
+    when 'star DESC'
+      @reviews = @reviews.order(rating: :desc)
+    when 'favorites DESC'
+      @reviews = @reviews
+        .left_joins(:favorites)
+        .group(:id)
+        .order('COUNT(favorites.id) DESC')
+    else
+      @reviews = @user.reviews.order(created_at: :desc)
+    end
   end
 
   def update

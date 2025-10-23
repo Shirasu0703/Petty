@@ -1,6 +1,10 @@
 <div class="container mt-4">
   <%= render "layouts/tag_form" %>
   <h2 class="text-center my-4">病院一覧</h2>
+  <h4>
+    <%= link_to "新着順", public_hospitals_path(sort: 'created_at DESC'), class: "btn btn-link" %> |
+    <%= link_to "評価の高い順", public_hospitals_path(sort: 'star DESC'), class: "btn btn-link" %>
+  </h4>
 <hr>
   <div class="row">
     <% @hospitals.each do |hospital| %>
