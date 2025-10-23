@@ -10,8 +10,13 @@ Rails.application.routes.draw do
           delete :remove_main_image
           delete :remove_sub_image
           delete :remove_tag
+          post :add_tag
         end
         resources :reviews, only: [:show, :index, :create, :edit, :update, :destroy] do
+          member do
+            delete :remove_tag
+            post :add_tag
+          end
          resources :comments, only: [:index, :destroy]
         end
       end
@@ -39,6 +44,7 @@ Rails.application.routes.draw do
         resources :reviews do
           member do
             delete :remove_tag
+            post :add_tag
           end
           resources :comments, only: [:create, :destroy]
           resource :favorite, only: [:create, :destroy]

@@ -17,7 +17,7 @@ class Admin::TagsController < ApplicationController
     if @tag.save
       redirect_to admin_tags_path, notice: "タグを追加しました。"
     else
-      redirect_to admin_tags_path, notice: "タグの追加に失敗しました。"
+      redirect_to admin_tags_path, notice: "すでに登録されています。"
     end
   end
 
@@ -26,10 +26,17 @@ class Admin::TagsController < ApplicationController
   end
 
   def update
+    @tag = Tag.find(params[:id])
+    if @tag.update(tag_params)
+      @tags = Tag.all
+      redirect_to admin_tags_path, notice: "#{@tag.tag}へ更新しました。"
+    else
+      redirect_to edit_admin_tag_path(@tag), alert: "更新に失敗しました。"
+    end
   end
 
   def destroy
-    @tag = Tag.find_by(params[:id])
+    @tag = Tag.find(params[:id])
     if @tag.destroy
       redirect_to admin_tags_path, notice: "#{@tag.tag}を削除しました。"
     else

@@ -61,7 +61,7 @@
               <div class="mb-3">
         <strong>現在のタグ</strong>
         <div class="d-flex flex-wrap mt-2">
-          <% @hospital.tags.each do |tag| %>
+          <% @hospital.tags.order(created_at: :asc).each do |tag| %>
             <div class="position-relative mr-2 mt-2">
               <span class="badge text-primary"><%= tag.tag %></span>
               <%= link_to "&times;".html_safe, remove_tag_admin_hospital_path(@hospital, tag_id: tag.id),

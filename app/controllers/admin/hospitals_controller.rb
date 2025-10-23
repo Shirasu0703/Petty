@@ -28,14 +28,14 @@ class Admin::HospitalsController < ApplicationController
   def create
     @hospital = Hospital.new(hospital_params)
     if @hospital.save
-      # if params[:hospital][:sub_images].present?
-      @hospital.tag_ids = params[:hospital][:tag_ids]
-    # @hospital.tag_ids = params[:hospital][:tag_ids]
+      if params[:hospital][:tag_ids].present?
+        @hospital.tags = Tag.where(id: params[:hospital][:tag_ids])
+      end
     if params[:hospital][:new_tag_names].present?
       new_tags = params[:hospital][:new_tag_names].split(",").map(&:strip).reject(&:blank?)
       new_tags.each do |tag_name|
         tag = Tag.find_or_create_by(tag: tag_name)
-        @hospital.tags << tag unless @hospital.tags.include?(tag)
+        @hospital.tags << tag unless @hospital.tags.exists?(id: tag.id)
       end
     end
       redirect_to admin_hospitals_path, notice: "病院を登録しました"
@@ -50,16 +50,19 @@ class Admin::HospitalsController < ApplicationController
   end
 
   def update
-    if params[:hospital][:sub_images].present?
-      @hospital.sub_images.attach(params[:hospital][:sub_images])
-    end
+    @hospital = Hospital.find(params[:id])
     if @hospital.update(hospital_params.except(:sub_images))
+      @hospital.sub_images.attach(params[:hospital][:sub_images]) if params[:hospital][:sub_images].present?
+
+      tag_ids = params[:hospital][:tag_ids].present? ? params[:hospital][:tag_ids].map(&:to_i) : []
+      @hospital.tags = Tag.where(id: tag_ids)
+
       if params[:hospital][:new_tag_names].present?
         new_tags = params[:hospital][:new_tag_names].split(',').map(&:strip).reject(&:blank?)
         new_tags.each do |tag_name|
           formatted_name = tag_name.start_with?('#') ? tag_name : "##{tag_name}"
           tag = Tag.find_or_create_by(tag: formatted_name)
-          @hospital.tags << tag unless @hospital.tags.include?(tag)
+          @hospital.tags << tag unless @hospital.tags.exists?(id: tag.id)
         end
       end
       redirect_to admin_hospitals_path, notice: "病院情報を更新しました"
@@ -94,6 +97,16 @@ class Admin::HospitalsController < ApplicationController
     @hospital.tags.destroy(tag)
     redirect_to edit_admin_hospital_path(@hospital), notice: "#{tag.tag} を削除しました。"
   end
+
+  def add_tag
+    @hospital = Hospital.find(params[:id])
+    tag_name = params[:tag_name].strip
+    formatted_name = tag_name.start_with?('#') ? tag_name : "##{tag_name}"
+    tag = Tag.find_or_create_by(tag: formatted_name)
+    @hospital.tags << tag unless @hospital.tags.include?(tag)
+    redirect_to edit_admin_hospital_path(@hospital), notice: "#{tag.tag} を追加しました。"
+  end
+  
 
   def average_rating
     reviews.average(:rating).to_f.round(1)

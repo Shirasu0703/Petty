@@ -65,7 +65,7 @@
       <% @review.tags.each do |tag| %>
         <div class="position-relative mr-2 mb-2">
           <span class="badge text-primary p-2 pr-4"><%= tag.tag %></span>
-          <%= link_to "&times;".html_safe, remove_tag_admin_hospital_path(@hospital, tag_id: tag.id),
+          <%= link_to "&times;".html_safe, remove_tag_admin_hospital_review_path(@review.hospital, @review, tag_id: tag.id),
           method: :delete, data: { confirm: "「#{tag.tag}」を削除しますか？" },
           class: "btn btn-sm btn-danger position-absolute tag-style" %>
         </div>

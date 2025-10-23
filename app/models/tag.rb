@@ -5,6 +5,8 @@ class Tag < ApplicationRecord
   has_many :review_tags, dependent: :destroy
   has_many :reviews, through: :review_tags
 
+  validates :tag, presence: true, uniqueness: true
+
   def self.look_for(word, method)
     if method == "perfect"
       {
