@@ -1,14 +1,24 @@
 @use '~bootstrap/scss/bootstrap';
 
 body {
+  min-height: 100vh;
   background: linear-gradient(
       rgba(255, 255, 255, 0.85),
       rgba(255, 255, 255, 0.85)
     ),
     url("~images/cat_image.jpg") no-repeat center center / cover;
-  background-color: #f8f6ee;
-  background-attachment: fixed;
+  background-color: #f8f8f8;
+  // background-attachment: fixed;
   font-family: 'Noto Sans JP', sans-serif;
-  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
 }
 
+.card {
+  background-color: #f8f8f8;
+}
+
+.card-body {
+  background-color: #fcfcfc;
+}

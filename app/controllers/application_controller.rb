@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_skip_header_footer
-    if (controller_name == "homes" && action_name == "top") ||
+    if (controller_name == "homes" && %w[top about].include?(action_name)) ||
       devise_controller? ||
       controller_path == "admin/sessions"
       @skip_header_footer = true

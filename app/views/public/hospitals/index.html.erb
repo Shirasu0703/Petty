@@ -1,27 +1,29 @@
 <div class="container mt-4">
   <%= render "layouts/tag_form" %>
-  <h2 class="text-center my-4">病院一覧</h2>
-  <h4>
-    <%= link_to "新着順", public_hospitals_path(sort: 'created_at DESC'), class: "btn btn-link" %> |
-    <%= link_to "評価の高い順", public_hospitals_path(sort: 'star DESC'), class: "btn btn-link" %>
-  </h4>
-<hr>
-  <div class="row">
-    <% @hospitals.each do |hospital| %>
-      <div class="col-md-3 md-4 my-3">
-        <div class="card h-100 shadow-sm">
-          <%= image_tag hospital.main_image, class: "card-img-top", alt: hospital.name %>
-          <div class="card-body">
-            <h5 class="card-title"><%= link_to hospital.name, public_hospital_path(hospital) %></h5>
-            <%= render 'layouts/rating_form', object: hospital, type: :rating, read_only: true, score: hospital.average_rating %>
-            <% hospital.tags.each do |tag| %>
-              <span class="badge text-primary"><%= tag.tag %></span>
-            <% end %>
-            <p><%= hospital.reviews.count%> 件</p>
+  <div class="card shadow-lg p-4 mb-4">
+    <h2 class="text-center my-4">病院一覧</h2>
+    <h4>
+      <%= link_to "新着順", public_hospitals_path(sort: 'created_at DESC'), class: "btn btn-link" %> |
+      <%= link_to "評価の高い順", public_hospitals_path(sort: 'star DESC'), class: "btn btn-link" %>
+    </h4>
+  <hr>
+    <div class="row">
+      <% @hospitals.each do |hospital| %>
+        <div class="col-md-3 md-4 my-3">
+          <div class="card h-100 shadow-sm">
+            <%= image_tag hospital.main_image, class: "card-img-top", alt: hospital.name %>
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to hospital.name, public_hospital_path(hospital) %></h5>
+              <%= render 'layouts/rating_form', object: hospital, type: :rating, read_only: true, score: hospital.average_rating %>
+              <% hospital.tags.each do |tag| %>
+                <span class="badge text-primary"><%= tag.tag %></span>
+              <% end %>
+              <p><%= hospital.reviews.count%> 件</p>
+            </div>
           </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
 

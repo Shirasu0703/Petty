@@ -1,42 +1,44 @@
 
 <%= render "layouts/tag_form" %>
 <div class="container mt-4">
-  <h1 class="text-center">
-    <%= "#{@tag.tag} の検索結果" %>
-  </h1>
-  <hr>
-  <% if @tags.present? %>
-    <span class="badge text-primary"><%= @tag.tag %></span>
-  <% end %>
-  <div class="row">
-    <% @reviews.each do |review| %>
-      <div class="col-md-3 md-4">
-        <div class="card h-100">
-          <div class="card-body">
-            <% review.tags.each do |tag| %>
-              <span class="badge text-primary"><%= tag.tag %></span>
-            <% end %>
-            <%= image_tag review.hospital.main_image, class: "card-img-top", alt: review.hospital.name %>
-            <h5 class="card-title"><%= review.title %></h5>
-            <p class="card-text"><%= truncate(review.body, length: 15) %></p>
-              <% if review.favorited_by?(current_user) %>
-                <p>
-                  <%= link_to public_hospital_review_favorite_path(review.hospital, review), method: :delete, params: { redirect_path: request.fullpath } do %>
-                    ♥<%= review.favorites.count %> いいね
-                  <% end %>
-                </p>
-                <% else %>
-                <p>
-                  <%= link_to public_hospital_review_favorite_path(review.hospital, review), method: :post, params: { redirect_path: request.fullpath } do %>
-                    ♡<%= review.favorites.count %> いいね
-                  <% end %>
-                </p>
+  <div class="card shadow-lg p-4 mb-4">
+    <h1 class="text-center">
+      <%= "#{@tag.tag} の検索結果" %>
+    </h1>
+    <hr>
+    <% if @tags.present? %>
+      <span class="badge text-primary"><%= @tag.tag %></span>
+    <% end %>
+    <div class="row">
+      <% @reviews.each do |review| %>
+        <div class="col-md-3 md-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <% review.tags.each do |tag| %>
+                <span class="badge text-primary"><%= tag.tag %></span>
               <% end %>
-            <p><%= "#{review.comments.count} コメント" %></p>
-            <%= link_to "レビュー詳細", public_hospital_review_path(review.hospital, review), class: "btn btn-primary" %>
+              <%= image_tag review.hospital.main_image, class: "card-img-top", alt: review.hospital.name %>
+              <h5 class="card-title"><%= review.title %></h5>
+              <p class="card-text"><%= truncate(review.body, length: 15) %></p>
+                <% if review.favorited_by?(current_user) %>
+                  <p>
+                    <%= link_to public_hospital_review_favorite_path(review.hospital, review), method: :delete, params: { redirect_path: request.fullpath } do %>
+                      ♥<%= review.favorites.count %> いいね
+                    <% end %>
+                  </p>
+                  <% else %>
+                  <p>
+                    <%= link_to public_hospital_review_favorite_path(review.hospital, review), method: :post, params: { redirect_path: request.fullpath } do %>
+                      ♡<%= review.favorites.count %> いいね
+                    <% end %>
+                  </p>
+                <% end %>
+              <p><%= "#{review.comments.count} コメント" %></p>
+              <%= link_to "レビュー詳細", public_hospital_review_path(review.hospital, review), class: "btn btn-primary" %>
+            </div>
           </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>

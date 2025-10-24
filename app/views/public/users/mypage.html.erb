@@ -1,66 +1,68 @@
 <%= render "layouts/tag_form" %>
 <div class="container mt-4">
-  <div class="d-flex justify-content-between">
-    <h2><%= @user.name %>さんのマイページ</h2>
-    <h4>
-      <%= link_to "新着順", mypage_public_users_path(sort: 'created_at DESC'), class: "btn btn-link" %> |
-      <%= link_to "評価の高い順", mypage_public_users_path(sort: 'star DESC'), class: "btn btn-link" %> |
-      <%= link_to "いいね数の多い順", mypage_public_users_path(sort: 'favorites DESC'), class: "btn btn-link" %>
-    </h4>
-  </div>
-  <hr>
-
-  <div class="row">
-    <div class="col-md-3 md-2">
-      <%= render "public/users/profile", user: @user %>
+  <div class="card shadow-sm p-4 mb-4">
+    <div class="d-flex justify-content-between">
+      <h2><%= @user.name %>さんのマイページ</h2>
+      <h4>
+        <%= link_to "新着順", mypage_public_users_path(sort: 'created_at DESC'), class: "btn btn-link" %> |
+        <%= link_to "評価の高い順", mypage_public_users_path(sort: 'star DESC'), class: "btn btn-link" %> |
+        <%= link_to "いいね数の多い順", mypage_public_users_path(sort: 'favorites DESC'), class: "btn btn-link" %>
+      </h4>
     </div>
+    <hr>
 
-    <div class="col-lg-9">
-      <% if @reviews.any? %>
-        <div class="row g-3">
-          <% @reviews.each do |review| %>
-            <div class="col-xl-4 col-lg-5 col-md-6 my-3">
-              <div class="card h-100 shadow-sm">
-                <%= link_to public_hospital_path(review.hospital), class: "card-img-top" do %>
-                <%= image_tag review.hospital.main_image, class: "card-img-top", alt: review.hospital.name %>
-                <% end %>
-                <div class="card-body">
-                  <h5 class="card-title"><%= link_to review.hospital.name, public_hospital_path(review.hospital) %>
-                  <%= render "layouts/rating_form", object: review, type: "rating", score: review.rating, read_only: true %>
-                  <h5 class="card-title"><%= review.title %></h5>
-                  <p class="card-text"><%= truncate(review.body, length: 15) %></p>
-                  <% if review.tags.any? %>
-                    <% review.tags.each do |tag| %>
-                      <span class="badge text-primary"><%= tag.tag %></span>
+    <div class="row">
+      <div class="col-md-3 md-2">
+        <%= render "public/users/profile", user: @user %>
+      </div>
+
+      <div class="col-lg-9">
+        <% if @reviews.any? %>
+          <div class="row g-3">
+            <% @reviews.each do |review| %>
+              <div class="col-xl-4 col-lg-5 col-md-6 my-3">
+                <div class="card h-100 shadow-sm">
+                  <%= link_to public_hospital_path(review.hospital), class: "card-img-top" do %>
+                  <%= image_tag review.hospital.main_image, class: "card-img-top", alt: review.hospital.name %>
+                  <% end %>
+                  <div class="card-body">
+                    <h5 class="card-title"><%= link_to review.hospital.name, public_hospital_path(review.hospital) %>
+                    <%= render "layouts/rating_form", object: review, type: "rating", score: review.rating, read_only: true %>
+                    <h5 class="card-title"><%= review.title %></h5>
+                    <p class="card-text"><%= truncate(review.body, length: 15) %></p>
+                    <% if review.tags.any? %>
+                      <% review.tags.each do |tag| %>
+                        <span class="badge text-primary"><%= tag.tag %></span>
+                      <% end %>
                     <% end %>
-                  <% end %>
 
-                  <% if review.favorited_by?(current_user) %>
-                    <p>
-                      <%= link_to public_hospital_review_favorite_path(review.hospital, review), method: :delete, params: { redirect_path: request.fullpath } do %>
-                        ♥<%= review.favorites.count %> いいね
-                      <% end %>
-                    </p>
-                    <% else %>
-                    <p>
-                      <%= link_to public_hospital_review_favorite_path(review.hospital, review), method: :post, params: { redirect_path: request.fullpath } do %>
-                        ♡<%= review.favorites.count %> いいね
-                      <% end %>
-                    </p>
-                  <% end %>
-                  <p><%= link_to "#{review.comments.count} コメント", public_hospital_review_path(review.hospital, review) %></p>
-                  <%= link_to "レビュー詳細", public_hospital_review_path(review.hospital, review), class: "btn btn-primary" %>
-                </div>
-                <div class="card-footer text-muted small">
-                  投稿日: <%= review.created_at.strftime("%Y-%m-%d") %>
+                    <% if review.favorited_by?(current_user) %>
+                      <p>
+                        <%= link_to public_hospital_review_favorite_path(review.hospital, review), method: :delete, params: { redirect_path: request.fullpath } do %>
+                          ♥<%= review.favorites.count %> いいね
+                        <% end %>
+                      </p>
+                      <% else %>
+                      <p>
+                        <%= link_to public_hospital_review_favorite_path(review.hospital, review), method: :post, params: { redirect_path: request.fullpath } do %>
+                          ♡<%= review.favorites.count %> いいね
+                        <% end %>
+                      </p>
+                    <% end %>
+                    <p><%= link_to "#{review.comments.count} コメント", public_hospital_review_path(review.hospital, review) %></p>
+                    <%= link_to "レビュー詳細", public_hospital_review_path(review.hospital, review), class: "btn btn-primary" %>
+                  </div>
+                  <div class="card-footer text-muted small">
+                    投稿日: <%= review.created_at.strftime("%Y-%m-%d") %>
+                  </div>
                 </div>
               </div>
-            </div>
-          <% end %>
-        </div>
-      <% else %>
-        <p>まだレビューは登録されていません。</p>
-      <% end %>
+            <% end %>
+          </div>
+        <% else %>
+          <p>まだレビューは登録されていません。</p>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
