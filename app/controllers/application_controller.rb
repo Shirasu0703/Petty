@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_action :set_skip_header_footer
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
@@ -21,5 +22,17 @@ class ApplicationController < ActionController::Base
   
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+  end
+
+  private
+
+  def set_skip_header_footer
+    if (controller_name == "homes" && action_name == "top") ||
+      devise_controller? ||
+      controller_path == "admin/sessions"
+      @skip_header_footer = true
+    else
+      @skip_header_footer = false
+    end
   end
 end

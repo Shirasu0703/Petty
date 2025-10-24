@@ -1,0 +1,53 @@
+.site-title {
+  font-size: 2.2rem;
+  color: #5c503e;
+  letter-spacing: 0.05em;
+}
+
+.site-sub-title {
+  font-size: 1.8rem;
+  color: #6c6150;
+  letter-spacing: 0.05em;
+}
+
+.btn-main {
+  background-color: #6c6b68;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  transition: 0.3s ease;
+}
+
+// .btn-main:hover {
+//   background-color: #7b7974;
+//   transform: translateY(-2px);
+// }
+
+.btn-sub {
+  background-color: #f097e0;
+  color: #554d4d;
+  font-weight: 500;
+  border-radius: 10px;
+  border: 1px solid #e286d1;
+  transition: 0.3s ease;
+}
+
+// .btn-sub:hover {
+//   background-color: #e286d1;
+//   border-color: #c574a0;
+// }
+
+@media (max-width: 576px) {
+  .site-title {
+    font-size: 1.6rem;
+  }
+
+  .site-sub-title {
+    font-size: 1.0rem;
+  }
+
+  .home-btn-group {
+    width: 80% !important;
+  }
+}
