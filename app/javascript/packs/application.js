@@ -37,30 +37,30 @@ window.raty = function(elem,opt) {
 
 
 // 表示処理
-document.addEventListener("turbolinks:load", function() {
-  document.querySelectorAll('.raty-display').forEach((elem) => {
-    elem.innerHTML = '';
-    const score = parseFloat(elem.dataset.score || 0);
-    const readOnly = elem.dataset.readonly === 'true';
+// document.addEventListener("turbolinks:load", function() {
+//   document.querySelectorAll('.raty-display').forEach((elem) => {
+//     elem.innerHTML = '';
+//     const score = parseFloat(elem.dataset.score || 0);
+//     const readOnly = elem.dataset.readonly === 'true';
 
-    const raty = new Raty(elem, {
-      starOn: "/assets/star-on.png",
-      starHalf: "/assets/star-half.png",
-      starOff: "/assets/star-off.png",
-      half: true,
-      readOnly,
-      score
-    });
-    raty.init();
-  });
-});
+//     const raty = new Raty(elem, {
+//       starOn: "/assets/star-on.png",
+//       starHalf: "/assets/star-half.png",
+//       starOff: "/assets/star-off.png",
+//       half: true,
+//       readOnly,
+//       score
+//     });
+//     raty.init();
+//   });
+// });
 
   // ページ遷移前に星評価を空にする
-document.addEventListener("turbolinks:before-cache", function() {
-  document.querySelectorAll('.raty-display').forEach((elem) => {
-    elem.innerHTML = '';
-  });
-});
+// document.addEventListener("turbolinks:before-cache", function() {
+//   document.querySelectorAll('.raty-display').forEach((elem) => {
+//     elem.innerHTML = '';
+//   });
+// });
 
 Rails.start()
 Turbolinks.start()

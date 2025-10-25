@@ -1,4 +1,6 @@
-<h1>病院新規登録</h1>
+<%
+=begin%>
+ <h1>病院新規登録</h1>
 <% if @hospital.errors.any? %>
   <%= @hospital.errors.count %>件のエラーが発生しました
   <ul>
@@ -50,4 +52,6 @@
 
     <%= f.submit "登録する", class: "btn btn-warning" %>
   <% end %>
-</div>
+</div> 
+<%
+=end%>

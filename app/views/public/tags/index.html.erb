@@ -20,6 +20,22 @@
                   <span class="badge text-primary"><%= tag.tag %></span>
                 <% end %>
                 <h5 classs="card-title"><%= review.title %></h5>
+                <div id="review_rating_<%= review.id %>"></div>
+                  <script>
+                    var elem = document.getElementById("review_rating_<%= review.id %>");
+                    var opt = {
+                        starOn: "<%= asset_path('star-on.png') %>",
+                        starOff: "<%= asset_path('star-off.png') %>",
+                        starHalf: "<%= asset_path('star-half.png') %>",
+                        readOnly: true,
+                        score: <%= review.rating %>
+                    };
+                    if (elem) elem.innerHTML = "";
+                    raty(elem,opt);
+                  </script>
+                <% if @tags.present? %>
+                  <span class="badge text-primary"><%= @tag.tag %></span>
+                <% end %>
                 <p class="card-text"><%= truncate(review.body, legth: 15) %></p>
 
                 <p class="card-text small text-muted">

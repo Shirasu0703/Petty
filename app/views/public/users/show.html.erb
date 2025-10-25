@@ -55,7 +55,19 @@
                   <% end %>
                   <div class="card-body">
                     <h5 class="card-title"><%= link_to review.hospital.name, public_hospital_path(review.hospital) %>
-                    <%= render "layouts/rating_form", object: review, type: "rating", score: review.rating, read_only: true %>
+                    <div id="review_rating_<%= review.id %>"></div>
+                    <script>
+                      var elem = document.getElementById("review_rating_<%= review.id %>");
+                      var opt = {
+                          starOn: "<%= asset_path('star-on.png') %>",
+                          starOff: "<%= asset_path('star-off.png') %>",
+                          starHalf: "<%= asset_path('star-half.png') %>",
+                          readOnly: true,
+                          score: <%= review.rating %>
+                      };
+                      if (elem) elem.innerHTML = "";
+                      raty(elem,opt);
+                    </script>
                     <h5 class="card-title"><%= review.title %></h5>
                     <p class="card-text"><%= truncate(review.body, length: 15) %></p>
                     <% review.tags.each do |tag| %>

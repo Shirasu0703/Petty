@@ -8,7 +8,19 @@
             <%= image_tag hospital.main_image, class: "card-img-top" %>
             <h4 class="card-title">
               <%= link_to hospital.name, public_hospital_path(hospital) %>
-              <%= render 'layouts/rating_form', object: hospital, type: :rating, read_only: true, score: hospital.average_rating %>
+              <div id="hospital_rating_<%= hospital.id %>"></div>
+                <script>
+                  var elem = document.getElementById("hospital_rating_<%= hospital.id %>");
+                  var opt = {
+                      starOn: "<%= asset_path('star-on.png') %>",
+                      starOff: "<%= asset_path('star-off.png') %>",
+                      starHalf: "<%= asset_path('star-half.png') %>",
+                      readOnly: true,
+                      score: <%= hospital.average_rating %>
+                  };
+                  if (elem) elem.innerHTML = "";
+                  raty(elem,opt);
+                </script>
             </h4>
             <% if hospital.tags.present? %>
               <div class="tags mb-2">

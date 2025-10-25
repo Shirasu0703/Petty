@@ -1,7 +1,4 @@
 <% dom_id_prefix = "#{object.class.name.downcase}_#{type}_#{object.id}" %>
 <div
-  class="raty-display rate"
   id="<%= dom_id_prefix %>"
-  data-score="<%= score || 0 %>"
-  data-readonly="<%= read_only ? 'true' : 'false' %>">
 </div>

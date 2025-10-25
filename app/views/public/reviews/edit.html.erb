@@ -14,31 +14,31 @@
   <hr>
   <div class="md-3 mb-3">
     <h4><%= f.label :cleanliness_comment, "清潔さ" %></h4>
-    <%= render 'layouts/rating_form', object: @review, type: :cleanliness_rating, read_only: true, score: @review.cleanliness_rating %>
+    <div id="review_cleanliness_rating_<%= @review.id %>"></div>
     <%= f.text_field :cleanliness_comment, class: "form-control border border-secondary" %>
   </div>
 
   <div class="md-3 mb-3">
     <h4><%= f.label :doctor_comment, "先生の対応" %></h4>
-    <%= render 'layouts/rating_form', object: @review, type: :doctor_rating, read_only: true, score: @review.doctor_rating %>
+    <div id="review_doctor_rating_<%= @review.id %>"></div>
     <%= f.text_field :doctor_comment, class: "form-control border border-secondary" %>
   </div>
 
   <div class="md-3 mb-3">
     <h4><%= f.label :staff_comment, "スタッフの対応" %></h4>
-    <%= render 'layouts/rating_form', object: @review, type: :staff_rating, read_only: true, score: @review.staff_rating %>
+    <div id= "review_staff_rating_<%= @review.id %>"></div>
     <%= f.text_field :staff_comment, class: "form-control border border-secondary" %>
   </div>
 
   <div class="md-3 mb-3">
     <h4><%= f.label :price_comment, "料金" %></h4>
-    <%= render 'layouts/rating_form', object: @review, type: :price_rating, read_only: true, score: @review.price_rating %>
+    <div id= "review_price_rating_<%= @review.id %>"></div>
     <%= f.text_field :price_comment, class: "form-control border border-secondary" %>
   </div>
 
   <div class="md-3 mb-3">
     <h4><%= f.label :waiting_comment, "待ち時間" %></h4>
-    <%= render 'layouts/rating_form', object: @review, type: :waiting_rating, read_only: true, score: @review.waiting_rating %>
+    <div id= "review_waiting_rating_<%= @review.id %>"></div>
     <%= f.text_field :waiting_comment, class: "form-control border border-secondary" %>
   </div>
 
@@ -49,7 +49,7 @@
 
   <div class="md-3 mb-3">
     <h4><%= f.label :body, "総合評価" %><//h4>
-    <%= render 'layouts/rating_form', object: @review, type: :rating, read_only: true, score: @review.rating %>
+    <div id="review_rating_<%= @review.id %>"></div>
     <%= f.text_area :body, row: 5, class: "form-control border border-secondary" %>
   </div>
 
@@ -95,4 +95,81 @@
   </div>
 </div>
 
+<script>
+    var elem = document.getElementById("review_cleanliness_rating_<%= @review.id %>");
+    var opt = {
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        readOnly: true,
+        score: <%= @review.cleanliness_rating %>
+    };
+    if (elem) elem.innerHTML = "";
+    raty(elem,opt);
+</script>
+
+<script>
+    var elem = document.getElementById("review_doctor_rating_<%= @review.id %>");
+    var opt = {
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        readOnly: true,
+        score: <%= @review.doctor_rating %>
+    };
+    if (elem) elem.innerHTML = "";
+    raty(elem,opt);
+</script>
+
+<script>
+    var elem = document.getElementById("review_staff_rating_<%= @review.id %>");
+    var opt = {
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        readOnly: true,
+        score: <%= @review.staff_rating %>
+    };
+    if (elem) elem.innerHTML = "";
+    raty(elem,opt);
+</script>
+
+<script>
+    var elem = document.getElementById("review_price_rating_<%= @review.id %>");
+    var opt = {
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        readOnly: true,
+        score: <%= @review.price_rating %>
+    };
+    if (elem) elem.innerHTML = "";
+    raty(elem,opt);
+</script>
+
+<script>
+    var elem = document.getElementById("review_waiting_rating_<%= @review.id %>");
+    var opt = {
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        readOnly: true,
+        score: <%= @review.waiting_rating %>
+    };
+    if (elem) elem.innerHTML = "";
+    raty(elem,opt);
+</script>
+
+<script>
+    var elem = document.getElementById("review_rating_<%= @review.id %>");
+    var opt = {
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        readOnly: true,
+        score: <%= @review.rating %>
+    };
+    if (elem) elem.innerHTML = "";
+    raty(elem,opt);
+</script>
 

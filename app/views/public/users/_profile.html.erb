@@ -11,7 +11,7 @@
   <h4><%= user.introduction %></h4>
 
   <% unless user.guest_user? %>
-    <div class="row">
+    <div class="row text-center">
       <p><%= link_to "プロフィール編集", edit_public_user_path(@user), class: "btn btn-warning" %></p>
     </div>
   <% end %>
