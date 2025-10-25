@@ -21,11 +21,6 @@
                 <% end %>
               </div>
             <% end %>
-            <% if review.tags.any? %>
-              <% review.tags.each do |tag| %>
-                <span class="badge text-primary"><%= tag.tag %></span>
-              <% end %>
-            <% end %>
 
             <% if review.favorited_by?(current_user) %>
               <p>
