@@ -34,7 +34,19 @@
         <td><%= review.user.name %></td>
         <td><%= review.hospital.name %></td>
         <td>
-          <%= render 'layouts/rating_form', object: review, type: :rating, read_only: true, score: review.rating %>
+          <div id="review_rating_<%= review.id %>"></div>
+          <script>
+            var elem = document.getElementById("review_rating_<%= review.id %>");
+            var opt = {
+                starOn: "<%= asset_path('star-on.png') %>",
+                starOff: "<%= asset_path('star-off.png') %>",
+                starHalf: "<%= asset_path('star-half.png') %>",
+                readOnly: true,
+                score: <%= review.rating %>
+            };
+            if (elem) elem.innerHTML = "";
+            raty(elem,opt);
+          </script>
           <p class="text-muted">（<%= review.rating %> / 5）</p>
         </td>
          <td><%= review.created_at.strftime("%Y-%m-%d") %></td>
