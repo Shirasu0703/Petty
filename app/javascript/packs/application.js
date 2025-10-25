@@ -26,6 +26,7 @@ import "stylesheets/hospital.scss"
 import "stylesheets/review.scss"
 // import "stylesheets/home.scss"
 
+
 import Raty from "../raty"
 window.Raty = Raty;
 window.raty = function(elem,opt) {
@@ -35,7 +36,7 @@ window.raty = function(elem,opt) {
 };
 
 
-
+// 表示処理
 document.addEventListener("turbolinks:load", function() {
   document.querySelectorAll('.raty-display').forEach((elem) => {
     elem.innerHTML = '';
@@ -54,8 +55,8 @@ document.addEventListener("turbolinks:load", function() {
   });
 });
 
-document.addEventListener("turbolinks:before-cache", function() {
   // ページ遷移前に星評価を空にする
+document.addEventListener("turbolinks:before-cache", function() {
   document.querySelectorAll('.raty-display').forEach((elem) => {
     elem.innerHTML = '';
   });

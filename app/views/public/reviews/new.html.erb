@@ -79,7 +79,7 @@
 </div>
 
 
-<!--  星評価の設定 -->
+
 <script>
   function initRaty(id, name) {
     const elem = document.querySelector(id);
@@ -95,7 +95,6 @@
       scoreName: name
     });
   }
-
   // Turbolinks使用なら turbolinks:load、未使用なら DOMContentLoaded
   document.addEventListener("turbolinks:load", function() {
     initRaty('#cleanliness_rating', 'review[cleanliness_rating]');
@@ -110,6 +109,7 @@
   document.addEventListener("turbolinks:before-cache", function() {
     $('.raty-display, .rate').empty();
   });
-</script>
+</script> 
+
 
 
