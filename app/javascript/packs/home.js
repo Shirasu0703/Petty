@@ -6,7 +6,7 @@ $(function() {
     function() { $(this).css('background-color', '#7b7974'); }
     );
 
-  $('.btn-loginx, .btnx-signin').hover(
+  $('.btnx-login, .btnx-signin').hover(
     function() { $(this).css('background-color', '#c574a0'); },
     function() { $(this).css('background-color', '#f097e0'); }
   );

@@ -9,33 +9,33 @@
     <div class="card-body">
       <div class="mb-3">
         <strong>総合評価</strong><br>
-        <%= render 'layouts/rating_form', object: @review, type: :rating, read_only: true, score: @review.rating %>
+        <div id="review_rating_<%= @review.id %>"></div>
         <p class="text-muted">（<%= @review.rating %> / 5）</p>
       </div>
       <hr>
       <div class="mb-3">
         <strong>清潔さ</strong>
-        <%= render 'layouts/rating_form', object: @review, type: :cleanliness_rating, read_only: true, score: @review.cleanliness_rating %>
+        <div id="review_cleanliness_rating_<%= @review.id %>"></div>
         <p class="text-muted mb-0"><%= @review.cleanliness_comment.presence || "(コメントなし)" %></p>
       </div>
       <div class="mb-3">
         <strong>先生の対応</strong>
-        <%= render 'layouts/rating_form', object: @review, type: :doctor_rating, read_only: true, score: @review.doctor_rating %>
+        <div id="review_doctor_rating_<%= @review.id %>"></div>
         <p class="text-muted mb-0"><%= @review.doctor_comment.presence || "(コメントなし)" %></p>
       </div>
       <div class="mb-3">
         <strong>スタッフの対応</strong>
-        <%= render 'layouts/rating_form', object: @review, type: :staff_rating, read_only: true, score: @review.staff_rating %>
+        <div id= "review_staff_rating_<%= @review.id %>"></div>
         <p class="text-muted mb-0"><%= @review.staff_comment.presence || "(コメントなし)" %></p>
       </div>
       <div class="mb-3">
         <strong>料金</strong>
-        <%= render 'layouts/rating_form', object: @review, type: :price_rating, read_only: true, score: @review.price_rating %>
+        <div id= "review_price_rating_<%= @review.id %>"></div>
         <p class="text-muted mb-0"><%= @review.price_comment.presence || "(コメントなし)" %></p>
       </div>
       <div class="mb-3">
         <strong>待ち時間</strong>
-        <%= render 'layouts/rating_form', object: @review, type: :waiting_rating, read_only: true, score: @review.waiting_rating %>
+        <div id= "review_waiting_rating_<%= @review.id %>"></div>
         <p class="text-muted mb-0"><%= @review.waiting_comment.presence || "(コメントなし)" %></p>
       </div>
       <div class="mb-3">
@@ -45,10 +45,6 @@
       <div class="mb-3">
         <strong>総合評価</strong>
         <p class="text-muted mb-0"><%= @review.body %></p>
-      </div>
-      <div class="mb-3">
-        <strong>総合コメント</strong>
-        <p class="text-dark"><%= simple_format(@review.body) %></p>
       </div>
       <div class="mb-3">
         <strong>🐾動物目線のひとこと</strong>
@@ -128,3 +124,81 @@
     </div>
   </div>
 </div>
+
+<script>
+    var elem = document.getElementById("review_rating_<%= @review.id %>");
+    var opt = {
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        readOnly: true,
+        score: <%= @review.rating %>
+    };
+    if (elem) elem.innerHTML = "";
+    raty(elem,opt);
+</script>
+
+<script>
+    var elem = document.getElementById("review_cleanliness_rating_<%= @review.id %>");
+    var opt = {
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        readOnly: true,
+        score: <%= @review.cleanliness_rating %>
+    };
+    if (elem) elem.innerHTML = "";
+    raty(elem,opt);
+</script>
+
+<script>
+    var elem = document.getElementById("review_doctor_rating_<%= @review.id %>");
+    var opt = {
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        readOnly: true,
+        score: <%= @review.doctor_rating %>
+    };
+    if (elem) elem.innerHTML = "";
+    raty(elem,opt);
+</script>
+
+<script>
+    var elem = document.getElementById("review_staff_rating_<%= @review.id %>");
+    var opt = {
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        readOnly: true,
+        score: <%= @review.staff_rating %>
+    };
+    if (elem) elem.innerHTML = "";
+    raty(elem,opt);
+</script>
+
+<script>
+    var elem = document.getElementById("review_price_rating_<%= @review.id %>");
+    var opt = {
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        readOnly: true,
+        score: <%= @review.price_rating %>
+    };
+    if (elem) elem.innerHTML = "";
+    raty(elem,opt);
+</script>
+
+<script>
+    var elem = document.getElementById("review_waiting_rating_<%= @review.id %>");
+    var opt = {
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        readOnly: true,
+        score: <%= @review.waiting_rating %>
+    };
+    if (elem) elem.innerHTML = "";
+    raty(elem,opt);
+</script>

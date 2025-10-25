@@ -7,7 +7,7 @@
           <div class="vol-md-5 p-4">
             <div class="mb-4 text-center">
               <h2 class="text-muted"><%= @hospital.name %></h2>
-                <%= render 'layouts/rating_form', object: @hospital, type: :rating, read_only: true, score: @hospital.average_rating %>
+                <div id="hospital_rating_<%= @hospital.id %>"></div>
                 <p class="text-muted">平均：<%= @hospital.average_rating %> / 5</p>
                 <% @hospital.tags.each do |tag| %>
                   <span class="badge text-primary"><%= tag.tag %></span>
@@ -43,7 +43,19 @@
                       <%= image_tag "no_image.jpg", size: "40x40" %>
                     <% end %>
                     <strong><%= review.user.name %></strong>
-                    <%= render "layouts/rating_form", object: review, type: "rating", score: review.rating, read_only: true %>
+                    <div id="review_rating_<%= review.id %>"></div>
+                    <script>
+                        var elem = document.getElementById("review_rating_<%= review.id %>");
+                        var opt = {
+                            starOn: "<%= asset_path('star-on.png') %>",
+                            starOff: "<%= asset_path('star-off.png') %>",
+                            starHalf: "<%= asset_path('star-half.png') %>",
+                            readOnly: true,
+                            score: <%= review.rating %>
+                        };
+                        if (elem) elem.innerHTML = "";
+                        raty(elem,opt);
+                    </script>
                       ♥<%= review.favorites.count %>
                     <%= review.body.truncate(15, omission: ' [...]') %>
                     <%= link_to "詳細", admin_hospital_review_path(review.hospital, review), class: "btn btn-outline-primary btn-sm" %>
@@ -63,33 +75,33 @@
           <p>タグはありません。</p>
         <% end %>
             <div class="d-flex align-items-center mb-3">
-              <%= render 'layouts/rating_form', object: @hospital, type: :rating, read_only: true, score: @hospital.average_rating %>
+              <div id="hospital_rating_<%= @hospital.id %>"></div>
               <p class="text-muted">平均：<%= @hospital.average_rating %> / 5</p>
             </div>
         <hr>
             <div class="mt-3">
               <strong>清潔さ</strong>
-              <%= render 'layouts/rating_form', object: @hospital, type: :cleanliness_rating, read_only: true, score: @hospital.average_cleanliness %>
+              <div id="hospital_cleanliness_rating_<%= @hospital.id %>"></div>
               <p class="text-muted">平均：<%= @hospital.average_cleanliness %> / 5</p>
             </div>
             <div class="mt-3">
               <strong>先生の対応</strong>
-              <%= render 'layouts/rating_form', object: @hospital, type: :doctor_rating, read_only: true, score: @hospital.average_doctor %>
+              <div id="hospital_doctor_rating_<%= @hospital.id %>"></div>
               <p class="text-muted">平均：<%= @hospital.average_doctor %> / 5</p>
             </div>
             <div class="mt-3">
               <strong>スタッフの対応</strong>
-              <%= render 'layouts/rating_form', object: @hospital, type: :staff_rating, read_only: true, score: @hospital.average_staff %>
+              <div id="hospital_staff_rating_<%= @hospital.id %>"></div>
               <p class="text-muted">平均：<%= @hospital.average_staff %> / 5</p>
             </div>
             <div class="mt-3">
               <strong>料金</strong>
-              <%= render 'layouts/rating_form', object: @hospital, type: :price_rating, read_only: true, score: @hospital.average_price %>
+              <div id="hospital_price_rating_<%= @hospital.id %>"></div>
               <p class="text-muted">平均：<%= @hospital.average_price %> / 5</p>
             </div>
             <div class="mt-3">
               <strong>待ち時間</strong>
-              <%= render 'layouts/rating_form', object: @hospital, type: :waiting_rating, read_only: true, score: @hospital.average_waiting %>
+              <div id="hospital_waiting_rating_<%= @hospital.id %>"></div>
               <p class="text-muted">平均：<%= @hospital.average_waiting %> / 5</p>
             </div>
             <div class="md-3">
@@ -108,10 +120,6 @@
               <strong>診察対応動物：</strong>
               <%= @hospital.animal_types %>
             </div>
-            <!-- リンクは病院一覧画面に移動 -->
-            <div class="d-grid mt-4">
-              <%= link_to "ホームページを見る", admin_hospitals_path, class: "btn btn-primary btn-lg rounded-pill" %>
-            </div>
           </div>
         </div>
       </div>
@@ -119,3 +127,80 @@
   </div>
 </div>
 
+<script>
+    var elem = document.getElementById("hospital_rating_<%= @hospital.id %>");
+    var opt = {
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        readOnly: true,
+        score: <%= @hospital.average_rating %>
+    };
+    if (elem) elem.innerHTML = "";
+    raty(elem,opt);
+</script>
+
+<script>
+    var elem = document.getElementById("hospital_cleanliness_rating_<%= @hospital.id %>");
+    var opt = {
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        readOnly: true,
+        score: <%= @hospital.average_cleanliness %>
+    };
+    if (elem) elem.innerHTML = "";
+    raty(elem,opt);
+</script>
+
+<script>
+    var elem = document.getElementById("hospital_doctor_rating_<%= @hospital.id %>");
+    var opt = {
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        readOnly: true,
+        score: <%= @hospital.average_doctor %>
+    };
+    if (elem) elem.innerHTML = "";
+    raty(elem,opt);
+</script>
+
+<script>
+    var elem = document.getElementById("hospital_staff_rating_<%= @hospital.id %>");
+    var opt = {
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        readOnly: true,
+        score: <%= @hospital.average_staff %>
+    };
+    if (elem) elem.innerHTML = "";
+    raty(elem,opt);
+</script>
+
+<script>
+    var elem = document.getElementById("hospital_price_rating_<%= @hospital.id %>");
+    var opt = {
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        readOnly: true,
+        score: <%= @hospital.average_price %>
+    };
+    if (elem) elem.innerHTML = "";
+    raty(elem,opt);
+</script>
+
+<script>
+    var elem = document.getElementById("hospital_waiting_rating_<%= @hospital.id %>");
+    var opt = {
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        readOnly: true,
+        score: <%= @hospital.average_waiting %>
+    };
+    if (elem) elem.innerHTML = "";
+    raty(elem,opt);
+</script>
