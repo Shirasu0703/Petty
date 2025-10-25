@@ -9,7 +9,7 @@
 
 <h2 class="text-center my-4">レビュー投稿画面</h2>
 <div class="review-background d-flex justify-content-center align-items-center min-vh-100">
-  <div class="card shadow-lg border-0" style="max-width: 700px; width: 90%; background: rgba(255, 255, 255, 0.9);">
+  <div class="card shadow-lg border-0 review-form mb-4">
 
 
   <%= form_with model: [@hospital, @review], url: public_hospital_reviews_path, method: :post do |f| %>
@@ -87,9 +87,9 @@
     elem.innerHTML = '';
 
     raty(elem, {
-      starOn: "<%= asset_path('star-on.png') %>",
-      starHalf: "<%= asset_path('star-half.png') %>",
-      starOff: "<%= asset_path('star-off.png') %>",
+      starOn: "<%= image_path('star-on.png') %>",
+      starHalf: "<%= image_path('star-half.png') %>",
+      starOff: "<%= image_path('star-off.png') %>",
       half: true,
       targetKeep: true,
       scoreName: name

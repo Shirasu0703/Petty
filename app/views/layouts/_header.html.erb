@@ -31,20 +31,21 @@
       <div class="collapse navbar-collapse order-3 order-lg-3 w-100" id="navbarNavDropdown">
         <div class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center p-2 gap-2">
           <% if admin_signed_in? %>
-            <%= link_to "病院一覧", admin_hospitals_path, class: "btn btnx-pink rounded-pill mx-1" %>
-            <%= link_to "会員一覧", admin_users_path, class: "btn btnx-pink rounded-pill mx-1" %>
-            <%= link_to "病院登録", new_admin_hospital_path, class: "btn btnx-pink rounded-pill mx-1" %>
-            <%= link_to "タグ一覧", admin_tags_path, class: "btn btnx-pink rounded-pill mx-1" %>
-            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btnx-pink rounded-pill mx-1" %>
+            <%= link_to "病院一覧", admin_hospitals_path, class: "btn btnx-admin-hospitals rounded-pill mx-1" %>
+            <%= link_to "会員一覧", admin_users_path, class: "btn btnx-admin-users rounded-pill mx-1" %>
+            <%= link_to "病院登録", new_admin_hospital_path, class: "btn btnx-admin-hospital rounded-pill mx-1" %>
+            <%= link_to "タグ一覧", admin_tags_path, class: "btn btnx-admin-tags rounded-pill mx-1" %>
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btnx-admin-logout rounded-pill mx-1" %>
           <% elsif user_signed_in? %>
-            <%= link_to "マイページ", mypage_public_users_path, class: "btn btnx-green rounded-pill mx-1" %>
-            <%= link_to "病院一覧", public_hospitals_path, class: "btn btnx-green rounded-pill mx-1" %>
-            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btnx-green rounded-pill mx-1" %>
+            <%= link_to "About", about_path, class: "btn btnx-user-about rounded-pill mx-1" %>
+            <%= link_to "マイページ", mypage_public_users_path, class: "btn btnx-user-mypage rounded-pill mx-1" %>
+            <%= link_to "病院一覧", public_hospitals_path, class: "btn btnx-user-hospitals rounded-pill mx-1" %>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btnx-user-logout rounded-pill mx-1" %>
           <% else %>
-            <%= link_to "About", about_path, class: "btn btnx-green rounded-pill mx-1" %>
-            <%= link_to "病院一覧", public_hospitals_path, class: "btn btnx-green rounded-pill mx-1" %>
-            <%= link_to "新規登録", new_user_registration_path, class: "btn btnx-green rounded-pill mx-1" %>
-            <%= link_to "ログイン", new_user_session_path, class: "btn btnx-green rounded-pill mx-1" %>
+            <%= link_to "About", about_path, class: "btn btnx-user-about rounded-pill mx-1" %>
+            <%= link_to "病院一覧", public_hospitals_path, class: "btn btnx-user-hospitals rounded-pill mx-1" %>
+            <%= link_to "新規登録", new_user_registration_path, class: "btn btnx-user-signup rounded-pill mx-1" %>
+            <%= link_to "ログイン", new_user_session_path, class: "btn btnx-user-login rounded-pill mx-1" %>
           <% end %>
         </div>
       </div>

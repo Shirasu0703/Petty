@@ -1,0 +1,98 @@
+// Top(Home)画面
+.site-title {
+  font-size: 2.2rem;
+  color: #5c503e;
+  letter-spacing: 0.05em;
+}
+
+.site-sub-title {
+  font-size: 1.8rem;
+  color: #6c6150;
+  letter-spacing: 0.05em;
+}
+
+.btnx-main {
+  background-color: #6c6b68;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  transition: 0.3s ease;
+}
+
+// .btn-main:hover {
+//   background-color: #7b7974;
+//   transform: translateY(-2px);
+// }
+
+.btnx-login,
+.btnx-signin {
+  background-color: #f097e0;
+  color: #554d4d;
+  font-weight: 500;
+  border-radius: 10px;
+  border: 1px solid #e286d1;
+  transition: 0.3s ease;
+}
+
+// .btn-sub:hover {
+//   background-color: #e286d1;
+//   border-color: #c574a0;
+// }
+
+// about画面
+.about-title {
+  font-size: 2.2rem;
+  color: #5c503e;
+  letter-spacing: 0.05em;
+}
+
+.about-text {
+  font-size: 1.8rem;
+  color: #6c6150;
+  letter-spacing: 0.05em;
+}
+
+header.bg-header .btnx-user-hospitals {
+  color: #fff;
+  background: #959491;
+  border: 2px solid #807f7c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header.bg-header .btnx-user-hospitals {
+  height: 60px;
+  width: 125px;
+  line-height: 40px;
+  padding: 0 20px;
+  text-align: center;
+}
+
+header.bg-header .btnx-user-hospitals {
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+
+@media (max-width: 576px) {
+  .site-title {
+    font-size: 1.6rem;
+  }
+
+  .site-sub-title {
+    font-size: 1.0rem;
+  }
+
+  .home-btn-group {
+    width: 80% !important;
+  }
+}
+
+.about-form {
+  width: 600px;
+  height: 450px;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.9);
+}

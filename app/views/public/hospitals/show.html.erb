@@ -4,47 +4,44 @@
     <div class="col-md-10">
       <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
         <div class="row g-0">
-          <div class="vol-md-5 p-4">
-            <div class="mb-4 text-center">
-              <h2 class="text-muted"><%= @hospital.name %></h2>
-              <%= render 'layouts/rating_form', object: @hospital, type: :rating, read_only: true, score: @hospital.average_rating %>
-              <p class="text-muted">平均：<%= @hospital.average_rating %> / 5</p>
-              <% @hospital.tags.each do |tag| %>
-                <span class="badge text-primary"><%= tag.tag %></span>
-              <% end %>
-          
-              <% if @hospital.main_image.attached? %>
-                <%= image_tag @hospital.main_image, class: "img-fluid rounded w-100" %>
-              <% end %>
+
+          <div class="col-md-5 p-4 text-center">
+            <h2 class="text-muted"><%= @hospital.name %></h2>
+            <%= render 'layouts/rating_form', object: @hospital, type: :rating, read_only: true, score: @hospital.average_rating %>
+            <p class="text-muted">平均：<%= @hospital.average_rating %> / 5</p>
         
-              <div class="sub-images-container d-flex flex-wrap gap-2">
-                <% if @hospital.sub_images.attached? %>
-                  <div class="sub-image-item">
-                    <% @hospital.sub_images.each do |image| %>
-                      <%= image_tag image, class: "rounded shadow-sm image-style" %>
-                    <% end %>
-                  </div>
-                <% end %>
-              </div>
+            <% if @hospital.main_image.attached? %>
+              <%= image_tag @hospital.main_image, class: "img-fluid rounded mb-3 w-100" %>
+            <% end %>
+      
+            <div class="sub-images-container d-flex flex-wrap gap-2 mb-3">
+              <% if @hospital.sub_images.attached? %>
+                <div class="sub-image-item">
+                  <% @hospital.sub_images.each do |image| %>
+                    <%= image_tag image, class: "rounded shadow-sm image-style" %>
+                  <% end %>
+                </div>
+              <% end %>
             </div>
 
-            <h5 class="mb-3 fw-bold text-secondary">
-            <i class="bi bi-chat-dots"></i>この病院についてのレビュー
+
+            <h5 class="mb-3 fw-bold text-secondary mt-3">
+            <i class="bi bi-chat-dots"></i>レビュー
             </h5>
             <h4>
               <%= link_to "新着順", public_hospital_path(@hospital, sort: 'new'), class: "btn btn-link" %> |
               <%= link_to "評価の高い順", public_hospital_path(@hospital, sort: 'high_rating'), class: "btn btn-link" %>
             </h4>
-          <hr>
+            <hr>
 
             <div class="mb-3 text-end">
-              <%= link_to "レビューを投稿する", new_public_hospital_review_path(hospital_id: @hospital.id), class: "btn btn-primary" %>
+              <%= link_to "レビューを投稿する", new_public_hospital_review_path(hospital_id: @hospital.id), class: "btn btn-primary btn-sm" %>
             </div>
 
             <% if @reviews.any? %>
             <% @reviews.each do |review| %>
-              <div class="col-lg-8 border rounded p-3 mb-3 bg-white shadow-sm">
-                <div class="d-flex justify-content-between align-items-center">
+              <div class="border rounded p-3 mb-3 bg-white shadow-sm text-start">
+                <div class="d-flex align-items-center mb-2">
                   <% if review.user.image.attached? %>
                     <%= image_tag review.user.image, size: "40x40" %>
                   <% else %>
@@ -70,82 +67,86 @@
                 </div>
               </div>
             <% end %>
-          <% else %>
-            <p class="text-muted">レビューはまだありません。</p>
-          <% end %>
-          
+            <% else %>
+              <p class="text-muted">レビューはまだありません。</p>
+            <% end %>
           </div>
 
-          <div class="col-md-9 p-5">
+
+          <div class="col-md-7 p-5">
+            <h3 class="fw-bold mb-3 text-primary"><%= @hospital.name %></h3>
+
             <% @hospital.tags.each do |tag| %>
-              <span class="badge text-primary"><%= tag.tag %></span>
+              <span class="badge text-primary border"><%= tag.tag %></span>
             <% end %>
 
-            <!--  <div class="d-flex align-items-center mb-3">  -->
             <div class="mt-3">
               <h4>総合評価</h4>
               <%= render 'layouts/rating_form', object: @hospital, type: :rating, read_only: true, score: @hospital.average_rating %>
               <p class="text-muted">平均：<%= @hospital.average_rating %> / 5</p>
             </div>
-          <hr>
 
-          <div class="mt-3">
-            <strong>清潔さ</strong>
-            <%= render 'layouts/rating_form', object: @hospital, type: :cleanliness_rating, read_only: true, score: @hospital.average_cleanliness %>
-            <p class="text-muted">平均：<%= @hospital.average_cleanliness %> / 5</p>
-          </div>
+            <hr>
+            <div class="mt-3">
+              <strong>清潔さ</strong>
+              <%= render 'layouts/rating_form', object: @hospital, type: :cleanliness_rating, read_only: true, score: @hospital.average_cleanliness %>
+              <p class="text-muted">平均：<%= @hospital.average_cleanliness %> / 5</p>
+            </div>
 
-          <div class="mt-3">
-            <strong>先生の対応</strong>
-            <%= render 'layouts/rating_form', object: @hospital, type: :doctor_rating, read_only: true, score: @hospital.average_doctor %>
-            <p class="text-muted">平均：<%= @hospital.average_doctor %> / 5</p>
-          </div>
+            <div class="mt-3">
+              <strong>先生の対応</strong>
+              <%= render 'layouts/rating_form', object: @hospital, type: :doctor_rating, read_only: true, score: @hospital.average_doctor %>
+              <p class="text-muted">平均：<%= @hospital.average_doctor %> / 5</p>
+            </div>
 
-          <div class="mt-3">
-            <strong>スタッフの対応</strong>
-            <%= render 'layouts/rating_form', object: @hospital, type: :staff_rating, read_only: true, score: @hospital.average_staff %>
-            <p class="text-muted">平均：<%= @hospital.average_staff %> / 5</p>
-          </div>
+            <div class="mt-3">
+              <strong>スタッフの対応</strong>
+              <%= render 'layouts/rating_form', object: @hospital, type: :staff_rating, read_only: true, score: @hospital.average_staff %>
+              <p class="text-muted">平均：<%= @hospital.average_staff %> / 5</p>
+            </div>
 
-          <div class="mt-3">
-            <strong>料金</strong>
-            <%= render 'layouts/rating_form', object: @hospital, type: :price_rating, read_only: true, score: @hospital.average_price %>
-            <p class="text-muted">平均：<%= @hospital.average_price %> / 5</p>
-          </div>
+            <div class="mt-3">
+              <strong>料金</strong>
+              <%= render 'layouts/rating_form', object: @hospital, type: :price_rating, read_only: true, score: @hospital.average_price %>
+              <p class="text-muted">平均：<%= @hospital.average_price %> / 5</p>
+            </div>
 
-          <div class="mt-3">
-            <strong>待ち時間</strong>
-            <%= render 'layouts/rating_form', object: @hospital, type: :waiting_rating, read_only: true, score: @hospital.average_waiting %>
-            <p class="text-muted">平均：<%= @hospital.average_waiting %> / 5</p>
-          </div>
+            <div class="mt-3">
+              <strong>待ち時間</strong>
+              <%= render 'layouts/rating_form', object: @hospital, type: :waiting_rating, read_only: true, score: @hospital.average_waiting %>
+              <p class="text-muted">平均：<%= @hospital.average_waiting %> / 5</p>
+            </div>
 
-            <div class="md-3">
+            <hr>
+            <div class="mb-2">
               <strong>住所：</strong>
               <%= @hospital.address %>
             </div>
 
-            <div class="md-3">
+            <div class="mb-2">
               <strong>電話番号：</strong>
               <%= @hospital.phone_number %>
             </div>
 
-            <div class="md-3">
+            <div class="mb-2">
               <strong>診察時間：</strong>
               <%= @hospital.opening_hours %>
             </div>
 
-            <div class="md-3">
+            <div class="mb-2">
               <strong>診察対応動物：</strong>
               <%= @hospital.animal_types %>
             </div>
 
-            <!-- リンクは病院一覧画面に移動 -->
+              <!-- リンクは病院一覧画面に移動 -->
             <div class="d-grid mt-4">
               <%= link_to "ホームページを見る", public_hospitals_path, class: "btn btn-primary btn-lg rounded-pill" %>
             </div>
           </div>
         </div>
-        <%= link_to "病院一覧へ", public_hospitals_path, class: "btn btn-link-color" %>
+        <div class="p-3 text-center">
+          <%= link_to "病院一覧へ", public_hospitals_path, class: "btn btn-link-color" %>
+        </div>
       </div>
     </div>
   </div>

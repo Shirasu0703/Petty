@@ -1,31 +1,49 @@
 header.bg-header {
-  background-color: #a58b68;
+  background-color: #d0eae1;
   border-bottom: 1px solid #ddd;
   height: auto;
   padding: 0 20px;
 }
 
-header.bg-header .btnx-pink{
+header.bg-header .btnx-admin-hospitals,
+header.bg-header .btnx-admin-users,
+header.bg-header .btnx-admin-hospital,
+header.bg-header .btnx-admin-tags,
+header.bg-header .btnx-admin-logout {
   color: #fff; 
-  background: #d869a1; 
-  border: 2px solid hsl(330, 59%, 63%); 
+  background: #f097e0; 
+  border: 2px solid #e286d1; 
   
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
-header.bg-header .btnx-green{
+header.bg-header .btnx-user-about,
+header.bg-header .btnx-user-mypage,
+header.bg-header .btnx-user-hospitals,
+header.bg-header .btnx-user-logout,
+header.bg-header .btnx-user-signup,
+header.bg-header .btnx-user-login {
   color: #fff;
-  background: #699a4c;
-  border: 2px solid #699a4c;
+  background: #959491;
+  border: 2px solid #807f7c;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-header.bg-header .btnx-green, 
-header.bg-header .btnx-pink {
+header.bg-header .btnx-user-about,
+header.bg-header .btnx-user-mypage,
+header.bg-header .btnx-user-hospitals,
+header.bg-header .btnx-user-logout,
+header.bg-header .btnx-user-signup,
+header.bg-header .btnx-user-login, 
+header.bg-header .btnx-admin-hospitals,
+header.bg-header .btnx-admin-users,
+header.bg-header .btnx-admin-hospital,
+header.bg-header .btnx-admin-tags,
+header.bg-header .btnx-admin-logout {
   height: 60px;
   width: 125px;
   line-height: 40px;
@@ -58,8 +76,6 @@ header.bg-header .navbar-collapse.collapse.show {
 @media (min-width: 992px) {
   header.bg-header .navbar-collapse {
     display: flex !important;
-    //flex-direction: row !important;
-    //justify-content: flex-end;
     align-items: center;
   }
 }
@@ -89,8 +105,17 @@ header.bg-header .navbar-toggler {
     margin-top: 0.25rem;
   }
 
-  header.bg-header .btnx-green, 
-  header.bg-header .btnx-pink {
+  header.bg-header .btnx-user-about,
+  header.bg-header .btnx-user-mypage,
+  header.bg-header .btnx-user-hospitals,
+  header.bg-header .btnx-user-logout,
+  header.bg-header .btnx-user-signup,
+  header.bg-header .btnx-user-login, 
+  header.bg-header .btnx-admin-hospitals,
+  header.bg-header .btnx-admin-users,
+  header.bg-header .btnx-admin-hospital,
+  header.bg-header .btnx-admin-tags,
+  header.bg-header .btnx-admin-logout {
     width: 100%;
     margin-bottom: 5px;
   }
@@ -109,4 +134,3 @@ header.bg-header .navbar-toggler {
   justify-content: end;
   padding-right: 13px;
 }
-
