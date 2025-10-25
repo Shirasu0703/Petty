@@ -33,6 +33,7 @@
                 <% end %>
               </div>
             <% end %>
+            <p>♥<%= review.favorites.count %></p>
             <p><%= link_to "#{review.comments.count} コメント", admin_hospital_review_path(review.hospital, review) %></p>
             <span class="text-muted small">
               投稿者: 
