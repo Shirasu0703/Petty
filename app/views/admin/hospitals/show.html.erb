@@ -25,25 +25,12 @@
             </div>
           </div>
             <h5 class="col-lg-8 mb-3 fw-bold text-secondary">
-              <i class="bi bi-chat-dots"></i>この病院についてのレビュー
+              <i class="bi bi-chat-dots"></i>レビュー
             </h5>
-case params[:sort]
-when 'created_at_desc'
-  @reviews = @reviews.order(created_at: :desc)
-
-when 'rating_desc'
-  @reviews = @reviews.order(rating: :desc)
-
-when 'favorites_desc'
-  @reviews = @reviews
-             .left_joins(:favorites)
-             .group(:id)
-             .order(Arel.sql('COUNT(favorites.id) DESC')) # ← SQLインジェクション防止のためArel.sqlを明示
-
-else
-  @reviews = @reviews.order(created_at: :desc)
-end
-
+            <h4>
+              <%= link_to "新着順", public_hospital_path(@hospital, sort: 'new'), class: "btn btn-link" %> |
+              <%= link_to "評価の高い順", public_hospital_path(@hospital, sort: 'high_rating'), class: "btn btn-link" %>
+            </h4>
           <hr>
             <% if @reviews.any? %>
               <% @reviews.each do |review| %>
