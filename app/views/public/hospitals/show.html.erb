@@ -23,8 +23,8 @@
             <i class="bi bi-chat-dots"></i>レビュー
             </h5>
             <h4>
-              <%= link_to "新着順", public_hospital_path(@hospital, sort: 'new'), class: "btn btn-link" %> |
-              <%= link_to "評価の高い順", public_hospital_path(@hospital, sort: 'high_rating'), class: "btn btn-link" %>
+              <%= link_to "新着順", admin_hospital_path(@hospital, sort: 'new'), class: "btn btn-link" %> |
+              <%= link_to "評価の高い順", admin_hospital_path(@hospital, sort: 'high_rating'), class: "btn btn-link" %>
             </h4>
             <hr>
 
@@ -55,19 +55,9 @@
                       if (elem) elem.innerHTML = "";
                       raty(elem,opt);
                   </script>
-                  <% if review.favorited_by?(current_user) %>
-                    <p>
-                      <%= link_to public_hospital_review_favorite_path(review.hospital, review), method: :delete, params: { redirect_path: request.fullpath } do %>
-                        ♥<%= review.favorites.count %>
-                      <% end %>
-                    </p>
-                    <% else %>
-                    <p>
-                      <%= link_to public_hospital_review_favorite_path(review.hospital, review), method: :post, params: { redirect_path: request.fullpath } do %>
-                        ♡<%= review.favorites.count %>
-                      <% end %>
-                    </p>
-                  <% end %>
+                  <div id="review_<%= review.id %>" class="review-item">
+                    <div class="favorite-btn"><%= render "public/favorites/favorite-btn", review: review %></div>
+                  </div>
                   <%= review.body.truncate(15, omission: ' [...]') %>
                   <%= link_to "もっと見る", public_hospital_review_path(review.hospital, review), class: "btn btn-outline-primary btn-sm" %>
                 </div>

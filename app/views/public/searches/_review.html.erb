@@ -33,20 +33,10 @@
                 <% end %>
               </div>
             <% end %>
+            <div id="review_<%= review.id %>" class="review-item">
+              <div class="favorite-btn"><%= render "public/favorites/favorite-btn", review: review %></div>
+            </div>
 
-            <% if review.favorited_by?(current_user) %>
-              <p>
-                <%= link_to public_hospital_review_favorite_path(review.hospital, review), method: :delete, params: { redirect_path: request.fullpath } do %>
-                  ♥<%= review.favorites.count %> いいね
-                <% end %>
-              </p>
-            <% else %>
-              <p>
-              <%= link_to public_hospital_review_favorite_path(review.hospital, review), method: :post, params: { redirect_path: request.fullpath } do %>
-                ♡<%= review.favorites.count %> いいね
-              <% end %>
-              </p>
-            <% end %>
             <p><%= link_to "#{review.comments.count} コメント", public_hospital_review_path(review.hospital, review) %></p>
             <span class="text-muted small">
               投稿者: 

@@ -37,7 +37,9 @@
                   <span class="badge text-primary"><%= @tag.tag %></span>
                 <% end %>
                 <p class="card-text"><%= truncate(review.body, legth: 15) %></p>
-
+                <div id="review_<%= review.id %>" class="review-item">
+                  <div class="favorite-btn"><%= render "public/favorites/favorite-btn", review: review %></div>
+                </div>
                 <p class="card-text small text-muted">
                   病院名：<%= review.hospital.name if review.hospital %>
                 </p>

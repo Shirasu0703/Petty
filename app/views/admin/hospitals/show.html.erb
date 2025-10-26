@@ -25,12 +25,11 @@
             </div>
           </div>
             <h5 class="col-lg-8 mb-3 fw-bold text-secondary">
-              <i class="bi bi-chat-dots"></i>この病院についてのレビュー
+              <i class="bi bi-chat-dots"></i>レビュー
             </h5>
             <h4>
-              <%= link_to "新着順", admin_hospital_path(@hospital, sort: 'new'), class: "btn btn-link" %> |
-              <%= link_to "評価の高い順", admin_hospital_path(@hospital, sort: 'high_rating'), class: "btn btn-link" %> |
-              <%= link_to "いいね数の多い順", admin_hospital_path(@hospital, sort: 'favorires DESC'), class: "btn btn-link" %>
+              <%= link_to "新着順", public_hospital_path(@hospital, sort: 'new'), class: "btn btn-link" %> |
+              <%= link_to "評価の高い順", public_hospital_path(@hospital, sort: 'high_rating'), class: "btn btn-link" %>
             </h4>
           <hr>
             <% if @reviews.any? %>

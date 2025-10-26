@@ -63,6 +63,8 @@ gem 'net-pop'
 
 gem 'net-imap'
 
+gem 'jquery-rails'
+
 gem 'dotenv-rails'
 group :production do
   gem 'mysql2'
