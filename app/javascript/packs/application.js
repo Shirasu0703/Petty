@@ -24,7 +24,7 @@ import "stylesheets/style.scss"
 import "stylesheets/tag.scss"
 import "stylesheets/hospital.scss"
 import "stylesheets/review.scss"
-// import "stylesheets/home.scss"
+import "stylesheets/home.scss"
 
 
 import Raty from "../raty"
