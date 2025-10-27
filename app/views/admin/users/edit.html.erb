@@ -1,64 +1,55 @@
-<%= render "layouts/tag_form" %>
-<h2 class="text-center my-4">ユーザー情報編集</h2>
-<% if @user.errors.any? %>
-  <%= @user.errors.count %>件のエラーが発生しました
-  <ul>
-    <% @user.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
+<%= render 'layouts/errors', obj: @user %>
+<div class="container mt-4">
+  <%= render "layouts/tag_form" %>
+  <div class="review-background d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow-lg border-0 use-card-style">
+    <h2 class="text-center my-4 text-main-color">ユーザー情報編集</h2>
+      <%= form_with model: @user, url: admin_user_path(@user), method: :patch do |f| %>
 
-<div class="review-background d-flex justify-content-center align-items-center min-vh-100">
-  <div class="card shadow-lg border-0" style="max-width: 700px; width: 90%; background: rgba(255, 255, 255, 0.9);">
-    <%= form_with model: @user, url: admin_user_path(@user), method: :patch do |f| %>
+        <div class="card-body">
+          <div class="text-center md-3">
+            <% if @user.image.attached? %>
+              <%= image_tag @user.image, size: "170x170" %>
+            <% else %>
+              <%= image_tag "no_image.jpg", size: "170x170" %>
+            <% end %>
+          </div>
 
-      <div class="card-body">
-        <div class="text-center md-3">
-          <% if @user.image.attached? %>
-            <%= image_tag @user.image, size: "170x170" %>
-          <% else %>
-            <%= image_tag "no_image.jpg", size: "170x170" %>
-          <% end %>
+          <div class="text-center md-3">
+            <strong class="text-sub-color"><%= f.label :image, "プロフィール画像" %></strong>
+            <p class="text-muted mb-0"><%= f.file_field :image, placeholder: "プロフィール画像", accept: "image/*" %></p> 
+          </div>
+
+          <div class="md-3">
+            <strong class="text-sub-color"><%= f.label :name, "名前" %></strong>
+            <p class="text-muted mb-0"><%= f.text_field :name, class: "form-control" %></p>
+          </div>
+
+          <div class="md-3">
+            <strong class="text-sub-color"><%= f.label :email, "メールアドレス" %></strong>
+            <p class="text-muted mb-0"><%= f.text_field :email, class: "form-control" %></p>
+          </div>
+
+          <div class="md-3">
+            <strong class="text-sub-color"><%= f.label :introduction, "自己紹介文" %></strong>
+            <p class="text-muted mb-0"><%= f.text_area :introduction, rows: 5, class: "form-control" %></p>
+          </div>
+
+          <div class="md-3 text-center">
+            <strong class="text-sub-color"><%= f.submit "更新", class: "btn btn-warning w-25" %></strong>
+            <%= link_to "会員一覧に戻る", admin_users_path, class: "btn btn-link-color w-25" %>
+          </div>
         </div>
-
-        <div class="text-center md-3">
-          <strong><%= f.label :image, "プロフィール画像" %></strong>
-          <p class="text-muted mb-0"><%= f.file_field :image, placeholder: "プロフィール画像", accept: "image/*" %></p> 
-        </div>
-
-        <div class="md-3">
-          <strong><%= f.label :name, "名前" %></strong>
-          <p class="text-muted mb-0"><%= f.text_field :name, class: "form-control" %></p>
-        </div>
-
-        <div class="md-3">
-          <strong><%= f.label :email, "メールアドレス" %></strong>
-          <p class="text-muted mb-0"><%= f.text_field :email, class: "form-control" %></p>
-        </div>
-
-        <div class="md-3">
-          <strong><%= f.label :introduction, "自己紹介文" %></strong>
-          <p class="text-muted mb-0"><%= f.text_area :introduction, rows: 5, class: "form-control" %></p>
-        </div>
-
-        <div class="md-3">
-          <strong><%= f.submit "更新", class: "btn btn-warning" %></strong>
-        </div>
-      </div>
-    <% end %>
-
-    
-    <div class="text-center mt-4 mb-4">
-      <% if @user.is_active? %>
-        <%= button_to "無効にする", deactivate_admin_user_path(@user), method: :patch, data: { confirm: "このユーザーを無効にしますか？" }, class: "btn btn-danger btn-sm" %>
-      <% else %>
-        <%= button_to "有効にする", activate_admin_user_path(@user), method: :patch, data: { confirm: "このユーザーを有効にしますか？" }, class: "btn btn-success btn-sm" %>
       <% end %>
-    </div>
 
-    <div class="text-center mb-4">
-      <%= link_to "会員一覧に戻る", admin_users_path, class: "btn btn-link-color" %>
+      
+      <div class="text-center mt-4 mb-4">
+        <% if @user.is_active? %>
+          <%= button_to "無効にする", deactivate_admin_user_path(@user), method: :patch, data: { confirm: "このユーザーを無効にしますか？" }, class: "btn btn-danger btn-sm w-25" %>
+        <% else %>
+          <%= button_to "有効にする", activate_admin_user_path(@user), method: :patch, data: { confirm: "このユーザーを有効にしますか？" }, class: "btn btn-success btn-sm w-25" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

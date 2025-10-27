@@ -1,9 +1,9 @@
-<%= render "layouts/tag_form" %>
 <div class="container mt-4">
+  <%= render "layouts/tag_form" %>
   <div class="card shadow-lg p-4 mb-4">
-    <div class="d-flex justify-content-between text-muted">
-      <h2><%= @user.name %>さんのマイページ</h2>
-      <h4>
+    <div class="d-flex justify-content-between">
+      <h2 class="text-main-color"><%= @user.name %>さんのマイページ</h2>
+      <h4 class="text-sub-color">
         <%= link_to "新着順", mypage_public_users_path(sort: 'created_at DESC'), class: "btn btn-link" %> |
         <%= link_to "評価の高い順", mypage_public_users_path(sort: 'star DESC'), class: "btn btn-link" %> |
         <%= link_to "いいね数の多い順", mypage_public_users_path(sort: 'favorites DESC'), class: "btn btn-link" %>
@@ -11,7 +11,7 @@
     </div>
     <hr>
 
-    <div class="row">
+    <div class="row text-sub-color">
       <div class="col-md-3 md-2">
         <%= render "public/users/profile", user: @user %>
       </div>

@@ -1,34 +1,37 @@
-<%= render "layouts/tag_form" %>
-<div class="card p-4 mb-4">
-  <h1 class="text-center">タグ一覧</h1>
+<div class="container mt-4">
+  <%= render "layouts/tag_form" %>
+  <div class="card p-4 mb-4">
+    <h1 class="text-center text-main-color">タグ一覧</h1>
 
-  <table class="table table-striped mt-3">
-    <thead>
-      <tr class="table-warning">
-        <th>ID</th>
-        <th>タグ名</th>
-        <th>使用数</th>
-        <th>操作</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @tags.each do |tag| %>
-        <tr>
-          <td><%= tag.id %></td>
-          <td><%= tag.tag %></td>
-          <td><%= "病院: #{tag.hospitals.count}, レビュー: #{tag.reviews.count}" %></td>
-          <td>
-            <%= link_to "編集", edit_admin_tag_path(tag), class: "btn btn-sm btn-primary" %>
-            <%= link_to "削除", admin_tag_path(tag),
-                        method: :delete,
-                        data: { confirm: "削除してよろしいですか？" },
-                        class: "btn btn-sm btn-danger" %>
-          </td>
+    <table class="table table-striped mt-3">
+      <thead>
+        <tr class="table-warning text-main-color">
+          <th>ID</th>
+          <th>タグ名</th>
+          <th>使用数(病院)</th>
+          <th>使用数(レビュー)</th>
+          <th>操作</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-
+      </thead>
+      <tbody>
+        <% @tags.each do |tag| %>
+          <tr class="text-sub-color">
+            <td><%= tag.id %></td>
+            <td><%= tag.tag %></td>
+            <td><%= "病院: #{tag.hospitals.count}" %></td>
+            <td><%= "レビュー: #{tag.reviews.count}" %></td>
+            <td>
+              <%= link_to "編集", edit_admin_tag_path(tag), class: "btn btn-sm btn-primary" %>
+              <%= link_to "削除", admin_tag_path(tag),
+                          method: :delete,
+                          data: { confirm: "削除してよろしいですか？" },
+                          class: "btn btn-sm btn-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 

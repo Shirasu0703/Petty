@@ -1,18 +1,11 @@
-<h2 class="text-center my-4">ユーザー情報編集画面</h2>
-<% if @user.errors.any? %>
-  <%= @user.errors.count %>件のエラーが発生しました
-  <ul>
-    <% @user.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
+<%= render 'layouts/errors', obj: @user %>
 
 <div class="review-background d-flex justify-content-center align-items-center min-vh-100">
-  <div class="card shadow-lg border-0" style="max-width: 700px; width: 90%; background: rgba(255, 255, 255, 0.9);">
+  <div class="card shadow-lg border-0 use-card-style">
+  <h2 class="text-center my-4 text-main-color">ユーザー情報編集画面</h2>
     <%= form_with model: @user, url: mypage_public_users_path, method: :patch do |f| %>
 
-    <div class="card-body">
+    <div class="card-body text-sub-color">
       <div class="md-3">
         <strong><%= f.label :image, "プロフィール画像" %></strong>
         <p class="text-muted mb-0"><%= f.file_field :image, placeholder: "プロフィール画像", accept: "image/*" %></p> 

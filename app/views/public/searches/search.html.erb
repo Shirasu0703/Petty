@@ -1,12 +1,15 @@
-<div class="container text-muted mt-4">
+<div class="container mt-4">
+  <%= render "layouts/tag_form" %>
   <div class="card shadow-lg p-4 mb-4">
-    <h2 class="text-center">検索結果</h2>
-  <hr>
+    <h2 class="text-center text-main-color">検索結果</h2>
+    <hr>
+    <div class="text-sub-color">
       <%= render "public/searches/user", users: @users %>
       <%= render "public/searches/review", reviews: @reviews %>
       <%= render "public/searches/hospital", hospitals: @hospitals %>
       <% if !(@users&.any? || @reviews&.any? || @hospitals&.any?) %>
       <p class="text-center">結果が見つかりませんでした。</p>
     <% end %>
+    </div>
   </div>
 </div>

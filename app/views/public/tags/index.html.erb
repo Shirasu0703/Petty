@@ -1,16 +1,16 @@
-<%= render "layouts/tag_form" %>
-<div class="container text-muted mt-4">
+<div class="container mt-4">
+  <%= render "layouts/tag_form" %>
   <div class="card shadow-lg p-4 mb-4">
     <% if params[:tag_id].present? && @tag %>
       <h1 class="text-center"><%= "#{@tag.tag} の検索結果" %></h1>
     <% else %>
-      <h2 class="text-center">すべてのタグ</h2>
+      <h2 class="text-center text-main-color">すべてのタグ</h2>
     <% end %>
     <hr>
     <% if @reviews.present? %>
       <div class="row">
         <% @reviews.each do |review| %>
-          <div class="col-md-3 md-4 mb-4">
+          <div class="col-lg-4 col-md-6 md-4 mb-4 text-sub-color">
             <div class="card h-100 shadow-sm">
               <% if review.hospital&.main_image.attached? %>
                 <%= image_tag review.hospital.main_image, class: "card-img-top", alt: review.hospital.name %>

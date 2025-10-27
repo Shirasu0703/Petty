@@ -1,7 +1,7 @@
-<%= render "layouts/tag_form" %>
 <div class="container mt-4">
-  <h3>検索結果</h3>
-<hr>
+  <%= render "layouts/tag_form" %>
+  <h3 class="text-main-color">検索結果</h3>
+  <hr>
     <%= render "admin/searches/user", users: @users %>
     <%= render "admin/searches/review", reviews: @reviews %>
     <%= render "admin/searches/hospital", hospitals: @hospitals %>

@@ -1,36 +1,38 @@
 <div class="container mt-4">
   <%= render "layouts/tag_form" %>
-  <div class="card shadow-lg p-4 mb-4 text-muted">
-    <h2 class="text-center my-4">病院一覧</h2>
-    <h4>
+  <div class="card shadow-lg p-4 mb-4">
+    <h2 class="text-center my-4 text-main-color">病院一覧</h2>
+    <h4 class="text-sub-color">
       <%= link_to "新着順", public_hospitals_path(sort: 'created_at DESC'), class: "btn btn-link" %> |
       <%= link_to "評価の高い順", public_hospitals_path(sort: 'star DESC'), class: "btn btn-link" %>
     </h4>
   <hr>
     <div class="row">
       <% @hospitals.each do |hospital| %>
-        <div class="col-md-3 md-4 my-3">
+        <div class="col-lg-4 col-md-6 col-sm-6 md-4 my-3">
           <div class="card h-100 shadow-sm">
             <%= image_tag hospital.main_image, class: "card-img-top", alt: hospital.name %>
-            <div class="card-body">
-              <h5 class="card-title"><%= link_to hospital.name, public_hospital_path(hospital) %></h5>
-              <div id="hospital_rating_<%= hospital.id %>"></div>
-                <script>
-                    var elem = document.getElementById("hospital_rating_<%= hospital.id %>");
-                    var opt = {
-                        starOn: "<%= asset_path('star-on.png') %>",
-                        starOff: "<%= asset_path('star-off.png') %>",
-                        starHalf: "<%= asset_path('star-half.png') %>",
-                        readOnly: true,
-                        score: <%= hospital.average_rating %>
-                    };
-                    if (elem) elem.innerHTML = "";
-                    raty(elem,opt);
-                </script>
+              <div class="card-body">
+                <h5 class="card-title"><%= link_to hospital.name, public_hospital_path(hospital), class: "text-main-color" %></h5>
+                <div class="d-flex align-items-center">
+                <div id="hospital_rating_<%= hospital.id %>"></div>
+                <p class="hospital-review-total">(<%= link_to "#{hospital.reviews.count}", public_hospital_path(hospital) %>)</p>
+              </div>
+              <script>
+                  var elem = document.getElementById("hospital_rating_<%= hospital.id %>");
+                  var opt = {
+                      starOn: "<%= asset_path('star-on.png') %>",
+                      starOff: "<%= asset_path('star-off.png') %>",
+                      starHalf: "<%= asset_path('star-half.png') %>",
+                      readOnly: true,
+                      score: <%= hospital.average_rating %>
+                  };
+                  if (elem) elem.innerHTML = "";
+                  raty(elem,opt);
+              </script>
               <% hospital.tags.each do |tag| %>
                 <span class="badge text-primary border"><%= tag.tag %></span>
               <% end %>
-              <p><%= hospital.reviews.count%> 件</p>
             </div>
           </div>
         </div>

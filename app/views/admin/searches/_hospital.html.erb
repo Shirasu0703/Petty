@@ -1,5 +1,5 @@
 <% if hospitals&.any? %>
-  <h2>病院名</h2>
+  <h2 class="text-main-color">病院名</h2>
   <div class="row">
     <% hospitals.each do |hospital| %>
       <div class="col-lx-3 col-lg-4 col-md-5 col-sm-10 md-4 mb-4">
@@ -8,20 +8,23 @@
             <%= image_tag hospital.main_image, class: "card-img-top" %>
             <h4 class="card-title">
               <%= link_to hospital.name, admin_hospital_path(hospital) %>
-              <div id="hospital_rating_<%= hospital.id %>"></div>
-              <script>
-                var elem = document.getElementById("hospital_rating_<%= hospital.id %>");
-                var opt = {
-                    starOn: "<%= asset_path('star-on.png') %>",
-                    starOff: "<%= asset_path('star-off.png') %>",
-                    starHalf: "<%= asset_path('star-half.png') %>",
-                    readOnly: true,
-                    score: <%= hospital.average_rating %>
-                };
-                if (elem) elem.innerHTML = "";
-                raty(elem,opt);
-              </script>
             </h4>
+            <div class="d-flex">
+              <div id="hospital_rating_<%= hospital.id %>"></div>
+              <p class="tag-review-total">(<%= hospital.reviews.count%>)</p>
+            </div>
+            <script>
+              var elem = document.getElementById("hospital_rating_<%= hospital.id %>");
+              var opt = {
+                  starOn: "<%= asset_path('star-on.png') %>",
+                  starOff: "<%= asset_path('star-off.png') %>",
+                  starHalf: "<%= asset_path('star-half.png') %>",
+                  readOnly: true,
+                  score: <%= hospital.average_rating %>
+              };
+              if (elem) elem.innerHTML = "";
+              raty(elem,opt);
+            </script>
             <% if hospital.tags.present? %>
               <div class="tags mb-2">
                 <% hospital.tags.each do |tag| %>

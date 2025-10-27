@@ -7,7 +7,7 @@
 .hospital-form {
   max-width: 700px;
   width: 90%;
-  background: #f8f8f8;
+  background: rgba(255, 255, 255, 0.9);
 }
 
 .image-style {
@@ -24,4 +24,12 @@
 
 .sub-image-item {
   position: relative;
+}
+
+.table-color {
+  background-color: #d0eae1;
+}
+
+.hospital-review-total {
+  margin: 10px;
 }

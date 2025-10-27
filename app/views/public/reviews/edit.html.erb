@@ -1,65 +1,60 @@
-<% if @review.errors.any? %>
-  <%= @review.errors.count %>件のエラーが発生しました
-  <ul>
-    <% @review.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
+<%= render 'layouts/errors', obj: @review %>
 
 <div class="container form-color mt-4 mb-4">
-<h2 class="text-center text-muted bg-light my-4">レビュー編集</h2>
+  <div class="card-header bg-light form-color text-center">
+    <h2 class="text-main-color my-2">レビュー編集</h4>
+  </div>
   <%= form_with model: @review, url: public_hospital_review_path(@review.hospital, @review), method: :patch do |f| %>
 
   <hr>
   <div class="md-3 mb-3">
-    <h5><%= f.label :cleanliness_comment, "清潔さ" %></h5>
+    <h5 class="text-sub-color"><%= f.label :cleanliness_comment, "清潔さ" %></h5>
     <div id="review_cleanliness_rating_<%= @review.id %>"></div>
     <%= f.text_field :cleanliness_comment, class: "form-control border border-light" %>
   </div>
 
   <div class="md-3 mb-3">
-    <h5><%= f.label :doctor_comment, "先生の対応" %></h5>
+    <h5 class="text-sub-color"><%= f.label :doctor_comment, "先生の対応" %></h5>
     <div id="review_doctor_rating_<%= @review.id %>"></div>
     <%= f.text_field :doctor_comment, class: "form-control border border-light" %>
   </div>
 
   <div class="md-3 mb-3">
-    <h5><%= f.label :staff_comment, "スタッフの対応" %></h5>
+    <h5 class="text-sub-color"><%= f.label :staff_comment, "スタッフの対応" %></h5>
     <div id= "review_staff_rating_<%= @review.id %>"></div>
     <%= f.text_field :staff_comment, class: "form-control border border-light" %>
   </div>
 
   <div class="md-3 mb-3">
-    <h5><%= f.label :price_comment, "料金" %></h5>
+    <h5 class="text-sub-color"><%= f.label :price_comment, "料金" %></h5>
     <div id= "review_price_rating_<%= @review.id %>"></div>
     <%= f.text_field :price_comment, class: "form-control border border-light" %>
   </div>
 
   <div class="md-3 mb-3">
-    <h5><%= f.label :waiting_comment, "待ち時間" %></h5>
+    <h5 class="text-sub-color"><%= f.label :waiting_comment, "待ち時間" %></h5>
     <div id= "review_waiting_rating_<%= @review.id %>"></div>
     <%= f.text_field :waiting_comment, class: "form-control border border-light" %>
   </div>
 
   <div class="md-3 mb-3">
-    <h5><%= f.label :title, "レビュータイトル" %></h5>
+    <h5 class="text-sub-color"><%= f.label :title, "レビュータイトル" %></h5>
     <%= f.text_field :title, class: "form-control border border-light" %>
   </div>
 
   <div class="md-3 mb-3">
-    <h5><%= f.label :body, "総合評価" %></h5>
+    <h5 class="text-sub-color"><%= f.label :body, "総合評価" %></h5>
     <div id="review_rating_<%= @review.id %>"></div>
     <%= f.text_area :body, row: 5, class: "form-control border border-light w-75" %>
   </div>
 
   <div class="md-3 mb-3">
-    <h5><%= f.label :animal_comment, "動物目線でひとこと！(任意)" %></h5>
+    <h5 class="text-sub-color"><%= f.label :animal_comment, "動物目線でひとこと！(任意)" %></h5>
     <%= f.text_field :animal_comment, class: "form-control border border-light" %>
   </div>
 
   <div class="mb-3 mb-3">
-    <h5>現在のタグ</h5>
+    <h5 class="text-sub-color">現在のタグ</h5>
     <div class="d-flex flex-wrap mt-2">
       <% @review.tags.each do |tag| %>
         <div class="position-relative mr-2 mb-2">
@@ -71,14 +66,14 @@
       <% end %>
     </div>
   </div>
-  <div class="mb-3 mb-3">
-      <p>タグを選択</p>
+  <div class="mb-3">
+      <p class="text-sub-color">タグを選択</p>
     <% @tags.each do |tag| %>
       <%= check_box_tag "review[tag_ids][]", tag.id, @review.tags.include?(tag) %>
       <%= tag.tag %>
     <% end %>
     <div class="mt-3">
-      <h5>新しいタグを入力（カンマ区切りで複数可）</h5>
+      <h5 class="text-sub-color">新しいタグを入力（カンマ区切りで複数可）</h5>
       <%= text_field_tag "review[new_tag_names]", nil, placeholder: "例）夜間対応, 駐車場あり, 先生が優しい", class: "form-control" %>
     </div>
   </div>

@@ -6,12 +6,12 @@ class Public::CommentsController < ApplicationController
     @review = @hospital.reviews.find(params[:review_id])
     @comment = current_user.comments.new(comment_params)
     @comment.review = @review
-    @comment.save
-    # if @comment.save
+    unless @comment.save
+      render 'error'
     # redirect_to public_hospital_review_path(@hospital, @review), notice: "コメントを投稿しました"
     # else
     # redirect_to public_hospital_review_path(@hospital, @review), alert: "コメントの投稿に失敗しました"
-    # end
+    end
   end
 
   def destroy

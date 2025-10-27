@@ -1,63 +1,58 @@
-<% if @hospital.errors.any? %>
-  <%= @hospital.errors.count %>件のエラーが発生しました
-  <ul>
-    <% @hospital.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
+<%= render 'layouts/errors', obj: @hospital %>
+<div class="container mt-4">
+  <%= render "layouts/tag_form" %>
 
-<%= render "layouts/tag_form" %>
-<h2 class="text-center my-4">病院登録</h2>
-<div class="hospital-background d-flex justify-content-center align-items-center min-vh-100">
-  <div class="card shadow-lg border-0" style="max-width: 700px; width: 90%; background: rgba(255, 255, 255, 0.9);">
-    <%= form_with model: @hospital, url: admin_hospitals_path, method: :post, local: true, multipart: true do |f| %>
-      <div class="card-body">
-        <div class="mb-3">
-          <strong><%= f.label :name, "施設名" %></strong>
-          <p class="text-muted mb-0"><%= f.text_field :name, class: "form-control" %></p>
-        </div>
-        <div class="mb-3">
-          <strong><%= f.label :address, "住所" %></strong>
-          <p class="text-muted mb-0"><%= f.text_area :address, class: "form-control" %></p>
-        </div>
-        <div class="mb-3">
-          <strong><%= f.label :phone_number, "連絡先" %></strong>
-          <p class="text-muted mb-0"><%= f.text_field :phone_number, class: "form-control" %></p>
-        </div>
-        <div class="mb-3">
-          <strong><%= f.label :opening_hours, "診察時間" %></strong>
-          <p class="text-muted mb-0"><%= f.text_area :opening_hours, class: "form-control" %></p>
-        </div>
-        <div class="mb-3">
-          <strong><%= f.label :aminal_types, "診察対応動物" %></strong>
-          <p class="text-muted mb-0"><%= f.text_field :animal_types, class: "form-control" %></p>
-        </div>
+  <h2 class="text-center my-4 text-main-color">病院登録</h2>
+  <div class="hospital-background d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow-lg border-0 hospital-form">
+      <%= form_with model: @hospital, url: admin_hospitals_path, method: :post, local: true, multipart: true do |f| %>
+        <div class="card-body">
+          <div class="mb-3">
+            <strong class="text-sub-color"><%= f.label :name, "施設名" %></strong>
+            <p class="text-muted mb-0"><%= f.text_field :name, class: "form-control" %></p>
+          </div>
+          <div class="mb-3">
+            <strong class="text-sub-color"><%= f.label :address, "住所" %></strong>
+            <p class="text-muted mb-0"><%= f.text_area :address, class: "form-control" %></p>
+          </div>
+          <div class="mb-3">
+            <strong class="text-sub-color"><%= f.label :phone_number, "連絡先" %></strong>
+            <p class="text-muted mb-0"><%= f.text_field :phone_number, class: "form-control" %></p>
+          </div>
+          <div class="mb-3">
+            <strong class="text-sub-color"><%= f.label :opening_hours, "診察時間" %></strong>
+            <p class="text-muted mb-0"><%= f.text_area :opening_hours, class: "form-control" %></p>
+          </div>
+          <div class="mb-3">
+            <strong class="text-sub-color"><%= f.label :aminal_types, "診察対応動物" %></strong>
+            <p class="text-muted mb-0"><%= f.text_field :animal_types, class: "form-control" %></p>
+          </div>
 
-        <!--  見出し画像  -->
-        <div class="mb-3">
-          <strong><%= f.label :main_image, "見出し画像(1枚)" %></strong>
-          <%= f.file_field :main_image, accept: "image/*", class: "form-control-file" %>
-        </div>
+          <!--  見出し画像  -->
+          <div class="mb-3">
+            <strong class="text-sub-color"><%= f.label :main_image, "見出し画像(1枚)" %></strong>
+            <%= f.file_field :main_image, accept: "image/*", class: "form-control-file" %>
+          </div>
 
-        <!-- サブ画像 -->
-        <div class="mb-3">
-          <strong><%= f.label :sub_images, "サブ画像(複数選択可)" %></strong><br />
-          <%= f.file_field :sub_images, multiple: true, accept: "image/*", class: "form-control-file" %>
+          <!-- サブ画像 -->
+          <div class="mb-3">
+            <strong class="text-sub-color"><%= f.label :sub_images, "サブ画像(複数選択可)" %></strong><br />
+            <%= f.file_field :sub_images, multiple: true, accept: "image/*", class: "form-control-file" %>
+          </div>
+          <div class="mb-3">
+            <p class="text-sub-color">タグを選択</p>
+            <% @tags.each do |tag| %>
+              <%= check_box_tag "hospital[tag_ids][]", tag.id, @hospital.tags.include?(tag) %>
+              <span class="badge text-primary border"><%= tag.tag %></span>
+            <% end %>
+          </div>
+          <div class="mt-3 mb-4">
+            <p class="text-sub-color">新しいタグを入力（カンマ区切りで複数可）</p>
+            <%= text_field_tag "hospital[new_tag_names]", nil, placeholder: "例）夜間対応, 駐車場あり, 先生が優しい", class: "form-control" %>
+          </div>
+            <%= f.submit "登録", class: "btn btn-warning w-100" %>
         </div>
-        <div class="mb-3">
-          <p>タグを選択</p>
-          <% @tags.each do |tag| %>
-            <%= check_box_tag "hospital[tag_ids][]", tag.id, @hospital.tags.include?(tag) %>
-            <span class="badge text-primary border"><%= tag.tag %></span>
-          <% end %>
-        </div>
-        <div class="mt-3 mb-4">
-          <p>新しいタグを入力（カンマ区切りで複数可）</p>
-          <%= text_field_tag "hospital[new_tag_names]", nil, placeholder: "例）夜間対応, 駐車場あり, 先生が優しい", class: "form-control" %>
-        </div>
-          <%= f.submit "登録", class: "btn btn-warning w-100" %>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>

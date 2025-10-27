@@ -1,100 +1,95 @@
-<% if @user.errors.any? %>
-  <%= @user.errors.count %>件のエラーが発生しました
-  <ul>
-    <% @user.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
-
-<div class="review-background d-flex justify-content-center align-items-center min-vh-100">  
-  <div class="card shadow-lg border-0 style-show mb-4 mt-4">
-  <h2 class="text-center my-4">ユーザー情報編集</h2>
-    <div class="card-body">
-      <div class="rounded border text-center mx-3">
-        <% if @user.image.attached? %>
-          <%= image_tag @user.image, size: "170x170" %>
-        <% else %>
-          <%= image_tag "no_image.jpg", size: "170x170" %>
-        <% end %>
-      <div>
-        <strong>名前</strong>
-        <p class="text-muted"><%= @user.name %></p>
+<%= render 'layouts/errors', obj: @user %>
+<div class="container mt-4">
+  <%= render "layouts/tag_form" %>
+  <div class="review-background d-flex justify-content-center align-items-center min-vh-100">  
+    <div class="card shadow-lg border-0 style-show mb-4 mt-4">
+    <h2 class="text-center my-4 text-main-color">ユーザー情報編集</h2>
+      <div class="card-body">
+        <div class="rounded border text-center mx-3 text-sub-color">
+          <% if @user.image.attached? %>
+            <%= image_tag @user.image, size: "170x170" %>
+          <% else %>
+            <%= image_tag "no_image.jpg", size: "170x170" %>
+          <% end %>
+        <div>
+          <strong>名前</strong>
+          <p class="text-muted"><%= @user.name %></p>
+        </div>
+        <div>
+          <strong>メールアドレス</strong>
+          <p class="text-muted"><%= @user.email %></p>
+        </div>
+        <div>
+          <strong>自己紹介文</strong>
+          <p class="text-muted"><%= @user.introduction %></p>
+        </div>
+        <div>
+          <% if @user.is_active? %>
+          <strong>会員ステータス</strong><br />
+            有効
+          <% else %>
+            退会済み
+          <% end %>
+        </div>
       </div>
-      <div>
-        <strong>メールアドレス</strong>
-        <p class="text-muted"><%= @user.email %></p>
-      </div>
-      <div>
-        <strong>自己紹介文</strong>
-        <p class="text-muted"><%= @user.introduction %></p>
-      </div>
-      <div>
-        <% if @user.is_active? %>
-        <strong>会員ステータス</strong><br />
-          有効
-        <% else %>
-          退会済み
-        <% end %>
-      </div>
-    </div>
-    <h4>
-      <%= link_to "新着順", public_user_path(id: @user, sort: 'created_at DESC'), class: "btn btn-link" %> |
-      <%= link_to "評価の高い順", public_user_path(id: @user, sort: 'star DESC'), class: "btn btn-link" %> |
-      <%= link_to "いいね数の多い順", public_user_path(id: @user, sort: 'favorites DESC'), class: "btn btn-link" %>
-    </h4>
-    <hr>
-      <div class="col-lg-9 mx-auto">
-        <% if @reviews.any? %>
-          <div class="row ustify-content-center g-4">
-            <% @reviews.each do |review| %>
-              <div class=" col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-4">
-                <div class="card h-100 shadow-sm">
-                  <%= link_to public_hospital_path(review.hospital), class: "card-img-top" do %>
-                  <%= image_tag review.hospital.main_image, class: "card-img-top", alt: review.hospital.name %>
-                  <% end %>
-                  <div class="card-body">
-                    <h5 class="card-title"><%= link_to review.hospital.name, public_hospital_path(review.hospital) %>
-                    <div id="review_rating_<%= review.id %>"></div>
-                    <script>
-                      var elem = document.getElementById("review_rating_<%= review.id %>");
-                      var opt = {
-                          starOn: "<%= asset_path('star-on.png') %>",
-                          starOff: "<%= asset_path('star-off.png') %>",
-                          starHalf: "<%= asset_path('star-half.png') %>",
-                          readOnly: true,
-                          score: <%= review.rating %>
-                      };
-                      if (elem) elem.innerHTML = "";
-                      raty(elem,opt);
-                    </script>
-                    <h5 class="card-title"><%= review.title %></h5>
-                    <p class="card-text"><%= truncate(review.body, length: 15) %></p>
-                    <% review.tags.each do |tag| %>
-                      <span class="badge text-primary border"><%= tag.tag %></span>
+      <h4>
+        <%= link_to "新着順", public_user_path(id: @user, sort: 'created_at DESC'), class: "btn btn-link" %> |
+        <%= link_to "評価の高い順", public_user_path(id: @user, sort: 'star DESC'), class: "btn btn-link" %> |
+        <%= link_to "いいね数の多い順", public_user_path(id: @user, sort: 'favorites DESC'), class: "btn btn-link" %>
+      </h4>
+      <hr>
+        <div class="col-lg-9 mx-auto">
+          <% if @reviews.any? %>
+            <div class="row ustify-content-center g-4">
+              <% @reviews.each do |review| %>
+                <div class=" col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-4">
+                  <div class="card h-100 shadow-sm">
+                    <%= link_to public_hospital_path(review.hospital), class: "card-img-top" do %>
+                    <%= image_tag review.hospital.main_image, class: "card-img-top", alt: review.hospital.name %>
                     <% end %>
-                    <div id="review_<%= review.id %>" class="review-item">
-                      <div class="favorite-btn"><%= render "public/favorites/favorite-btn", review: review %></div>
-                    </div>
+                    <div class="card-body">
+                      <h5 class="card-title"><%= link_to review.hospital.name, public_hospital_path(review.hospital) %>
+                      <div id="review_rating_<%= review.id %>"></div>
+                      <script>
+                        var elem = document.getElementById("review_rating_<%= review.id %>");
+                        var opt = {
+                            starOn: "<%= asset_path('star-on.png') %>",
+                            starOff: "<%= asset_path('star-off.png') %>",
+                            starHalf: "<%= asset_path('star-half.png') %>",
+                            readOnly: true,
+                            score: <%= review.rating %>
+                        };
+                        if (elem) elem.innerHTML = "";
+                        raty(elem,opt);
+                      </script>
+                      <h5 class="card-title"><%= review.title %></h5>
+                      <p class="card-text"><%= truncate(review.body, length: 15) %></p>
+                      <% review.tags.each do |tag| %>
+                        <span class="badge text-primary border"><%= tag.tag %></span>
+                      <% end %>
+                      <div id="review_<%= review.id %>" class="review-item">
+                        <div class="favorite-btn"><%= render "public/favorites/favorite-btn", review: review %></div>
+                      </div>
 
-                    <p>✏️<%= link_to "#{review.comments.count} コメント", public_hospital_review_path(review.hospital, review) %></p>
-                    <%= link_to "レビュー詳細", public_hospital_review_path(review.hospital, review), class: "btn btn-primary" %>
-                  </div>
-                  <div class="card-footer text-muted small">
-                    投稿日: <%= review.created_at.strftime("%Y-%m-%d") %>
+                      <p>✏️<%= link_to "#{review.comments.count} コメント", public_hospital_review_path(review.hospital, review) %></p>
+                      <%= link_to "レビュー詳細", public_hospital_review_path(review.hospital, review), class: "btn btn-primary" %>
+                    </div>
+                    <div class="card-footer text-muted small">
+                      投稿日: <%= review.created_at.strftime("%Y-%m-%d") %>
+                    </div>
                   </div>
                 </div>
-              </div>
-            <% end %>
-          </div>
-        <% else %>
-        <p>まだレビューは登録されていません。</p>
-        <% end %>
-      </div>
+              <% end %>
+            </div>
+          <% else %>
+          <p>まだレビューは登録されていません。</p>
+          <% end %>
+        </div>
 
-      <div class="text-center my-4">
-        <%= link_to "病院一覧へ", public_hospitals_path, class: "btn btn-link-color w-25" %>
-        <%= link_to "レビューへ", public_hospital_review_path(@hospital, @review), class: "btn btn-link-color w-25" %>
+        <div class="text-center my-4">
+          <%= link_to "病院一覧へ", public_hospitals_path, class: "btn btn-link-color w-25" %>
+          <%= link_to "レビューへ", public_hospital_review_path(@hospital, @review), class: "btn btn-link-color w-25" %>
+        </div>
       </div>
     </div>
   </div>

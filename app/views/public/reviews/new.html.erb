@@ -1,74 +1,67 @@
-<% if @review.errors.any? %>
-  <%= @review.errors.count %>件のエラーが発生しました
-  <ul>
-    <% @review.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
+<%= render 'layouts/errors', obj: @review %>
 
 <div class="review-background d-flex justify-content-center align-items-center min-vh-100">
   <div class="card shadow-lg border-0 review-form mb-4 mt-4">
-  <h2 class="text-center text-muted my-4">レビュー投稿画面</h2>
+  <h2 class="text-center text-main-color my-4">レビュー投稿画面</h2>
 
 
   <%= form_with model: [@hospital, @review], url: public_hospital_reviews_path, method: :post do |f| %>
   <div class="card-body">
     <div class="mb-3">
-      <strong><%= f.label :cleanliness_rating, "清潔さ" %></strong>
+      <strong class="text-sub-color"><%= f.label :cleanliness_rating, "清潔さ" %></strong>
       <div id="cleanliness_rating" class="my-2 rate"></div>
       <p class="text-muted mb-0"><%= f.text_field :cleanliness_comment, class: "form-control", placeholder: "清潔さについてコメントしてください" %></p>
     </div>
 
     <div class="mb-3">
-      <strong><%= f.label :doctor_rating, "先生の対応" %></strong>
+      <strong class="text-sub-color"><%= f.label :doctor_rating, "先生の対応" %></strong>
       <div id="doctor_rating" class="my-2 rate"></div>
       <p class="text-muted mb-0"><%= f.text_field :doctor_comment, class: "form-control", placeholder: "先生の対応についてコメントしてください" %></p>
     </div>
 
     <div class="mb-3">
-      <strong><%= f.label :staff_rating, "スタッフの対応" %></strong>
+      <strong class="text-sub-color"><%= f.label :staff_rating, "スタッフの対応" %></strong>
       <div id="staff_rating" class="my-2 rate"></div>
       <p class="text-muted mb-0"><%= f.text_field :staff_comment, class: "form-control", placeholder: "スタッフの対応についてコメントしてください" %></p>
     </div>
 
     <div class="mb-3">
-      <strong><%= f.label :price_rating, "料金" %></strong>
+      <strong class="text-sub-color"><%= f.label :price_rating, "料金" %></strong>
       <div id="price_rating" class="my-2 rate"></div>
       <p class="text-muted mb-0"><%= f.text_field :price_comment, class: "form-control", placeholder: "料金についてコメントしてください" %></p>
     </div>
 
     <div class="mb-3">
-      <strong><%= f.label :waiting_rating, "待ち時間" %></strong>
+      <strong class="text-sub-color"><%= f.label :waiting_rating, "待ち時間" %></strong>
       <div id="waiting_rating" class="my-2 rate"></div>
       <p class="text-muted mb-0"><%= f.text_field :waiting_comment, class: "form-control", placeholder: "待ち時間についてコメントしてください" %></p>
     </div>
 
     <div class="mb-3">
-      <strong><%= f.label :title, "レビューにタイトルをつける" %></strong>
+      <strong class="text-sub-color"><%= f.label :title, "レビューにタイトルをつける" %></strong>
       <p class="text-muted mb-0"><%= f.text_field :title, class: "form-control", placeholder: "タイトルを記入してください" %></p>
     </div>
 
     <div class="mb-3">
-      <strong><%= f.label :body, "総合評価" %></strong>
+      <strong class="text-sub-color"><%= f.label :body, "総合評価" %></strong>
       <div id="rating" class="my-2 rate"></div>
       <p class="text-muted mb-0"><%= f.text_area :body, rows: 6, class: "form-control", placeholder: "総合的な感想を記入してください。" %></p>
     </div>
 
 
     <div class="mb-3">
-      <strong><%= f.label :animal_comment, "動物目線でひとこと！(任意)" %></strong>
+      <strong class="text-sub-color"><%= f.label :animal_comment, "動物目線でひとこと！(任意)" %></strong>
       <p class="text-muted mb-0"><%= f.text_field :animal_comment, class: "form-control", placeholder: "例:広々していて過ごしやすかった！" %></p>
     </div>
     
     <div class="mb-3">
-      <p>タグを選択</p>
+      <p class="text-sub-color">タグを選択</p>
       <% @tags.each do |tag| %>
         <%= check_box_tag "review[tag_ids][]", tag.id, @review.tags.include?(tag) %>
         <%= tag.tag %>
       <% end %>
       <div class="mt-3">
-        <p>新しいタグを入力（カンマ区切りで複数可）</p>
+        <p class="text-sub-color">新しいタグを入力（カンマ区切りで複数可）</p>
         <%= text_field_tag "review[new_tag_names]", nil, placeholder: "例）夜間対応, 駐車場あり, 先生が優しい", class: "form-control" %>
       </div>
     </div>
