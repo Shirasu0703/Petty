@@ -10,7 +10,7 @@
                 <div id="hospital_rating_<%= @hospital.id %>"></div>
                 <p class="text-muted">平均：<%= @hospital.average_rating %> / 5</p>
                 <% @hospital.tags.each do |tag| %>
-                  <span class="badge text-primary"><%= tag.tag %></span>
+                  <span class="badge text-primary border"><%= tag.tag %></span>
                 <% end %>
                 <%= image_tag @hospital.main_image, class: "img-fluid rounded w-100" %>
             </div>
@@ -68,7 +68,7 @@
           <div class="col-md-7 p-5">
           <% if @review.present? && @review.tags.present? %>
           <% @review.tags.each do |tag| %>
-            <span class="badge text-primary"><%= tag.tag %></span>
+            <span class="badge text-primary border"><%= tag.tag %></span>
           <% end %>
         <% else %>
           <p>タグはありません。</p>

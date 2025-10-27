@@ -52,7 +52,7 @@
       </div>
       <div class="mb-3">
         <% @review.tags.each do |tag| %>
-          <span class="badge text-primary"><%= tag.tag %></span>
+          <span class="badge text-primary border"><%= tag.tag %></span>
         <% end %>
       </div>
       <div class="card-footer d-flex justify-content-between align-items-center">
@@ -74,7 +74,7 @@
       </div>
 
       <div class="mb-3">
-        <p>コメント件数：<%= @review.comments.count %></p>
+        <p>✏️<%= @review.comments.count %>コメント</p>
       </div>
 
       <div class="mt-4">

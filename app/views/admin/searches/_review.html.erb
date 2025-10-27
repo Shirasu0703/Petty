@@ -29,12 +29,12 @@
             <% if review.tags.present? %>
               <div class="tags mb-2">
                 <% review.tags.each do |tag| %>
-                  <span class="badge text-primary"><%= tag.tag %></span>
+                  <span class="badge text-primary border"><%= tag.tag %></span>
                 <% end %>
               </div>
             <% end %>
             <p>♥<%= review.favorites.count %></p>
-            <p><%= link_to "#{review.comments.count} コメント", admin_hospital_review_path(review.hospital, review) %></p>
+            <p>✏️<%= link_to "#{review.comments.count} コメント", admin_hospital_review_path(review.hospital, review) %></p>
             <span class="text-muted small">
               投稿者: 
               <% if review.user.present? %>

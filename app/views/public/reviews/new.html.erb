@@ -7,9 +7,9 @@
   </ul>
 <% end %>
 
-<h2 class="text-center my-4">レビュー投稿画面</h2>
 <div class="review-background d-flex justify-content-center align-items-center min-vh-100">
-  <div class="card shadow-lg border-0 review-form mb-4">
+  <div class="card shadow-lg border-0 review-form mb-4 mt-4">
+  <h2 class="text-center text-muted my-4">レビュー投稿画面</h2>
 
 
   <%= form_with model: [@hospital, @review], url: public_hospital_reviews_path, method: :post do |f| %>

@@ -63,7 +63,7 @@
         <div class="d-flex flex-wrap mt-2">
           <% @hospital.tags.order(created_at: :asc).each do |tag| %>
             <div class="position-relative mr-2 mt-2">
-              <span class="badge text-primary"><%= tag.tag %></span>
+              <span class="badge text-primary border"><%= tag.tag %></span>
               <%= link_to "&times;".html_safe, remove_tag_admin_hospital_path(@hospital, tag_id: tag.id),
               method: :delete, data: { confirm: "「#{tag.tag}」を削除しますか？" },
               class: "btn btn-sm btn-danger position-absolute tag-style" %>

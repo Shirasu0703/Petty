@@ -3,7 +3,7 @@
   <div class="row">
     <% reviews.each do |review| %>
       <div class="col-lx-3 col-lg-4 col-md-5 col-sm-10 md-4 mb-4">
-        <div class="card h-100">
+        <div class="card h-100 shadow-sm">
           <div class="card-body text-center">
             <%= image_tag review.hospital.main_image, class: "card-img-top" %>
             <h4 class="card-title">
@@ -29,24 +29,27 @@
             <% if review.tags.present? %>
               <div class="tags mb-2">
                 <% review.tags.each do |tag| %>
-                  <span class="badge text-primary"><%= tag.tag %></span>
+                  <span class="badge text-primary border"><%= tag.tag %></span>
                 <% end %>
               </div>
             <% end %>
             <div id="review_<%= review.id %>" class="review-item">
               <div class="favorite-btn"><%= render "public/favorites/favorite-btn", review: review %></div>
             </div>
-
-            <p><%= link_to "#{review.comments.count} コメント", public_hospital_review_path(review.hospital, review) %></p>
-            <span class="text-muted small">
+          <p class="card-text small">
+            ✏️<%= link_to "#{review.comments.count} コメント", public_hospital_review_path(review.hospital, review) %>
+          </p>
+          </div>
+            <div class="card-footer text-muted small">
               投稿者: 
               <% if review.user.present? %>
                 <%= link_to review.user.name, public_user_path(review.user), class: "text-decoration-none text-primary" %>
               <% else %>
                 不明
               <% end %>
-            </span>
-          </div>
+              <br />
+                投稿日: <%= review.created_at.strftime("%Y-%m-%d") %>
+            </div>
         </div>
       </div>
     <% end %>

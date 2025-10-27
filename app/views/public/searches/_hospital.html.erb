@@ -3,7 +3,7 @@
   <div class="row">
     <% hospitals.each do |hospital| %>
       <div class="col-lx-3 col-lg-4 col-md-5 col-sm-10 md-4 mb-4">
-        <div class="card h-100">
+        <div class="card h-100 shadow-sm">
           <div class="card-body text-center">
             <%= image_tag hospital.main_image, class: "card-img-top" %>
             <h4 class="card-title">
@@ -25,11 +25,16 @@
             <% if hospital.tags.present? %>
               <div class="tags mb-2">
                 <% hospital.tags.each do |tag| %>
-                  <span class="badge text-primary"><%= tag.tag %></span>
+                  <span class="badge text-primary border"><%= tag.tag %></span>
                 <% end %>
               </div>
             <% end %>
-            <p><%= link_to "レビュー：#{hospital.reviews.count} 件", public_hospital_reviews_path(hospital) %></p>
+            <p class="card-text text-muted small">
+              投稿レビュー数：<%= link_to "#{hospital.reviews.count} 件", public_hospital_reviews_path(hospital) %>
+            </p>
+          </div>
+          <div class="card-footer text-muted small">
+            病院登録日：<%= hospital.created_at.strftime("%Y-%m-%d") %>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 <%= render "layouts/tag_form" %>
 <div class="container mt-4">
-  <div class="card shadow-sm p-4 mb-4">
-    <div class="d-flex justify-content-between">
+  <div class="card shadow-lg p-4 mb-4">
+    <div class="d-flex justify-content-between text-muted">
       <h2><%= @user.name %>さんのマイページ</h2>
       <h4>
         <%= link_to "新着順", mypage_public_users_path(sort: 'created_at DESC'), class: "btn btn-link" %> |
@@ -16,7 +16,7 @@
         <%= render "public/users/profile", user: @user %>
       </div>
 
-      <div class="col-lg-9">
+      <div class="col-lg-9 text-muted">
         <% if @reviews.any? %>
           <div class="row g-3">
             <% @reviews.each do |review| %>
@@ -44,7 +44,7 @@
                     <p class="card-text"><%= truncate(review.body, length: 15) %></p>
                     <% if review.tags.any? %>
                       <% review.tags.each do |tag| %>
-                        <span class="badge text-primary"><%= tag.tag %></span>
+                        <span class="badge text-primary border"><%= tag.tag %></span>
                       <% end %>
                     <% end %>
 
@@ -52,7 +52,9 @@
                       <div class="favorite-btn"><%= render "public/favorites/favorite-btn", review: review %></div>
                     </div>
                     
-                    <p><%= link_to "#{review.comments.count} コメント", public_hospital_review_path(review.hospital, review) %></p>
+                  <p class="card-text small">
+                    ✏️<%= link_to "#{review.comments.count} コメント", public_hospital_review_path(review.hospital, review) %>
+                  </p>
                     <%= link_to "レビュー詳細", public_hospital_review_path(review.hospital, review), class: "btn btn-primary" %>
                   </div>
                   <div class="card-footer text-muted small">

@@ -49,7 +49,7 @@
           <p>タグを選択</p>
           <% @tags.each do |tag| %>
             <%= check_box_tag "hospital[tag_ids][]", tag.id, @hospital.tags.include?(tag) %>
-            <span class="badge text-primary"><%= tag.tag %></span>
+            <span class="badge text-primary border"><%= tag.tag %></span>
           <% end %>
         </div>
         <div class="mt-3 mb-4">

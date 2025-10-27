@@ -34,14 +34,13 @@
       </div>
 
       <div class="my-3 text-center">
-        <strong><%= f.submit "更新", class: "btn btn-warning" %></strong>
+        <strong><%= f.submit "更新", class: "btn btn-warning w-25" %></strong>
+        <strong><%= link_to "マイページに戻る", mypage_public_users_path, class: "btn btn-link-color" %></strong>
       </div>
 
       <div class="text-center mt-4">
-        <%= link_to "退会手続へ", unsubscribe_public_users_path, class: "btn btn-danger" %>
+        <%= link_to "退会手続へ", unsubscribe_public_users_path, class: "btn btn-danger w-25" %>
       </div>
     </div>
   <% end %>
-
-  <%= link_to "マイページに戻る", mypage_public_users_path, class: "btn btn-link-color" %>
 </div>

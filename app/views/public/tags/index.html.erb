@@ -1,10 +1,10 @@
 <%= render "layouts/tag_form" %>
-<div class="container mt-4">
+<div class="container text-muted mt-4">
   <div class="card shadow-lg p-4 mb-4">
     <% if params[:tag_id].present? && @tag %>
       <h1 class="text-center"><%= "#{@tag.tag} の検索結果" %></h1>
     <% else %>
-      <h1 class="text-center">すべてのタグ</h1>
+      <h2 class="text-center">すべてのタグ</h2>
     <% end %>
     <hr>
     <% if @reviews.present? %>
@@ -19,7 +19,7 @@
                 <% review.tags.each do |tag| %>
                   <span class="badge text-primary"><%= tag.tag %></span>
                 <% end %>
-                <h5 classs="card-title"><%= review.title %></h5>
+                <h5><%= link_to review.hospital.name, public_hospital_path(review.hospital) %></h5>
                 <div id="review_rating_<%= review.id %>"></div>
                   <script>
                     var elem = document.getElementById("review_rating_<%= review.id %>");
@@ -34,19 +34,19 @@
                     raty(elem,opt);
                   </script>
                 <% if @tags.present? %>
-                  <span class="badge text-primary"><%= @tag.tag %></span>
+                  <span class="badge text-primary border"><%= @tag.tag %></span>
                 <% end %>
                 <p class="card-text"><%= truncate(review.body, legth: 15) %></p>
                 <div id="review_<%= review.id %>" class="review-item">
                   <div class="favorite-btn"><%= render "public/favorites/favorite-btn", review: review %></div>
                 </div>
-                <p class="card-text small text-muted">
-                  病院名：<%= review.hospital.name if review.hospital %>
+                <p class="card-text small">
+                  ✏️<%= link_to "#{review.comments.count} コメント", public_hospital_review_path(review.hospital, review) %>
                 </p>
-                <div class="card-footer text-muted small">
-                  投稿日: <%= review.created_at.strftime("%Y-%m-%d") %>
-                </div>
               <%= link_to "レビュー詳細", public_hospital_review_path(review.hospital, review), class: "btn btn-primary" %>
+              </div>
+              <div class="card-footer text-muted small">
+                投稿日: <%= review.created_at.strftime("%Y-%m-%d") %>
               </div>
             </div>
           </div>
