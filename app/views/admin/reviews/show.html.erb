@@ -79,10 +79,20 @@
           <p class="comments-count">✏️<%= @review.comments.count %>コメント</p>
         </div>
 
+        <div class="mt-4 comments">
+          <%= render "admin/comments/index", review: @review %>
+        </div>
+        <div id="comments_error">
+          <%= render 'layouts/errors', obj: @comment %>
+        </div>
+
         <div class="mt-4">
           <h5 class="text-center mb-3 text-main-color">💬 コメント一覧</h5>
     
-          <% if @review.comments.any? %>
+          
+ <%
+=begin%>
+ <% if @review.comments.any? %>
             <% @review.comments.each do |comment| %>
               <div class="card mb-3 shadow-sm border-0 form-color">
                 <div class="card-body">
@@ -101,7 +111,10 @@
           <% else %>
             <p class="text-muted text-center text-sub-color">まだコメントはありません。</p>
           <% end %>
-        </div>
+        </div>  
+<%
+=end%>
+
 
 
         <%

@@ -2,13 +2,19 @@ class Admin::CommentsController < ApplicationController
   before_action :authenticate_admin!
   def create
     @hospital = Hospital.find(params[:hospital_id])
-    @review = Review.find(params[:review_id])
+    @review = @hospital.reviews.find(params[:review_id])
     @comment = current_user.comments.new(comment_params)
     @comment.review = @review
-    if @comment.save
-    redirect_to admin_hospital_review_path(@hospital, @review), notice: "コメントを投稿しました"
-    else
-    redirect_to admin_hospital_review_path(@hospital, @review), alert: "コメントの投稿に失敗しました"
+    unless @comment.save
+      render 'error'
+    # @hospital = Hospital.find(params[:hospital_id])
+    # @review = Review.find(params[:review_id])
+    # @comment = current_user.comments.new(comment_params)
+    # @comment.review = @review
+    # if @comment.save
+    # redirect_to admin_hospital_review_path(@hospital, @review), notice: "コメントを投稿しました"
+    # else
+    # redirect_to admin_hospital_review_path(@hospital, @review), alert: "コメントの投稿に失敗しました"
     end
   end
 
@@ -17,7 +23,7 @@ class Admin::CommentsController < ApplicationController
     @review = @hospital.reviews.find(params[:review_id])
     @comment = @review.comments.find(params[:id])
     @comment.destroy
-    redirect_to admin_hospital_review_path(@hospital, @review), notice: "コメントを削除しました。"
+    # redirect_to admin_hospital_review_path(@hospital, @review), notice: "コメントを削除しました。"
   end
 
   private
