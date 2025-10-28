@@ -7,9 +7,16 @@
       <p>通っている病院の良さをもっとたくさんの人に知ってもらいたい。</p>
       <p>そんな悩みをレビューを通して共有や病院探しの参考にするためのサイトです。</p>
     </div>
-
     <div class="mb-3">
-      <%= link_to "病院一覧へ", public_hospitals_path, class: "btn btnx-hospitals rounded-pill mx-1" %>
+      <% if admin_signed_in? %>
+          <%= link_to "病院一覧へ", admin_hospitals_path, class: "btn btnx-hospitals rounded-pill mx-1" %>
+      <% elsif user_signed_in? %>
+          <%= link_to "病院一覧へ", public_hospitals_path, class: "btn btnx-hospitals rounded-pill mx-1" %>
+      <% else %>
+          <%= link_to "病院一覧へ", public_hospitals_path, class: "btn btnx-hospitals rounded-pill mx-1" %>
+      <% end %>
     </div>
   </div>
 </div>
+
+
