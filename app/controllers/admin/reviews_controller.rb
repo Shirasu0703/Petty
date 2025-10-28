@@ -77,6 +77,7 @@ before_action :set_review_for_hospital, only: [:show, :edit, :update, :destroy]
       end
       redirect_to admin_hospital_review_path(@hospital, @review), notice: "レビューを更新しました"
     else
+      @tags = Tag.all
       render :edit
     end
   end
