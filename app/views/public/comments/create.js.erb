@@ -1,4 +1,5 @@
 $("#review_<%= @review.id %> .comments-count").html("コメント数: <%= @review.comments.count %>");
 $(".comments").html("<%= j(render 'public/comments/index', review: @review) %>");
 $("#comment_body").val("");
+$("#comments_error").html("");
 

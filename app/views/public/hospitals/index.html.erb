@@ -2,7 +2,7 @@
   <%= render "layouts/tag_form" %>
   <div class="card shadow-lg p-4 mb-4">
     <h2 class="text-center my-4 text-main-color">病院一覧</h2>
-    <h4 class="text-sub-color">
+    <h4 class="text-center text-sub-color">
       <%= link_to "新着順", public_hospitals_path(sort: 'created_at DESC'), class: "btn btn-link" %> |
       <%= link_to "評価の高い順", public_hospitals_path(sort: 'star DESC'), class: "btn btn-link" %>
     </h4>
@@ -13,7 +13,7 @@
           <div class="card h-100 shadow-sm">
             <%= image_tag hospital.main_image, class: "card-img-top", alt: hospital.name %>
               <div class="card-body">
-                <h5 class="card-title"><%= link_to hospital.name, public_hospital_path(hospital), class: "text-main-color" %></h5>
+                <h5 class="card-title"><%= link_to hospital.name, public_hospital_path(hospital) %></h5>
                 <div class="d-flex align-items-center">
                 <div id="hospital_rating_<%= hospital.id %>"></div>
                 <p class="hospital-review-total">(<%= link_to "#{hospital.reviews.count}", public_hospital_path(hospital) %>)</p>
