@@ -67,8 +67,8 @@
                     <%= link_to "もっと見る", public_hospital_review_path(review.hospital, review), class: "btn btn-outline-primary btn-sm" %>
                   </div>
 
-                  <div class="mt-2 text-end">
-                    <%= render "public/favorites/favorite-btn", review: review %>
+                  <div id="review_<%= review.id %>" class="review-item">
+                    <div class="favorite-btn"><%= render "public/favorites/favorite-btn", review: review %></div>
                   </div>
                 </div>
               <% end %>
