@@ -68,6 +68,7 @@ class Public::ReviewsController < ApplicationController
       end
       redirect_to public_hospital_review_path(@hospital, @review), notice: "レビューを更新しました"
     else
+      @tags = Tag.all
       render :edit
     end
   end
