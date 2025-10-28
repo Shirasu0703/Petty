@@ -65,6 +65,8 @@ gem 'net-imap'
 
 gem 'jquery-rails'
 
+gem 'enum_help'
+
 gem 'dotenv-rails'
 group :production do
   gem 'mysql2'
