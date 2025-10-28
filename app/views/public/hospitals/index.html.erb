@@ -13,7 +13,7 @@
           <div class="card h-100 shadow-sm">
             <%= image_tag hospital.main_image, class: "card-img-top", alt: hospital.name %>
               <div class="card-body">
-                <h5 class="card-title"><%= link_to hospital.name, public_hospital_path(hospital), class: "text-main-color" %></h5>
+                <h5 class="card-title"><%= link_to hospital.name, public_hospital_path(hospital) %></h5>
                 <div class="d-flex align-items-center">
                 <div id="hospital_rating_<%= hospital.id %>"></div>
                 <p class="hospital-review-total">(<%= link_to "#{hospital.reviews.count}", public_hospital_path(hospital) %>)</p>
