@@ -32,7 +32,7 @@
           <% end %>
         </div>
       </div>
-      <h4>
+      <h4 class="text-center text-sub-color">
         <%= link_to "新着順", public_user_path(id: @user, sort: 'created_at DESC'), class: "btn btn-link" %> |
         <%= link_to "評価の高い順", public_user_path(id: @user, sort: 'star DESC'), class: "btn btn-link" %> |
         <%= link_to "いいね数の多い順", public_user_path(id: @user, sort: 'favorites DESC'), class: "btn btn-link" %>

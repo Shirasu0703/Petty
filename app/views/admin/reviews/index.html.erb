@@ -2,7 +2,7 @@
   <%= render "layouts/tag_form" %>
   <div class="card p-4 mb-4">
   <h2 class="text-center text-main-color">レビュー一覧</h2>
-    <h4 class="v">
+    <h4 class="text-center text-sub-color">
       <%= link_to "新着順", admin_reviews_path(@review, sort: 'created_at DESC'), class: "btn btn-link" %> |
       <%= link_to "評価の高い順", admin_reviews_path(@review, sort: 'star DESC'), class: "btn btn-link" %> |
       <%= link_to "いいね数の多い順", admin_reviews_path(@review, sort: 'favorites DESC'), class: "btn btn-link" %>
