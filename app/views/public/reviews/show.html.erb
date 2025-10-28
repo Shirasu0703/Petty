@@ -1,104 +1,107 @@
-<%= render "layouts/tag_form" %>
-<h2 class="text-center my-4"></h2>
-<div class="review-background d-flex justify-content-center align-items-center min-vh-100">
-  <div class="card shadow-lg border-0 review-form mb-4" >
-    <div class="card-header bg-warning text-white text-center">
-      <h4 class="text-muted mb-0"><%= @hospital.name %></h4>
-    </div>
+<div class="container mt-4">
+  <%= render "layouts/tag_form" %>
+  <div class="text-center my-4"></div>
+  <div class="review-background d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow-lg border-0 review-form mb-4" >
+      <div class="card-header bg-light text-white text-center">
+        <h2 class="text-main-color mb-0">レビュー詳細</h2>
+      </div>
 
-    <div class="card-body">
-      <div class="mb-3">
-        <strong>総合評価</strong><br>
-        <div id="review_rating_<%= @review.id %>"></div>
-        <p class="text-muted">（<%= @review.rating %> / 5）</p>
-        <% @review.tags.each do |tag| %>
-          <span class="badge text-primary"><%= tag.tag %></span>
-        <% end %>
-      </div>
-      <hr>
-      <div class="mb-3">
-        <strong>清潔さ</strong>
-        <div id="review_cleanliness_rating_<%= @review.id %>"></div>
-        <p class="text-muted mb-0"><%= @review.cleanliness_comment.presence || "(コメントなし)" %></p>
-      </div>
-      <div class="mb-3">
-        <strong>先生の対応</strong>
-        <div id="review_doctor_rating_<%= @review.id %>"></div>
-        <p class="text-muted mb-0"><%= @review.doctor_comment.presence || "(コメントなし)" %></p>
-      </div>
-      <div class="mb-3">
-        <strong>スタッフの対応</strong>
-        <div id= "review_staff_rating_<%= @review.id %>"></div>
-        <p class="text-muted mb-0"><%= @review.staff_comment.presence || "(コメントなし)" %></p>
-      </div>
-      <div class="mb-3">
-        <strong>料金</strong>
-        <div id= "review_price_rating_<%= @review.id %>"></div>
-        <p class="text-muted mb-0"><%= @review.price_comment.presence || "(コメントなし)" %></p>
-      </div>
-      <div class="mb-3">
-        <strong>待ち時間</strong>
-        <div id= "review_waiting_rating_<%= @review.id %>"></div>
-        <p class="text-muted mb-0"><%= @review.waiting_comment.presence || "(コメントなし)" %></p>
-      </div>
-      <div class="mb-3">
-        <strong>レビュータイトル</strong>
-        <p class="text-muted mb-0"><%= @review.title %></p>
-      </div>
-      <div class="mb-3">
-        <strong>総合評価</strong>
-        <p class="text-muted mb-0"><%= @review.body %></p>
-      </div>
-      <div class="mb-3">
-        <strong>🐾動物目線のひとこと</strong>
-        <p class="text-muted mb-0"><%= @review.animal_comment %></p>
-      </div>
-      <% @review.tags.each do |tag| %>
-        <span class="badge text-primary"><%= tag.tag %></span>
-      <% end %>
-      <div class="card-footer d-flex justify-content-between aling-items-center">
-        <span class="text-muted small">
-          投稿者: 
-          <% if @review.user.present? %>
-            <%= link_to @review.user.name, public_user_path(@review.user), class: "text-decoration-none text-primary" %>
-          <% else %>
-          不明
+      <div class="card-body text-center">
+        <div class="mb-3">
+          <strong class="text-sub-color">総合評価</strong><br>
+          <div id="review_rating_<%= @review.id %>"></div>
+          <p class="text-muted">（<%= @review.rating %> / 5）</p>
+          <% @review.tags.each do |tag| %>
+            <span class="badge text-primary"><%= tag.tag %></span>
           <% end %>
-        </span>
-        <% if user_signed_in? && current_user == @review.user %>
-          <div>
-            <%= link_to "編集", edit_public_hospital_review_path(@hospital, @review), class:"btn btn-warning" %> |
-            <%= link_to "削除", public_hospital_review_path(@hospital, @review), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
-          </div>
-        <% end %>
-      </div>
-      <div class="mb-3">
-        <div id="review_<%= @review.id %>" class="review-item">
-          <div class="favorite-btn"><%= render "public/favorites/favorite-btn", review: @review %></div>
-          <p class="comments-count">コメント件数：<%= @review.comments.count %></p>
         </div>
-      </div>
-
-      <div class="mt-4 comments">
-        <%= render "public/comments/index", review: @review %>
-      </div>
-
-      <div class="mt-4">
-        <h5 class="text-center mb-3">✏️ コメントを投稿する</h5>
-        <div class="card shadow-sm border-0 mb-4 form-color">
-          <div class="card-body">
-            <%= form_with model: [@hospital, @review, @comment], url: public_hospital_review_comments_path(@hospital, @review, @comment), local: false do |f| %>
-              <div class="mb-3">
-                <%= f.text_area :body, rows: 4, class: "form-control", placeholder: "コメントを入力してください" %>
-              </div>
-              <div class="text-center">
-                <%= f.submit "送信する", class: "btn btn-warning px-4" %>
-              </div>
+        <hr>
+        <div class="mb-3">
+          <strong class="text-sub-color">清潔さ</strong>
+          <div id="review_cleanliness_rating_<%= @review.id %>"></div>
+          <p class="text-muted mb-0"><%= @review.cleanliness_comment.presence || "(コメントなし)" %></p>
+        </div>
+        <div class="mb-3">
+          <strong class="text-sub-color">先生の対応</strong>
+          <div id="review_doctor_rating_<%= @review.id %>"></div>
+          <p class="text-muted mb-0"><%= @review.doctor_comment.presence || "(コメントなし)" %></p>
+        </div>
+        <div class="mb-3">
+          <strong class="text-sub-color">スタッフの対応</strong>
+          <div id= "review_staff_rating_<%= @review.id %>"></div>
+          <p class="text-muted mb-0"><%= @review.staff_comment.presence || "(コメントなし)" %></p>
+        </div>
+        <div class="mb-3">
+          <strong class="text-sub-color">料金</strong>
+          <div id= "review_price_rating_<%= @review.id %>"></div>
+          <p class="text-muted mb-0"><%= @review.price_comment.presence || "(コメントなし)" %></p>
+        </div>
+        <div class="mb-3">
+          <strong class="text-sub-color">待ち時間</strong>
+          <div id= "review_waiting_rating_<%= @review.id %>"></div>
+          <p class="text-muted mb-0"><%= @review.waiting_comment.presence || "(コメントなし)" %></p>
+        </div>
+        <div class="mb-3">
+          <strong class="text-sub-color">レビュータイトル</strong>
+          <p class="text-muted mb-0"><%= @review.title %></p>
+        </div>
+        <div class="mb-3">
+          <strong class="text-sub-color">総合評価</strong>
+          <p class="text-muted mb-0"><%= @review.body %></p>
+        </div>
+        <div class="mb-3">
+          <strong class="text-sub-color">🐾動物目線のひとこと</strong>
+          <p class="text-muted mb-0"><%= @review.animal_comment %></p>
+        </div>
+        <div class="card-footer d-flex justify-content-between aling-items-center">
+          <div class="text-muted small">
+            投稿者: 
+            <% if @review.user.present? %>
+              <%= link_to @review.user.name, public_user_path(@review.user), class: "text-decoration-none text-primary" %> |
+            <% else %>
+            不明
             <% end %>
+              投稿日: <%= @review.created_at.strftime("%Y-%m-%d") %>
+          </div>
+          <% if user_signed_in? && current_user == @review.user %>
+            <div>
+              <%= link_to "編集", edit_public_hospital_review_path(@hospital, @review), class:"btn btn-warning" %> |
+              <%= link_to "削除", public_hospital_review_path(@hospital, @review), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+            </div>
+          <% end %>
+        </div>
+        <div class="mb-3">
+          <div id="review_<%= @review.id %>" class="review-item">
+            <div class="favorite-btn"><%= render "public/favorites/favorite-btn", review: @review %></div>
+            <p class="comments-count">✏️<%= @review.comments.count %>コメント</p>
+          </div>
+        </div>
+
+        <div class="mt-4 comments">
+          <%= render "public/comments/index", review: @review %>
+        </div>
+
+        <div id="comments_error">
+          <%= render 'layouts/errors', obj: @comment %>
+        </div>
+
+        <div class="mt-4">
+          <h5 class="text-center mb-3 text-main-color">✏️ コメントを投稿する</h5>
+          <div class="card shadow-sm border-0 mb-4 form-color">
+            <div class="card-body">
+              <%= form_with model: [@hospital, @review, @comment], url: public_hospital_review_comments_path(@hospital, @review, @comment), local: false do |f| %>
+                <div class="mb-3">
+                  <%= f.text_area :body, rows: 4, class: "form-control", placeholder: "コメントを入力してください" %>
+                </div>
+                <div class="text-center">
+                  <%= f.submit "送信する", class: "btn btn-warning px-4" %>
+                </div>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
-
       <div class="text-center">
         <%= link_to "病院詳細に戻る", public_hospital_path(@hospital), class: "btn btn-link-color" %>
       </div>

@@ -3,33 +3,39 @@
   <div class="row">
     <% hospitals.each do |hospital| %>
       <div class="col-lx-3 col-lg-4 col-md-5 col-sm-10 md-4 mb-4">
-        <div class="card h-100">
+        <div class="card h-100 shadow-sm">
           <div class="card-body text-center">
             <%= image_tag hospital.main_image, class: "card-img-top" %>
             <h4 class="card-title">
               <%= link_to hospital.name, public_hospital_path(hospital) %>
-              <div id="hospital_rating_<%= hospital.id %>"></div>
-                <script>
-                  var elem = document.getElementById("hospital_rating_<%= hospital.id %>");
-                  var opt = {
-                      starOn: "<%= asset_path('star-on.png') %>",
-                      starOff: "<%= asset_path('star-off.png') %>",
-                      starHalf: "<%= asset_path('star-half.png') %>",
-                      readOnly: true,
-                      score: <%= hospital.average_rating %>
-                  };
-                  if (elem) elem.innerHTML = "";
-                  raty(elem,opt);
-                </script>
             </h4>
+            <div class="d-flex align-items-center">
+              <div id="hospital_rating_<%= hospital.id %>"></div>
+              <p class="hospital-review-total">(<%= link_to "#{hospital.reviews.count}", public_hospital_path(hospital) %>)</p>
+            </div>
+            <script>
+              var elem = document.getElementById("hospital_rating_<%= hospital.id %>");
+              var opt = {
+                  starOn: "<%= asset_path('star-on.png') %>",
+                  starOff: "<%= asset_path('star-off.png') %>",
+                  starHalf: "<%= asset_path('star-half.png') %>",
+                  readOnly: true,
+                  score: <%= hospital.average_rating %>
+              };
+              if (elem) elem.innerHTML = "";
+              raty(elem,opt);
+            </script>
+
             <% if hospital.tags.present? %>
               <div class="tags mb-2">
                 <% hospital.tags.each do |tag| %>
-                  <span class="badge text-primary"><%= tag.tag %></span>
+                  <span class="badge text-primary border"><%= tag.tag %></span>
                 <% end %>
               </div>
             <% end %>
-            <p><%= link_to "レビュー：#{hospital.reviews.count} 件", public_hospital_reviews_path(hospital) %></p>
+          </div>
+          <div class="card-footer text-muted small">
+            病院登録日：<%= hospital.created_at.strftime("%Y-%m-%d") %>
           </div>
         </div>
       </div>

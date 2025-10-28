@@ -47,9 +47,18 @@
 }
 
 .about-text {
-  font-size: 1.8rem;
+  font-size: 1.3rem;
   color: #6c6150;
   letter-spacing: 0.05em;
+}
+
+.btnx-hospitals {
+  color: #fff;
+  background: #959491;
+  border: 2px solid #807f7c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 /*
 header.bg-header .btnx-user-hospitals {
@@ -89,9 +98,9 @@ header.bg-header .btnx-user-hospitals {
   }
 }
 
-.about-form {
-  width: 600px;
-  height: 450px;
-  padding: 15px;
-  background-color: rgba(255, 255, 255, 0.9);
-}
+// .about-form {
+//   width: 600px;
+//   height: 450px;
+//   padding: 15px;
+//   background-color: rgba(255, 255, 255, 0.9);
+// }

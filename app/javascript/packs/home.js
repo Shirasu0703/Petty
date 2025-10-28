@@ -1,7 +1,7 @@
 import "../stylesheets/home.scss";
 
 $(function() {
-  $('.btnx-main').hover(
+  $('.btnx-main, .btnx-hospitals').hover(
     function() { $(this).css('background-color', '#6c6b68'); },
     function() { $(this).css('background-color', '#7b7974'); }
     );

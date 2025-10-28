@@ -4,13 +4,13 @@
     <% users.each do |user| %>
       <div class="col-lx-3 col-lg-4 col-md-5 col-sm-10 md-4 mb-4">
         <div class="card h-100">
-          <div class="card-body text-center">
+          <div class="card-body text-center shadow-sm">
             <%= image_tag user.get_profile_image, class: "card-img-top" %>
               <h5 class="card-title">
                 <%= link_to user.name, public_user_path(user), class: "text-decoration-none text-primary" %>
               </h5>
               <p class="card-text text-muted small">
-                投稿レビュー数：<%= link_to user.reviews.count, public_user_path(user) %>
+                投稿レビュー数：<%= link_to "#{user.reviews.count}件", public_user_path(user) %>
               </p>
               <%= link_to "会員投稿一覧へ", public_user_path(user), class: "btn btn-primary" %>
           </div>

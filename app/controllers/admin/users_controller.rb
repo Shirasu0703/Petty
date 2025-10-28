@@ -14,7 +14,7 @@ class Admin::UsersController < ApplicationController
     when 'star DESC'
       @reviews = @reviews.order(rating: :desc)
     when 'favorites DESC'
-      @reviews = @reviews.order
+      @reviews = @reviews
         .left_joins(:favorites)
         .group(:id)
         .order('COUNT(favorites.id) DESC')

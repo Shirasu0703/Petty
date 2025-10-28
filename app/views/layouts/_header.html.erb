@@ -3,12 +3,12 @@
   <nav class="navbar navbar-expand-lg navbar-light w-100">
     <div class="container flex-column flex-lg-row align-items-center justify-content-between">
 
-      <div class="d-flex align-items-center justify-content-between w-100 order-1 order-lg-1">
+      <div class="d-flex align-items-center justify-content-start w-100 order-1 order-lg-1">
         <div class="d-flex align-items-center">
           <%= link_to about_path, class: "navbar-brand p-3 m-0" do %>
-            <%= image_tag('pet_dog.png', alt: "サイトロゴ", class: "logo-img") %>
+            <%= image_tag('petty-rogo.png', alt: "サイトロゴ", class: "logo-img") %>
           <% end %>
-          <div class="welcome-text ms-2">
+          <div class="welcome-text ms-2 text-sub-color">
             <% if admin_signed_in? %>
               管理者ログイン中...
             <% elsif user_signed_in? %>
@@ -31,9 +31,9 @@
       <div class="collapse navbar-collapse order-3 order-lg-3 w-100" id="navbarNavDropdown">
         <div class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center p-2 gap-2">
           <% if admin_signed_in? %>
+            <%= link_to "病院登録", new_admin_hospital_path, class: "btn btnx-admin-hospital rounded-pill mx-1" %>
             <%= link_to "病院一覧", admin_hospitals_path, class: "btn btnx-admin-hospitals rounded-pill mx-1" %>
             <%= link_to "会員一覧", admin_users_path, class: "btn btnx-admin-users rounded-pill mx-1" %>
-            <%= link_to "病院登録", new_admin_hospital_path, class: "btn btnx-admin-hospital rounded-pill mx-1" %>
             <%= link_to "タグ一覧", admin_tags_path, class: "btn btnx-admin-tags rounded-pill mx-1" %>
             <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btnx-admin-logout rounded-pill mx-1" %>
           <% elsif user_signed_in? %>

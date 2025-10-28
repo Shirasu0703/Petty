@@ -1,5 +1,5 @@
 <% if reviews&.any? %>
-  <h2>レビュー</h2>
+  <h2 class="text-main-color">レビュー</h2>
   <div class="row">
     <% reviews.each do |review| %>
       <div class="col-lx-3 col-lg-4 col-md-5 col-sm-10 md-4 mb-4">
@@ -23,18 +23,18 @@
                 </script>
               <%= link_to review.title, edit_admin_hospital_review_path(review.hospital, review), class: "text-decoration-none text-primary" %>
             </h4>
-            <p class="card-text">
+            <p class="card-text text-muted">
               <%= truncate(review.body, length: 15) %>
             </p>
             <% if review.tags.present? %>
               <div class="tags mb-2">
                 <% review.tags.each do |tag| %>
-                  <span class="badge text-primary"><%= tag.tag %></span>
+                  <span class="badge text-primary border"><%= tag.tag %></span>
                 <% end %>
               </div>
             <% end %>
-            <p>♥<%= review.favorites.count %></p>
-            <p><%= link_to "#{review.comments.count} コメント", admin_hospital_review_path(review.hospital, review) %></p>
+            <p>♥<%= review.favorites.count %>いいね</p>
+            <p>✏️<%= link_to "#{review.comments.count} コメント", admin_hospital_review_path(review.hospital, review) %></p>
             <span class="text-muted small">
               投稿者: 
               <% if review.user.present? %>
