@@ -9,11 +9,10 @@
 Tag.destroy_all
 
 Admin.create!(
-  email: ENV['DB_EMAIL'],
-  password: ENV['SECRET_KEY'],
-  password_confirmation: ENV['SECRET_KEY']
+  email: ENV['ADMIN_EMAIL'],
+  password: ENV['ADMIN_PASSWORD'],
+  password_confirmation: ENV['ADMIN_PASSWORD']
 )
-
 
 Tag.create!([
   { tag: '#犬'},
