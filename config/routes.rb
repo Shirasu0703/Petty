@@ -45,6 +45,8 @@ Rails.application.routes.draw do
           member do
             delete :remove_tag
             post :add_tag
+            patch :published
+            patch :unpublished
           end
           resources :comments, only: [:create, :destroy]
           resource :favorite, only: [:create, :destroy]

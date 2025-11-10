@@ -19,6 +19,7 @@ class Public::ReviewsController < ApplicationController
 
   def index
     @reviews = Review.all.order(params[:id])
+    @review = Review.published
     # @reviews.params[:tag_id].present? ? Tag.find(params[:tag_id]).reviews : Post.all
     if params[:tag_id].present?
       @tag =Tag.find(params[:tag_id])
@@ -102,6 +103,19 @@ class Public::ReviewsController < ApplicationController
     @review = @hospital.reviews.find(params[:id])
   end
 
+  def published
+    @review = Review.find(params[:id])
+    @review.update(published: true)
+    redirect_to request.referer, notice: "公開にしました"
+  end
+  
+  def unpublished
+    @review = Review.find(params[:id])
+    @review.update(published: false)
+    redirect_to request.referer, notice: "非公開にしました"
+  end
+  
+
   def ensure_correct_user
     unless @review.user == current_user
       flash[:alert] = "権限がありません。"
@@ -110,7 +124,7 @@ class Public::ReviewsController < ApplicationController
   end
    
   def review_params
-    params.require(:review).permit(:title, :body, :image, :rating,
+    params.require(:review).permit(:title, :body, :image, :published, :rating,
                                    :cleanliness_comment, :doctor_comment, :staff_comment, :price_comment, :waiting_comment, :animal_comment,
                                    :cleanliness_rating, :doctor_rating, :staff_rating, :price_rating, :waiting_rating,
                                    :animal_type, :animal_icon, tag_ids: [])

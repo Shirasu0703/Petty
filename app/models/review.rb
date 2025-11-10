@@ -10,6 +10,10 @@ class Review < ApplicationRecord
   validates :body, presence: true
   validates :rating, presence: true
 
+  # 公開・非公開機能
+  scope :published, -> {where(published: true)}
+  scope :unpublished, -> {where(published: false)}
+
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end

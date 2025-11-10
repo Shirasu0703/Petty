@@ -65,6 +65,11 @@
         <%= text_field_tag "review[new_tag_names]", nil, placeholder: "例）夜間対応, 駐車場あり, 先生が優しい", class: "form-control" %>
       </div>
     </div>
+    <div class="md-3 mb-3">
+      <strong class="text-sub-color">投稿の公開状態</strong><br />
+        <%= f.radio_button :published, true %>公開
+        <%= f.radio_button :published, false %>非公開
+    </div>
     <%= f.submit "レビューを投稿する", class: "btn btn-warning w-100" %>
   </div>
   <% end %>

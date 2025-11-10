@@ -53,7 +53,7 @@
     <%= f.text_field :animal_comment, class: "form-control border border-light" %>
   </div>
 
-  <div class="mb-3 mb-3">
+  <div class="md-3 mb-3">
     <h5 class="text-sub-color">現在のタグ</h5>
     <div class="d-flex flex-wrap mt-2">
       <% @review.tags.each do |tag| %>
@@ -66,7 +66,7 @@
       <% end %>
     </div>
   </div>
-  <div class="mb-3">
+  <div class="md-3 mb-3">
       <p class="text-sub-color">タグを選択</p>
     <% @tags.each do |tag| %>
       <%= check_box_tag "review[tag_ids][]", tag.id, @review.tags.include?(tag) %>
@@ -76,6 +76,12 @@
       <h5 class="text-sub-color">新しいタグを入力（カンマ区切りで複数可）</h5>
       <%= text_field_tag "review[new_tag_names]", nil, placeholder: "例）夜間対応, 駐車場あり, 先生が優しい", class: "form-control" %>
     </div>
+  </div>
+
+  <div class="md-3 mb-3">
+    <strong class="text-sub-color">投稿の公開状態</strong><br />
+      <%= f.radio_button :published, true %>公開
+      <%= f.radio_button :published, false %>非公開
   </div>
 
   <div class="text-center my-3 mb-3">
