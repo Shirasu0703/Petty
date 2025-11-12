@@ -1,5 +1,5 @@
 .search-form {
-  display: 100%;
+  width: 100%;
   max-width: 900px;
 }
 
@@ -58,5 +58,18 @@
   .search-form .form-select,
   .search-form button {
     width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .search-form {
+    flex-direction: column;
+    align-items: stretch;
+    width: 215px;
+  
+    .form-select,
+    button {
+      width: 215px;
+    }
   }
 }
