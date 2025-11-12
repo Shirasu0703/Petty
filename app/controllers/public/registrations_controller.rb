@@ -2,6 +2,8 @@
 
 class Public::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
+  # ゲストログイン画面で新規登録を行うため「prepend」を記述し、Deviseより先にログアウト処理する
+  prepend_before_action :check_guest_user, only: [:new]
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
@@ -59,4 +61,13 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  private
+
+  def check_guest_user
+    if user_signed_in? && current_user.guest_user?
+      sign_out(current_user)
+      flash[:notice] = "ゲストユーザーをログアウトしました。新規登録を行ってください。"
+    end
+  end
 end
