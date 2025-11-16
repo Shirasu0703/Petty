@@ -53,7 +53,6 @@ class Admin::UsersController < ApplicationController
       redirect_to admin_users_path, alert: "無効化に失敗しました。"
     end
   end
-  
 
   private
 

@@ -8,8 +8,6 @@ class UsersController < ApplicationController
   def mypage
     @user = current_user
     sort_params = params[:sort] || "created_at DESC"
-    # @hospital = Hospital.first
-    # @review = @hospital.reviews.first
     allowed_sorts = {
       'created_at DESC' => 'created_at DESC',
       'star DESC' => 'rating DESC',
@@ -18,7 +16,6 @@ class UsersController < ApplicationController
     sort_order = allowed_sorts[sort_params] || "created_at DESC"
     # ログインユーザーの投稿したレビューを新しい順に取得とページネーション
     @reviews = @user.reviews
-    # .page(params[:page]).per(6)
     case params[:sort]
     when 'created_at DESC'
       @reviews = @reviews.order(created_at: :desc)
@@ -79,7 +76,6 @@ class UsersController < ApplicationController
     redirect_to new_user_registration_path, notice: "退会が完了しました。ご利用ありがとうございました。"
   end
 
-  
   private
 
   def set_user
@@ -100,7 +96,7 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :introduction, :image)
   end
-  
+
   def ensure_guest_user
     @user = User.find(params[:id])
     if @user.guest_user?

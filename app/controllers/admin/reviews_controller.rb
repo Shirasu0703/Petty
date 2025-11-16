@@ -100,7 +100,6 @@ before_action :set_review_for_hospital, only: [:show, :edit, :update, :destroy]
     @review.tags << tag unless @review.tags.include?(tag)
     redirect_to edit_admin_hospital_review_path(@review.hospital, @review), notice: "#{tag.tag} を追加しました。"
   end
-  
 
   private
 

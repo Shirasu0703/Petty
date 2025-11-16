@@ -14,12 +14,10 @@ class Public::ReviewsController < ApplicationController
     @comment = Comment.new
     @hospital = Hospital.find(params[:hospital_id])
     @review = @hospital.reviews.find(params[:id])
-    # .page(params[:page]).per(6)
   end
 
   def index
     @reviews = Review.all.order(params[:id])
-    # @reviews.params[:tag_id].present? ? Tag.find(params[:tag_id]).reviews : Post.all
     if params[:tag_id].present?
       @tag =Tag.find(params[:tag_id])
       @reviews = @tag.reviews.includes(:user, :hospital)
