@@ -15,12 +15,21 @@
 * お勧めしたい動物病院を他の人にも共有したい時
 
 ## 設計書
-* 後ほど作成予定
+* UIFlows
+* https://drive.google.com/file/d/1pMxnK8Ucem_12RCY33byIiZGjcXzeNVx/view?usp=sharing
+* ER図
+* https://drive.google.com/file/d/1ME1mP46HbLuILwy1X9aOvvWxhkZK_lH7/view?usp=sharing
+* AWS構成図
+* https://drive.google.com/file/d/1KFdt9C8G_QJm77pgNESk2O8zvb35gBsH/view?usp=sharing
+* アプリケーション詳細設計書
+* https://docs.google.com/spreadsheets/d/1nKofL1Uvx0-0brCrd0dQjy8ZpPzUk4i3mwyy5GMp898/edit?usp=sharing
+* テーブル定義書
+* https://docs.google.com/spreadsheets/d/1gq-B9qpbwG0cG941QTkaxo2bwcHYpb7bY4lGpW_jhL4/edit?usp=sharing
 ​
 ## 開発環境
-* OS：Windows
-* 言語：HTML,CSS,JavaScript,Ruby,SQL
-* フレームワーク：Ruby on Rails
+* OS：Ubuntu
+* 言語：HTML,CSS,Ruby,JavaScript,SQL
+* フレームワーク：Ruby on Rails, Bootstrap
 * JSライブラリ：jQuery
 * IDE：Visual Studio Code（VSCode）
 ​
@@ -32,6 +41,11 @@
 
 * 猫画工房
 * https://nekoillust.com/
+
+* いらすとや
+* https://www.irasutoya.com/
+
+
 
 
 

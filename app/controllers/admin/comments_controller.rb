@@ -7,10 +7,6 @@ class Admin::CommentsController < ApplicationController
     @comment.review = @review
     unless @comment.save
       render 'error'
-    # @hospital = Hospital.find(params[:hospital_id])
-    # @review = Review.find(params[:review_id])
-    # @comment = current_user.comments.new(comment_params)
-    # @comment.review = @review
     # if @comment.save
     # redirect_to admin_hospital_review_path(@hospital, @review), notice: "コメントを投稿しました"
     # else

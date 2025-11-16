@@ -6,14 +6,12 @@ class Public::FavoritesController < ApplicationController
     favorite = current_user.favorites.find_or_create_by(review_id: @review.id)
     # favorite.save
     # redirect_to request.referer
-    # redirect_to params[:redirect_path].presence || public_hospital_review_path(@hospital, @review)
   end
 
   def destroy
     favorite = current_user.favorites.find_by(review_id: @review.id)
     favorite.destroy
     # redirect_to request.referer
-    # redirect_to params[:redirect_path].presence || public_hospital_review_path(@hospital, @review)
   end
 
   private

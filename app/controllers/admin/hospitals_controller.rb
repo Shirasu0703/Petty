@@ -106,7 +106,6 @@ class Admin::HospitalsController < ApplicationController
     @hospital.tags << tag unless @hospital.tags.include?(tag)
     redirect_to edit_admin_hospital_path(@hospital), notice: "#{tag.tag} を追加しました。"
   end
-  
 
   def average_rating
     reviews.average(:rating).to_f.round(1)
