@@ -45,7 +45,11 @@
 * いらすとや
 * https://www.irasutoya.com/
 
+* canva
+* https://www.canva.com/ja_jp/logos/?gclsrc=aw.ds&gad_source=1&gad_campaignid=22710837571&gbraid=0AAAAAC_3nldKXjpBx1B5NPhoK1OyWuufF&gclid=CjwKCAjwisnGBhAXEiwA0zEORwTU1i_N466FfSvAhq8ZgwOFjd1oHnWuP6HKqzp1klwwvdDMTXvuDxoC0I4QAvD_BwE
 
+* Chat GPT
+* https://chatgpt.com/
 
 
 

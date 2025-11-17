@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_10_20_035928) do
+ActiveRecord::Schema.define(version: 2025_11_16_112003) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -80,10 +80,8 @@ ActiveRecord::Schema.define(version: 2025_10_20_035928) do
     t.string "name", null: false
     t.string "address", null: false
     t.string "phone_number", null: false
-    t.string "opening_hours"
-    t.string "animal_types"
-    t.float "longitude"
-    t.float "latitude"
+    t.string "opening_hours", null: false
+    t.string "animal_types", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -100,9 +98,8 @@ ActiveRecord::Schema.define(version: 2025_10_20_035928) do
     t.integer "user_id", null: false
     t.integer "hospital_id"
     t.decimal "rating", precision: 2, scale: 1
-    t.string "title"
+    t.string "title", null: false
     t.text "body", null: false
-    t.boolean "published"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.decimal "cleanliness_rating", precision: 2, scale: 1
@@ -116,8 +113,6 @@ ActiveRecord::Schema.define(version: 2025_10_20_035928) do
     t.decimal "waiting_rating", precision: 2, scale: 1
     t.string "waiting_comment"
     t.string "animal_comment"
-    t.string "animal_type"
-    t.string "animal_icon"
   end
 
   create_table "tags", force: :cascade do |t|
