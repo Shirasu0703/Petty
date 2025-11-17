@@ -56,7 +56,7 @@ Rails.application.routes.draw do
         get :mypage
         get :publish_unpublish
         get :unsubscribe
-        patch :withdraw    
+        patch :withdraw
         get :searches, to: "searches#search"
       end
     end
