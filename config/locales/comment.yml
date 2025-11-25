@@ -1,0 +1,10 @@
+ja:
+  activerecord:
+    models:
+      comment: コメント
+    attributes:
+      comment:
+        body: コメント
+  errors:
+    messages:
+      comment_invalid: "コメントを入力してください"

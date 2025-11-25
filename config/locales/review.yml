@@ -1,0 +1,12 @@
+ja:
+  activerecord:
+    models:
+      reveiw: レビュー
+    attributes:
+      review:
+        title: タイトル
+        body: 内容
+        rating: 評価
+  errors:
+    messages:
+      review_invalid: "レビューの内容に誤りがあります"

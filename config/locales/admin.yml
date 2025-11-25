@@ -1,0 +1,16 @@
+ja:
+  activerecord:
+    attributes:
+      admin:
+        email: メールアドレス
+        password: パスワード
+      hospital:
+        name: 病院名
+        address: 住所
+        phone_number: 連絡先
+        main_image: 見出し画像
+      tag:
+        tag: タグ名
+    errors:
+      messages:
+        hospital_invald: "入力内容に誤りがあります"
