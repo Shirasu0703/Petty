@@ -52,9 +52,9 @@
                   <script>
                       var elem = document.getElementById("review_rating_<%= review.id %>");
                       var opt = {
-                          starOn: "<%= asset_path('star-on.png') %>",
-                          starOff: "<%= asset_path('star-off.png') %>",
-                          starHalf: "<%= asset_path('star-half.png') %>",
+                      starOn: "<%= asset_tag_path('star-on.png') %>",
+                      starOff: "<%= asset_tag_path('star-off.png') %>",
+                      starHalf: "<%= asset_tag_path('star-half.png') %>",
                           readOnly: true,
                           score: <%= review.rating %>
                       };
@@ -157,9 +157,9 @@
 <script>
     var elem = document.getElementById("hospital_rating_<%= @hospital.id %>");
     var opt = {
-        starOn: "<%= asset_path('star-on.png') %>",
-        starOff: "<%= asset_path('star-off.png') %>",
-        starHalf: "<%= asset_path('star-half.png') %>",
+        starOn: "<%= asset_tag_path('star-on.png') %>",
+        starOff: "<%= asset_tag_path('star-off.png') %>",
+        starHalf: "<%= asset_tag_path('star-half.png') %>",
         readOnly: true,
         score: <%= @hospital.average_rating %>
     };
@@ -170,9 +170,9 @@
 <script>
     var elem = document.getElementById("hospital_cleanliness_rating_<%= @hospital.id %>");
     var opt = {
-        starOn: "<%= asset_path('star-on.png') %>",
-        starOff: "<%= asset_path('star-off.png') %>",
-        starHalf: "<%= asset_path('star-half.png') %>",
+        starOn: "<%= asset_tag_path('star-on.png') %>",
+        starOff: "<%= asset_tag_path('star-off.png') %>",
+        starHalf: "<%= asset_tag_path('star-half.png') %>",
         readOnly: true,
         score: <%= @hospital.average_cleanliness %>
     };
@@ -183,9 +183,9 @@
 <script>
     var elem = document.getElementById("hospital_doctor_rating_<%= @hospital.id %>");
     var opt = {
-        starOn: "<%= asset_path('star-on.png') %>",
-        starOff: "<%= asset_path('star-off.png') %>",
-        starHalf: "<%= asset_path('star-half.png') %>",
+        starOn: "<%= asset_tag_path('star-on.png') %>",
+        starOff: "<%= asset_tag_path('star-off.png') %>",
+        starHalf: "<%= asset_tag_path('star-half.png') %>",
         readOnly: true,
         score: <%= @hospital.average_doctor %>
     };
@@ -196,9 +196,9 @@
 <script>
     var elem = document.getElementById("hospital_staff_rating_<%= @hospital.id %>");
     var opt = {
-        starOn: "<%= asset_path('star-on.png') %>",
-        starOff: "<%= asset_path('star-off.png') %>",
-        starHalf: "<%= asset_path('star-half.png') %>",
+        starOn: "<%= asset_tag_path('star-on.png') %>",
+        starOff: "<%= asset_tag_path('star-off.png') %>",
+        starHalf: "<%= asset_tag_path('star-half.png') %>",
         readOnly: true,
         score: <%= @hospital.average_staff %>
     };
@@ -209,9 +209,9 @@
 <script>
     var elem = document.getElementById("hospital_price_rating_<%= @hospital.id %>");
     var opt = {
-        starOn: "<%= asset_path('star-on.png') %>",
-        starOff: "<%= asset_path('star-off.png') %>",
-        starHalf: "<%= asset_path('star-half.png') %>",
+        starOn: "<%= asset_tag_path('star-on.png') %>",
+        starOff: "<%= asset_tag_path('star-off.png') %>",
+        starHalf: "<%= asset_tag_path('star-half.png') %>",
         readOnly: true,
         score: <%= @hospital.average_price %>
     };
@@ -222,9 +222,9 @@
 <script>
     var elem = document.getElementById("hospital_waiting_rating_<%= @hospital.id %>");
     var opt = {
-        starOn: "<%= asset_path('star-on.png') %>",
-        starOff: "<%= asset_path('star-off.png') %>",
-        starHalf: "<%= asset_path('star-half.png') %>",
+        starOn: "<%= asset_tag_path('star-on.png') %>",
+        starOff: "<%= asset_tag_path('star-off.png') %>",
+        starHalf: "<%= asset_tag_path('star-half.png') %>",
         readOnly: true,
         score: <%= @hospital.average_waiting %>
     };

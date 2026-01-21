@@ -21,9 +21,9 @@
               <script>
                   var elem = document.getElementById("hospital_rating_<%= hospital.id %>");
                   var opt = {
-                      starOn: "<%= asset_path('star-on.png') %>",
-                      starOff: "<%= asset_path('star-off.png') %>",
-                      starHalf: "<%= asset_path('star-half.png') %>",
+                      starOn: "<%= asset_tag_path('star-on.png') %>",
+                      starOff: "<%= asset_tag_path('star-off.png') %>",
+                      starHalf: "<%= asset_tag_path('star-half.png') %>",
                       readOnly: true,
                       score: <%= hospital.average_rating %>
                   };
